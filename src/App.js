@@ -7,6 +7,8 @@ import HeaderBar from "./components/HeaderBar";
 import Navigation from "./components/Navigation";
 import Preview from "./components/Preview";
 import { CartProvider } from "./utils/CartContext";
+import Header from "./components/Header";
+import CarouselSection from "./components/CarouselSection";
 
 
 function App() {
@@ -15,15 +17,18 @@ function App() {
     
     <div className="App">
     <CartProvider>
-      <HeaderBar />
-      <Routes>
+      <Header />
+      <CarouselSection />
+
+      {/* <HeaderBar /> */}
+      {/* <Routes>
         <Route path="/" element={<Navigation />} />
         <Route path="/preview" element={<Preview />}/>
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cancel" element={<CancelTransaction /> } />
         <Route path="/confirm" element={ <ConfirmPayment /> } />
-      </Routes>
+      </Routes> */}
     </CartProvider>
     </div>
     );
