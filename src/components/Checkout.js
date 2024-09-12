@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useCart from "../../utils/CartContext";
+import useCart from "../utils/CartContext";
 import * as yup from 'yup'
 import { Field, Form, Formik } from 'formik'
 import SyncLoader from "react-spinners/SyncLoader";

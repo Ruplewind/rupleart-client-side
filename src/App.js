@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import CancelTransaction from "./components/client/CancelTransaction";
-import Cart from "./components/client/Cart";
-import Checkout from "./components/client/Checkout";
-import ConfirmPayment from "./components/client/ConfirmPayment";
-import HeaderBar from "./components/client/HeaderBar";
-import Navigation from "./components/client/Navigation";
-import Preview from "./components/client/Preview";
+import CancelTransaction from "./components/CancelTransaction";
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
+import ConfirmPayment from "./components/ConfirmPayment";
+import HeaderBar from "./components/HeaderBar";
+import Navigation from "./components/Navigation";
+import Preview from "./components/Preview";
 import { CartProvider } from "./utils/CartContext";
 
 

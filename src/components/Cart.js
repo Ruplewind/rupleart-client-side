@@ -1,4 +1,4 @@
-import useCart from "../../utils/CartContext";
+import useCart from "../utils/CartContext";
 import ClearIcon from '@mui/icons-material/Clear';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from "react-router-dom";
@@ -43,7 +43,7 @@ const Cart = () => {
                         </div>
                         : 
                         <div className="pb-2 lg:pb-4 flex gap-2 items-center text-sm mt-2 lg:mt-0">
-                            <img src={require('../../images/clock.png')} width={"15px"}/> 
+                            <img src={require('../images/clock.png')} width={"15px"}/> 
                             { 
                                 product.hours > 0 ? 
                                 <span className="text-sm capitalize">{product.hours} Hrs {product.minutes} Mins</span>

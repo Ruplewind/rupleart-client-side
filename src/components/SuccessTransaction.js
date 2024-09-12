@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Checkmark } from 'react-checkmark';
 import { useEffect } from "react";
-import useCart from "../../utils/CartContext";
+import useCart from "../utils/CartContext";
 
 const SuccessTransaction = () => {
 

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 //import he from 'he';
 import { useEffect, useState } from "react";
-import useCart from "../../utils/CartContext";
+import useCart from "../utils/CartContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -109,7 +109,7 @@ const Preview = () => {
                 :
                 <div>
                     <div className="pb-4 flex gap-2 items-center text-sm">
-                        <img src={require('../../images/clock.png')} width={"20px"}/>
+                        <img src={require('../images/clock.png')} width={"20px"}/>
                         { 
                             data.hours > 0 ? 
                             <span className="text-sm capitalize">{data.hours} Hrs {data.minutes} Mins</span>
