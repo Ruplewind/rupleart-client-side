@@ -10,19 +10,23 @@ import { CartProvider } from "./utils/CartContext";
 import Header from "./components/Header";
 import CarouselSection from "./components/CarouselSection";
 import Shop from "./components/Shop";
+import Footer from "./components/Footer";
 
 
 function App() {
   
   return (
     
-    <div className="App">
+    <div className="App flex flex-col min-h-screen">
     <CartProvider>
       <Header />
       <CarouselSection />
-      <Routes>
-        <Route path="/shop" element={<Shop />} />
-      </Routes>
+      <div className="flex-grow">
+        <Routes>
+          <Route path="/shop" element={<Shop />} />
+        </Routes>
+      </div>
+      
 
       {/* <HeaderBar /> */}
       {/* <Routes>
@@ -33,6 +37,7 @@ function App() {
         <Route path="/cancel" element={<CancelTransaction /> } />
         <Route path="/confirm" element={ <ConfirmPayment /> } />
       </Routes> */}
+      <Footer />
     </CartProvider>
     </div>
     );
