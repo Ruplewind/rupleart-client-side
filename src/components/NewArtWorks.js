@@ -20,7 +20,7 @@ function NewArtWorks() {
         })
     },[])
   return (
-    <div className='font-montserrat mt-10 ml-20'>
+    <div className='font-montserrat mt-10 ml-14'>
         <div className='font-bold uppercase'>New ArtWorks</div>
 
         { loading && <div className='text-gray-700'>Loading ...</div>}
@@ -28,15 +28,15 @@ function NewArtWorks() {
         {
             !loading && !error && products.map(item => 
                 (
-                    <Link to={"/preview"} className='mt-4 flex w-full gap-4 border-b border-b-gray-400 p-1 rounded-sm hover:shadow-lg hover:-translate-y-1'>
+                    <Link to={"/preview"} className='mt-2 flex w-full gap-4 border-b border-b-gray-400 p-1 rounded-sm hover:shadow-lg hover:-translate-y-1'>
                         <img 
                         src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`} 
                         alt={item.productName} 
-                        className='transition-all duration-300 object-cover w-16 h-16 group-hover:w-60 group-hover:h-60 rounded-lg' 
+                        className='transition-all duration-300 object-cover w-14 h-14 group-hover:w-60 group-hover:h-60 rounded-lg' 
                         />
-                        <div>
-                            <div className='font-semibold hover:font-extrabold mt-3 text-xs'>{item.productName}</div>                    
-                            <div className='text-purple-900 hover:text-purple-700 font-montserrat text-sm mt-2'>Ksh {item.price}</div>
+                        <div className='mt-1'>
+                            <div className='font-semibold hover:font-extrabold text-xs'>{item.productName}</div>                    
+                            <div className='text-purple-900 hover:text-purple-700 font-montserrat text-xs mt-2'>Ksh {item.price}</div>
                         </div>
                     </Link>
                 )

@@ -27,7 +27,7 @@ const Shop = () => {
 
     return ( <div className='flex mx-5 gap-4 mb-10'>
         <div className='w-1/6'>
-            <div className='font-montserrat mt-10 ml-20'>
+            <div className='font-montserrat mt-10 ml-14'>
                 <div className='font-bold'>CATEGORIES</div>
                     { loading && <div className='text-gray-700'>Loading ...</div>}
                     <div className='mt-2'>

@@ -75,12 +75,12 @@ function Footer() {
 
                 <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>The Spectrum of Silence</button>
                 <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>EcoArt Futures Festival</button>
-                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Chromatic Horizons: Light and Color Exhibition</button>
+                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Chromatic Horizons</button>
                 <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Metaverse Art Summit</button>
-                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Sculpting the Future: 3D Art Biennale</button>            </div>
+                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Sculpting the Future</button>            </div>
 
         </div>
-      <div className='text-center p-2  mt-2 font-bold text-white'>
+      <div className='text-center p-2 text-sm mt-3 font-bold text-white'>
         Ruple Art &copy; {year}
       </div>
     </div>

@@ -33,7 +33,7 @@ const Products = ({ category }) => {
     })
     return ( <div className='mt-5 w-full mx-5'>
         { loading && <div className="text-center text-slate-500 text-md mb-5">Loading...</div>}
-        <div className="text-center text-slate-500 text-md mb-1 capitalize">{category == null ?  (<div>All Artworks</div>) : category}</div>
+        <div className="text-center font-bold text-slate-500 text-md mb-1 capitalize">{category == null ?  (<div>All Artworks</div>) : category}</div>
         <div className="text-center text-slate-500 text-md mb-5 text-sm">({!loading && filteredData.length} items)</div>
 
 
