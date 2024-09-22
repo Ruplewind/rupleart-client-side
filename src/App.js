@@ -9,6 +9,7 @@ import Preview from "./components/Preview";
 import { CartProvider } from "./utils/CartContext";
 import Header from "./components/Header";
 import CarouselSection from "./components/CarouselSection";
+import Shop from "./components/Shop";
 
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
     <CartProvider>
       <Header />
       <CarouselSection />
+      <Routes>
+        <Route path="/shop" element={<Shop />} />
+      </Routes>
 
       {/* <HeaderBar /> */}
       {/* <Routes>

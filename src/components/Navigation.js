@@ -1,7 +1,7 @@
 import { Tab, Tabs, Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import Hoodies from './Hoodies';
-import Tshirts from './Tshirts';
+import Shop from './Shop';
 import Videos from './Videos';
 
 const Navigation = () => {
@@ -26,7 +26,7 @@ const Navigation = () => {
         {currentTabIndex === 0 && (
         <Box sx={{ p: 0 }} className="mt-3">
           <Typography>
-                    <Tshirts />
+                    <Shop />
           </Typography>
         </Box>
         )}

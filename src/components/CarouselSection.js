@@ -4,7 +4,7 @@ import React from 'react'
 function CarouselSection() {
   return (
     <Carousel className="h-96" 
-    transition={{duration: 2}} 
+    transition={{duration: 5}} 
     autoplay={true}
     loop={true}
     prevArrow={({handlePrev})=>{
