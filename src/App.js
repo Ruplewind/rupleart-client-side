@@ -11,7 +11,7 @@ import Header from "./components/Header";
 import CarouselSection from "./components/CarouselSection";
 import Shop from "./components/Shop";
 import Footer from "./components/Footer";
-
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function App() {
   
@@ -38,6 +38,7 @@ function App() {
         <Route path="/confirm" element={ <ConfirmPayment /> } />
       </Routes> */}
       <Footer />
+      <WhatsAppButton />
     </CartProvider>
     </div>
     );
