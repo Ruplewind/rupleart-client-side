@@ -235,7 +235,7 @@ const Checkout = () => {
         </div>
 
 
-        <button type="submit" className="visible lg:collapse fixed bottom-0 bg-blue-950 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif flex justify-center">
+        <button type="submit" className="visible lg:collapse fixed bottom-0 bg-purple-900 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif flex justify-center">
            { loading &&  <div><SyncLoader size={6} color={"#fff"}/></div> }
            {!loading && <div>PAY</div> }
         </button>

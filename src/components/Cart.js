@@ -69,7 +69,7 @@ const Cart = () => {
             
             
 
-            <Link to={'/checkout'}><div className="visible lg:collapse fixed bottom-0 bg-blue-950 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif" >
+            <Link to={'/checkout'}><div className="visible lg:collapse fixed bottom-0 bg-purple-900 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif" >
                 CHECKOUT
             </div></Link>
         </div> 

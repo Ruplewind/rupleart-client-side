@@ -30,15 +30,15 @@ function Footer() {
     },[])
   return (
     <div className='w-full font-montserrat bg-black/100 p-2'>
-        <div className='flex gap-4 w-full justify-evenly mb-2 mt-4'>
-            <div>
+        <div className='block lg:flex gap-4 w-full justify-evenly mb-2 mt-4'>
+            <div className='mb-4'>
                 <div className='flex gap-2 items-center'>
-                    <img src={require("../images/logo.png")} className='w-14 bg-white p-2 rounded-lg' />
-                    <span className='text-white font-bold text-xl'>Ruple Art</span>
+                    <img src={require("../images/logo.png")} className='w-10 lg:w-14 bg-white p-2 rounded-lg' />
+                    <span className='text-white font-bold text-lg lg:text-xl'>Ruple Art</span>
                 </div>
                 <div className='flex items-center mt-4 gap-2'>
                     <LocationOnIcon sx={{color: 'white', fontSize: 20}}/>
-                    <button className='block text-gray-400 hover:text-gray-600 uppercase text-sm'>Heritan House Argwings Kodhek Road</button>
+                    <button className='block text-gray-400 hover:text-gray-600 uppercase text-sm'>Heritan Hse Argwings Kodhek Road</button>
                 </div>
                 <div className='flex items-center mt-2 gap-2'>
                     <CallIcon sx={{color: 'white', fontSize: 20}} />
@@ -50,7 +50,7 @@ function Footer() {
                 </div>
 
             </div>
-            <div className=''>
+            <div className='mb-4 h-0 collapse lg:visible'>
                 <div className='font-bold text-white'>OUR COMPANY</div>
                 <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>FAQ</button>
                 <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Contact Us</button>
@@ -59,7 +59,7 @@ function Footer() {
                 <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Return Policy</button>
             </div>
 
-            <div>
+            <div className='mb-4 h-0 collapse lg:visible'>
                 <div className='font-bold text-white'>SHOP</div>
                 {
                     !loading && categories.length > 0 && categories.slice(1,6).map(category => 
@@ -70,7 +70,7 @@ function Footer() {
                 }
             </div>
 
-            <div>
+            <div className='h-0 collapse lg:visible'>
                 <div className='font-bold text-white'>EVENTS</div>
 
                 <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>The Spectrum of Silence</button>
