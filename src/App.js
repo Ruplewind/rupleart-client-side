@@ -11,6 +11,7 @@ import Header from "./components/Header";
 import CarouselSection from "./components/CarouselSection";
 import Shop from "./components/Shop";
 import Footer from "./components/Footer";
+import Homepage from "./components/Homepage";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 function App() {
@@ -20,10 +21,11 @@ function App() {
     <div className="App flex flex-col min-h-screen">
     <CartProvider>
       <Header />
-      <CarouselSection />
-      <div className="flex-grow">
+      <div className="flex-grow max-h-full">
         <Routes>
+          <Route path="/" element={<Homepage />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/preview" element={<Preview />} />
         </Routes>
       </div>
       

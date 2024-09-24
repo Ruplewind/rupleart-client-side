@@ -1,10 +1,15 @@
-import { useLocation } from "react-router-dom";
-//import he from 'he';
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import useCart from "../utils/CartContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import ImageZoom from "./ImageZoom";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import EmailIcon from '@mui/icons-material/Email';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { Twitter } from "@mui/icons-material";
+import RelatedProducts from "./RelatedProducts";
+import NewArtWorks from "./NewArtWorks";
 
 const Preview = () => {
 
@@ -16,129 +21,116 @@ const Preview = () => {
 
     const data = location.state.data;
 
-    // const html = he.decode(data.description);
-
     const { addToCart } = useCart();
 
     const [size, setSize] = useState(null); 
     const [quantity, setQuantity] = useState(1);
 
-    useEffect(()=>{
-        { 
-            data.xSmall ? setSize("XS") :
-        
-            data.small ? setSize("SM") :
-
-            data.medium ? setSize("M") :
-
-            data.large ? setSize("L") :
-
-            data.xLarge ? setSize("XL") :
-
-            data.xXLarge ? setSize("2XL") :
-
-            setSize(null);
-        }
-    }, [data])
-
-    const handleAddToCart = ()=>{
+    const handleAddToCart = () => {
         addToCart({ ...data, size, quantity: Number(quantity) });
     }
 
+    return (
+        <div className="mt-10 lg:mx-28 font-montserrat">
+            <ToastContainer />
 
-    return ( <div className="block lg:flex mt-10 lg:mt-10">
-        <ToastContainer />
-        <div className="invisible lg:visible h-0 lg:h-auto lg:w-1/2 flex justify-center">
-            <img src={`${process.env.REACT_APP_API_URL}/uploads/${data.image || data.thumbnail}`} className="object-contain" width="620px" alt="" />
-        </div>
-        <div className="visible lg:invisible w-auto lg:w-0 flex justify-center">
-            <img src={`${process.env.REACT_APP_API_URL}/uploads/${data.image || data.thumbnail}`} className="object-contain" width="310px" alt="" />
-        </div>
+            <div className="block lg:flex">
+                {/* Image section with zoom */}
+                <div className="lg:w-2/6 flex justify-center lg:justify-start lg:visible lg:relative">
+                    <ImageZoom imageUrl={`${process.env.REACT_APP_API_URL}/uploads/${data.image}`} />
+                </div>
 
-        <div className="w-full lg:w-1/2 lg:pr-52 p-10">
-           <div className="font-serif text-gray-800 text-bold lg:text-2xl tracking-wider pb-1 lg:pb-3">{data.productName || data.title}</div> 
-           
-           <form>
+                {/* Mobile view for image (non-zoomed) */}
+                <div className="lg:hidden flex justify-center">
+                    <img 
+                        src={`${process.env.REACT_APP_API_URL}/uploads/${data.image}`} 
+                        className="object-contain" 
+                        width="310px" 
+                        alt={data.productName} 
+                    />
+                </div>
 
-                { data.type == "hoodie" || data.type == "tshirt" ? 
-                <div>
-                    <div className="text-gray-500 pb-4 lg:pb-10">Ksh {data.price}</div>
-                    <hr />
-                    <div className="flex py-4">
-                            <div className="text-gray-500 w-20 flex items-center">Size</div>
-                            <select 
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-1 lg:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            onChange={(e)=> setSize(e.target.value)}
-                            >
-                                { 
-                                    data.xSmall && <option value={"XS"}>XS</option>
-                                }
-                                {
-                                    data.small && <option value="SM">SM</option>
-                                }
-                                {
-                                    data.medium && <option value="M">M</option>
-                                }
-                                {
-                                    data.large && <option value={"L"}>L</option>
-                                }
-                                {
-                                    data.xLarge && <option value={"XL"}>XL</option>
-                                }
-                                {
-                                    data.xXLarge && <option value={"2XL"}>2XL</option>
-                                }
-                            </select>                
-                    </div>
-                    <hr />
-                    <div className="flex py-4">
-                            <div className="text-gray-500 w-20 flex items-center">Quantity</div>
-                            <select 
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-1 lg:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            onChange={(e)=> setQuantity(e.target.value)}
-                            >
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
-                            </select>                
+                {/* Product details */}
+                <div className="p-10 lg:w-3/6 ml-5">
+                    <div className="font-semibold lg:text-3xl tracking-wide pb-1 lg:pb-3">{data.productName}</div> 
+
+                    <form>
+                        <div className="text-sm">
+                            <div className="flex gap-2 items-center my-2">
+                                <div className="">Category:</div>
+                                <div className="">{data.type}</div>            
+                            </div>
+                            <div className="flex gap-2 items-center my-2">
+                                <div className="">Description:</div>
+                                <div className="text-gray-800">{data.description}</div>            
+                            </div>
+                            <div className="flex gap-2 items-center my-2">
+                                <div className="">Size:</div>
+                                <div>{data.size}</div>            
+                            </div>
+                            <div className="my-2 lg:my-2 text-purple-900 font-extrabold">Ksh {data.price}</div>
+                          
+                            <div className="flex gap-2 items-center my-2 mt-4">
+                                <div className="">Quantity</div>
+                                <select 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-1 lg:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    onChange={(e) => setQuantity(e.target.value)}
+                                >
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                </select>                
+                            </div>
+                        </div>
+                    </form>
+
+                    {/* Desktop Add to Cart button */}
+                    <button 
+                        className="hidden lg:block w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm"
+                        onClick={() => handleAddToCart()}
+                    >
+                        ADD TO CART
+                    </button>
+
+                    {/* Share section */}
+                    <div className="hidden lg:flex mt-5 items-center text-sm gap-2 font-bold">
+                        <span>Share: </span>
+                        <Link to={"/"}>
+                            <FacebookIcon sx={{color:'#424242', fontSize: 20}} />
+                        </Link>
+                        <Link to={"/"}>
+                            <Twitter sx={{color:'#424242', fontSize: 20}} />
+                        </Link>
+                        <Link to={"/"}>
+                            <EmailIcon sx={{color:'#424242', fontSize: 20}} />
+                        </Link>
+                        <Link to={"/"}>
+                            <WhatsAppIcon  sx={{color:'#424242', fontSize: 20}} />
+                        </Link>                    
                     </div>
                 </div>
-                
-                :
-                <div>
-                    <div className="pb-4 flex gap-2 items-center text-sm">
-                        <img src={require('../images/clock.png')} width={"20px"}/>
-                        { 
-                            data.hours > 0 ? 
-                            <span className="text-sm capitalize">{data.hours} Hrs {data.minutes} Mins</span>
-                                :
-                            <span className="text-sm capitalize">{data.minutes} Mins</span>
-                        }
-                    </div>
-                    <div className="text-gray-500 pb-4 lg:pb-5">Ksh {data.price}</div>
+
+                <div className="lg:w-2/6 border-l">
+                    <NewArtWorks />
                 </div>
-                }
-                
-           </form>
-           <hr />
 
-           {/* <div className="text-bold py-8">Description</div>
+                {/* Mobile Add to Cart button */}
+                <button 
+                    className="lg:hidden fixed bottom-0 bg-blue-950 text-white text-center w-full p-4 font-serif font-bold tracking-wider"
+                    onClick={() => handleAddToCart()}
+                >
+                    ADD TO CART
+                </button>
+            </div>
 
-           <div className="break-words" dangerouslySetInnerHTML={{ __html: html}} /> */}
-
-           <button className="collapse lg:visible w-52 mt-10 flex justify-center p-1 border-2 border-black hover:bg-black hover:text-white" onClick={() => handleAddToCart()}>
-            ADD TO CART
-           </button>
-
-        
-        </div>
-        <button className="visible lg:collapse fixed bottom-0 bg-blue-950 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif" onClick={() => handleAddToCart()}>
-            ADD TO CART
-        </button>
-        
-    </div> );
+            {/* Related Products section */}
+            <div className="mt-10">
+                <RelatedProducts category={null} />
+            </div>
+        </div> 
+    );
 }
  
 export default Preview;

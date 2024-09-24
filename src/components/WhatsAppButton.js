@@ -12,7 +12,7 @@ function WhatsAppButton() {
 
   return (
     <div
-      className="fixed bottom-8 left-4 z-50 flex items-center justify-center"
+      className="fixed bottom-8 left-6 z-50 flex items-center justify-center"
       onClick={handleClick}
     >
       {/* Pulsating Circle */}

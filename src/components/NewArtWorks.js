@@ -28,7 +28,7 @@ function NewArtWorks() {
         {
             !loading && !error && products.map(item => 
                 (
-                    <Link to={"/preview"} className='mt-2 flex w-full gap-4 border-b border-b-gray-400 p-1 rounded-sm hover:shadow-lg hover:-translate-y-1'>
+                    <Link to={"/preview"} state={{ data: item }}className='mt-2 flex w-full gap-4 border-b border-b-gray-400 p-1 rounded-sm hover:shadow-lg hover:-translate-y-1'>
                         <img 
                         src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`} 
                         alt={item.productName} 

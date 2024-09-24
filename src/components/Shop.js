@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Products from './Products';
 import NewArtWorks from './NewArtWorks';
+import CarouselSection from './CarouselSection';
 
 const Shop = () => {
 
@@ -25,7 +26,10 @@ const Shop = () => {
     const [ selectedCategory, setSelectedCategory] = useState(null);
 
 
-    return ( <div className='flex mx-5 gap-4 mb-10'>
+    return ( 
+    <div>  
+      <CarouselSection />
+      <div className='flex mx-5 gap-4 mb-10'>
         <div className='w-1/6'>
             <div className='font-montserrat mt-10 ml-14'>
                 <div className='font-bold'>CATEGORIES</div>
@@ -64,6 +68,7 @@ const Shop = () => {
         <div className='w-5/6'>
             <Products category={selectedCategory}/>
         </div>
+    </div>
     </div> );
 }
  
