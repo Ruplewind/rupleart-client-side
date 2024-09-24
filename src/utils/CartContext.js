@@ -22,22 +22,16 @@ export const CartProvider = ({ children }) => {
         
 
         if(itemIndex >= 0){ //If it exists in state
-            if(product.type && (product.type = "hoodie" || product.type == "tshirt")){
                 
-                state.products[itemIndex].quantity += Number(product.quantity);
+            state.products[itemIndex].quantity += Number(product.quantity);
 
-                state.products[itemIndex].size = product.size;
-    
-                updatedPrice(state.products);
-                
-                toast("Product Has Been Added To Cart",{
-                    autoClose: 500
-                })
-            }else{
-                toast("Video already exists in the cart",{
-                    autoClose: 500
-                })
-            }
+            state.products[itemIndex].size = product.size;
+
+            updatedPrice(state.products);
+            
+            toast("Product Has Been Added To Cart",{
+                autoClose: 500
+            })
             
         }else{
             //let newProduct = {...product, quantity: product.quantity}

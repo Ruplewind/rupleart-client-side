@@ -22,12 +22,10 @@ const Preview = () => {
     const data = location.state.data;
 
     const { addToCart } = useCart();
-
-    const [size, setSize] = useState(null); 
     const [quantity, setQuantity] = useState(1);
 
     const handleAddToCart = () => {
-        addToCart({ ...data, size, quantity: Number(quantity) });
+        addToCart({ ...data, quantity: Number(quantity) });
     }
 
     return (

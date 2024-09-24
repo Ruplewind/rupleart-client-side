@@ -7,13 +7,15 @@ const Cart = () => {
 
     const { products, total, removeFromCart } = useCart();
 
+    console.log(products)
+
     
     const handleRemoveFromCart = (product) =>{
         removeFromCart(product)
     }
 
 
-    return ( <div>
+    return ( <div className="mb-10">
         { products.length > 0 ? 
         <div>
             <div className="text-center font-semibold font-mono mt-16 lg:ml-8">Your Cart</div>
@@ -22,12 +24,16 @@ const Cart = () => {
             { products.map(product =>(
                 <div className="flex justify-center lg:justify-around mx-5 lg:mx-80 mb-5 lg:mb-3 gap-1">
                     
-                    <img src={`${process.env.REACT_APP_API_URL}/uploads/${ product.image || product.thumbnail }`} className="w-20 h-20 lg:w-44 lg:h-auto"/>
+                    <img src={`${process.env.REACT_APP_API_URL}/uploads/${ product.image }`} className="w-20 h-20 lg:w-28 lg:h-auto object-contain"/>
                     
-                    <div className="block lg:flex lg:gap-5  lg:justify-around text-sm lg:text-base ">
-                        <div className="flex items-center text-xs lg:text-base w-52 lg:w-64 font-bold lg:font-normal">{ product.productName || product.title }</div>
-                        { 
-                            product.type == "hoodie" || product.type == "tshirt" ?  
+                    <div className="block lg:flex lg:gap-5  lg:justify-around text-sm lg:text-base items-center">
+                        <div className="text-xs lg:text-base w-52 lg:w-64">
+                            <div className="flex items-center  font-bold lg:font-normal">
+                                { product.productName }
+                            </div>
+                            <div className="flex items-center text-gray-500">Size: {product.size}</div>
+                        </div>
+                          
                         <div className="flex py-0 w-10 lg:w-28">
                                 <div className="text-gray-500 w-10 lg:w-10 flex items-center">Qty:</div>
                                 <div className="flex items-center">{product.quantity}
@@ -40,24 +46,7 @@ const Cart = () => {
                                     <option value={1}>5</option>
                                 </select>    */}
                                 </div>             
-                        </div>
-                        : 
-                        <div className="pb-2 lg:pb-4 flex gap-2 items-center text-sm mt-2 lg:mt-0">
-                            <img src={require('../images/clock.png')} width={"15px"}/> 
-                            { 
-                                product.hours > 0 ? 
-                                <span className="text-sm capitalize">{product.hours} Hrs {product.minutes} Mins</span>
-                                    :
-                                <span className="text-sm capitalize">{product.minutes} Mins</span>
-                            }
                         </div> 
-                        }
-                        { 
-                            product.type == "hoodie" || product.type == "tshirt" ?  
-                            <div className="flex items-center lg:w-24">Size: {product.size}</div> 
-                            : 
-                            <div className="flex items-center lg:w-24"></div> 
-                        }
                         <div className="flex items-center lg:w-20">Ksh {product.price}</div>
                     </div>
                     <div className="flex items-center m-0 lg:ml-10">
@@ -73,7 +62,7 @@ const Cart = () => {
                     
             </div>
             <div className="flex justify-center px-10 ml-5 lg:mb-8">
-                <Link to={'/checkout'}><div className="collapse lg:visible w-48 flex justify-center p-1 border-2 border-black hover:bg-black hover:text-white" >
+                <Link to={'/checkout'}><div className="collapse lg:visible w-48 flex justify-center p-2 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
                         CHECKOUT
                 </div></Link>
             </div>

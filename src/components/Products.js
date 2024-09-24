@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import useCart from '../utils/CartContext';
 
 const Products = ({ category }) => {
 
@@ -31,6 +32,13 @@ const Products = ({ category }) => {
             return item;
         }
     })
+
+    const { addToCart } = useCart();
+    const [quantity, setQuantity] = useState(1);
+
+    const handleAddToCart = (data) => {
+        addToCart({ ...data, quantity: Number(quantity) });
+    }
     return ( <div className='mt-5 w-full mx-5'>
         { loading && <div className="text-center text-slate-500 text-md mb-5">Loading...</div>}
         <div className="text-center font-bold text-slate-500 text-md mb-1 capitalize">{category == null ?  (<div>All Artworks</div>) : category}</div>
@@ -65,7 +73,11 @@ const Products = ({ category }) => {
                     </div>
 
                     <div className='flex justify-center max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300'>
-                    <button className='bg-purple-900 hover:bg-purple-700 text-white p-2 text-sm uppercase rounded-lg mt-2'>
+                    <button 
+                    onClick={()=>{
+                        handleAddToCart(item)
+                    }}
+                    className='bg-purple-900 hover:bg-purple-700 text-white p-2 text-sm uppercase rounded-lg mt-2'>
                         add to cart
                     </button>
                     </div>
