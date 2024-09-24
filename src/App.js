@@ -13,6 +13,8 @@ import Shop from "./components/Shop";
 import Footer from "./components/Footer";
 import Homepage from "./components/Homepage";
 import WhatsAppButton from "./components/WhatsAppButton";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   
@@ -21,13 +23,15 @@ function App() {
     <div className="App flex flex-col min-h-screen">
     <CartProvider>
       <Header />
-      <div className="flex-grow max-h-full">
+      <div className="flex-grow bg-gray-100">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
       

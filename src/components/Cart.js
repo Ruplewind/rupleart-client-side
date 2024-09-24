@@ -1,11 +1,14 @@
 import useCart from "../utils/CartContext";
 import ClearIcon from '@mui/icons-material/Clear';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../utils/AuthContext";
 
 const Cart = () => {
 
     const { products, total, removeFromCart } = useCart();
+    const { token } = useContext(AuthContext);
 
     console.log(products)
 
@@ -62,16 +65,30 @@ const Cart = () => {
                     
             </div>
             <div className="flex justify-center px-10 ml-5 lg:mb-8">
-                <Link to={'/checkout'}><div className="collapse lg:visible w-48 flex justify-center p-2 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
+                {
+                    token !== null ? <Link to={'/checkout'}><div className="collapse lg:visible w-48 flex justify-center p-2 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
                         CHECKOUT
                 </div></Link>
+                :
+                <Link to={'/login'}><div className="collapse lg:visible w-48 flex justify-center p-2 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
+                        CHECKOUT
+                </div></Link>
+                }
             </div>
             
             
 
+            { token !== null ?
+            
             <Link to={'/checkout'}><div className="visible lg:collapse fixed bottom-0 bg-purple-900 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif" >
                 CHECKOUT
             </div></Link>
+            :
+            <Link to={'/login'}><div className="visible lg:collapse fixed bottom-0 bg-purple-900 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif" >
+                CHECKOUT
+            </div></Link>
+
+            }
         </div> 
         
         : 
