@@ -49,6 +49,7 @@ const Checkout = () => {
             let allItemsAreVideos = products.every(item => item.title);
             if(data.ok){
                 data.json().then((res)=>{
+                    console.log(res)
                     setTowns(res);
                     setLocation(res[0]._id);
                     if(allItemsAreVideos){
@@ -117,9 +118,9 @@ const Checkout = () => {
     const [ phoneNumber, setPhoneNumber] = useState('');
 
 
-    return ( <div className="mt-3 lg:mt-20 ">
+    return ( <div className="mt-3 lg:mt-10 mb-10 lg:mb-10 ">
         <ToastContainer />
-            <div className="flex justify-center mb-10 text-xl">Checkout</div>
+            <div className="flex justify-center mb-10 text-xl font-montserrat uppercase">Checkout</div>
             
     { showIframe ? (
         <div className="flex justify-center items-center">
@@ -147,7 +148,7 @@ const Checkout = () => {
         {(props)=>(
     <Form>
         
-        <div className="block lg:flex lg:justify-center mx-5 lg:mx-10">                
+        <div className="block lg:flex lg:justify-center mx-5 lg:mx-20">                
             <div className="block w-full lg:w-1/2">
                 <div className="font-bold mb-5">Account Information</div>
                 <div className="flex gap-4">
@@ -180,7 +181,7 @@ const Checkout = () => {
                                 <option>Loading....</option>
                                 :
                                 towns.map( town => 
-                                    <option key={town._id} value={town._id}>{town.town} - Ksh.{town.price}</option>
+                                    <option key={town._id} value={town._id}>{town.name} - Ksh.{town.price}</option>
                                 )
                             }
                     </select>
@@ -194,7 +195,7 @@ const Checkout = () => {
                     products.map( product =>(
                         <div className="flex mb-1 text-xs lg:text-base">
                             <div className="w-48 lg:w-64">
-                                { product.productName || product.title }
+                                { product.productName }
                             </div>
                             <div className="ml-5 lg:ml-0 w-5 lg:w-20">
                                X { product.quantity }
@@ -224,8 +225,8 @@ const Checkout = () => {
                     {/* <div className="ml-12 lg:ml-0">KES. {total + deliveryCost}</div> */}
                 </div>
 
-                <button className="collapse lg:visible w-28 flex justify-center p-1 border-2 border-black mt-10 hover:bg-black hover:text-white" type="submit">
-                    { loading &&  <div><SyncLoader size={6} color={"black"}/></div> }
+                <button className="collapse lg:visible w-28 flex justify-center p-2 border-2 bg-purple-900 mt-10 hover:bg-purple-700 text-white rounded-lg" type="submit">
+                    { loading &&  <div><SyncLoader size={6} color={"white"}/></div> }
                     {!loading && <div>PAY</div> }
                 </button>
 
