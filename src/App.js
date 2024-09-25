@@ -16,6 +16,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import MyProfile from "./components/MyProfile";
+import Events from "./components/Events";
 
 function App() {
   
@@ -34,6 +35,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<MyProfile />} />
+          <Route path="/events" element={<Events />} />
         </Routes>
       </div>
       
