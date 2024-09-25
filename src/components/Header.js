@@ -5,6 +5,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import useCart from '../utils/CartContext';
 import { AuthContext } from '../utils/AuthContext';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Header() {
     const { products } = useCart();
@@ -61,18 +62,20 @@ function Header() {
                                                 navigate('/profile');
                                                 toggleDropdown();
                                             }} 
-                                            className='block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-900'
+                                            className='w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-900 flex gap-2 items-center'
                                         >
-                                            My Profile
+                                            <PersonIcon sx={{fontSize: 16}} />
+                                            <span>My profile</span>
                                         </button>
                                         <button 
                                             onClick={()=> {
                                                 handleLogout();
                                                 toggleDropdown();
                                             }} 
-                                            className='block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-900'
+                                            className='w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-900 flex gap-2 items-center'
                                         >
-                                            Logout
+                                            <LogoutIcon sx={{fontSize: 16}} />
+                                            <span>Logout</span>
                                         </button>
                                     </div>
                                 )}
