@@ -42,7 +42,6 @@ function Header() {
                             <ShoppingCartIcon fontSize={'small'}   />
                             <sup className="font-features sups bg"><div className='text-black bg-black'>{products.length}</div></sup>
                         </Link>
-                        <Link to={"/"} className='bg-purple-900 hover:bg-purple-800 text-white rounded-lg text-xs flex px-2 items-center'>Post Ad</Link>
 
                         {token !== null ? (
                             <div className='relative'>
@@ -52,14 +51,25 @@ function Header() {
                                     onClick={toggleDropdown}
                                 >
                                     <PersonIcon sx={{fontSize: 20}} />
-                                    <span>{fullName}</span>
                                 </div>
 
                                 {/* Dropdown menu */}
                                 {dropdownVisible && (
                                     <div className='fixed z-50 right-0 mt-2 w-40 bg-gray-100 shadow-lg rounded-md py-2'>
                                         <button 
-                                            onClick={handleLogout} 
+                                            onClick={() => {
+                                                navigate('/profile');
+                                                toggleDropdown();
+                                            }} 
+                                            className='block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-900'
+                                        >
+                                            My Profile
+                                        </button>
+                                        <button 
+                                            onClick={()=> {
+                                                handleLogout();
+                                                toggleDropdown();
+                                            }} 
                                             className='block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-900'
                                         >
                                             Logout
@@ -74,6 +84,8 @@ function Header() {
                                 </div>
                             </div>
                         )}
+                        { token && <Link to={"/"} className='bg-purple-900 hover:bg-purple-800 text-white rounded-lg text-xs flex px-2 items-center'>Post Ad</Link> }
+
                     </div>
                 </ul>
 

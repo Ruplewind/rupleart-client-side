@@ -15,6 +15,7 @@ import Homepage from "./components/Homepage";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import MyProfile from "./components/MyProfile";
 
 function App() {
   
@@ -32,6 +33,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<MyProfile />} />
         </Routes>
       </div>
       

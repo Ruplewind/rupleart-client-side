@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useCart from "../utils/CartContext";
 import * as yup from 'yup'
 import { Field, Form, Formik } from 'formik'
 import SyncLoader from "react-spinners/SyncLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from "../utils/AuthContext";
 
 const myRegex = /^07\d{8}$/;
 
@@ -116,6 +117,26 @@ const Checkout = () => {
     const [ secondName, setSecondName] = useState('');
     const [ email, setEmail] = useState('');
     const [ phoneNumber, setPhoneNumber] = useState('');
+
+    const { userId, token } = useContext(AuthContext);
+    useEffect(()=>{
+        fetch(`${process.env.REACT_APP_API_URL}/profile`,{
+            method: 'GET',
+            headers: {
+                'Authorization':`Bearer ${token}`
+            }
+        })
+        .then( data => data.json())
+        .then( data => {
+            setEmail(data.email);
+            setFirstName(data.first_name);
+            setSecondName(data.second_name);
+            setPhoneNumber(data.phoneNumber);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    },[]);
 
 
     return ( <div className="mt-3 lg:mt-10 mb-10 lg:mb-10 ">
