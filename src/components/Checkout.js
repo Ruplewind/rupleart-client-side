@@ -6,27 +6,20 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../utils/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const myRegex = /^07\d{8}$/;
 
 const Checkout = () => {
 
     const { products, total } = useCart();
-
     const [ location, setLocation ] = useState(null);
-
     const [deliveryCost, setDeliveryCost] = useState(0);
-
     const [link, setLink] = useState('');
-
     const [showIframe, setShowIframe] = useState(false);
-
     const [loading, setLoading] = useState(false);
-
     const [towns, setTowns] = useState([]);
-
     const [townsLoading, setTownsLoading] = useState(true);
-
     const [allVideos, SetAllVideos] = useState(false);
 
     useEffect(()=>{
@@ -119,6 +112,7 @@ const Checkout = () => {
     const [ phoneNumber, setPhoneNumber] = useState('');
 
     const { userId, token } = useContext(AuthContext);
+    
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_API_URL}/profile`,{
             method: 'GET',
@@ -138,6 +132,7 @@ const Checkout = () => {
         })
     },[]);
 
+    const navigate = useNavigate();
 
     return ( <div className="mt-3 lg:mt-10 mb-10 lg:mb-10 ">
         <ToastContainer />
@@ -174,21 +169,28 @@ const Checkout = () => {
                 <div className="font-bold mb-5">Account Information</div>
                 <div className="flex gap-4">
                     <div>
-                        <Field type="text" name="firstname" onChange={e => {setFirstName(e.target.value)}} value={props.values.firstname} placeholder="First name"  className="border-b-2 p-3 mb-2 w-full lg:w-3/4" required/>
+                        <Field type="text" name="firstname" readOnly onChange={e => {setFirstName(e.target.value)}} value={props.values.firstname} placeholder="First name"  className="border-b-2 p-2 mb-2 w-full lg:w-3/4" required/>
                         <div className="p-1 capitalize text-red-900 text-xs">{props.touched.firstname && props.errors.firstname}</div>
                     </div>
                     <div>
-                        <Field type="text" name="secondname" onChange={e => {setSecondName(e.target.value)}} value={props.values.secondname} placeholder="Second name"  className="border-b-2 p-3 mb-2 w-full lg:w-3/4" required/>
+                        <Field type="text" name="secondname" readOnly onChange={e => {setSecondName(e.target.value)}} value={props.values.secondname} placeholder="Second name"  className="border-b-2 p-2 mb-2 w-full lg:w-3/4" required/>
                         <div className="p-1 capitalize text-red-900 text-xs">{props.touched.secondname && props.errors.secondname}</div>
                     </div>
                 </div>                
                 <div>
-                <Field type="email" name="email" onChange={e => {setEmail(e.target.value)}} value={props.values.email} placeholder="Email"  className="border-b-2 p-3 mb-2 w-full lg:w-3/4" required/>
+                <Field type="email" name="email" readOnly onChange={e => {setEmail(e.target.value)}} value={props.values.email} placeholder="Email"  className="border-b-2 p-2 mb-2 w-full lg:w-3/4" required/>
                 </div>
                 <div className="p-1 capitalize text-red-900 text-xs">{props.touched.email && props.errors.email}</div>
                 <div>
-                <Field type="text" name="phoneNumber" onChange={e => {setPhoneNumber(e.target.value)}} value={props.values.phoneNumber} placeholder="Phone Number" className="border-b-2 p-3 mb-2 w-full lg:w-3/4" />
+                <Field type="text" name="phoneNumber" readOnly onChange={e => {setPhoneNumber(e.target.value)}} value={props.values.phoneNumber} placeholder="Phone Number" className="border-b-2 p-2 mb-2 w-full lg:w-3/4" />
                 </div>
+                <div className="flex justify-end  w-full lg:w-3/4">
+                    <button onClick={e => {
+                        e.preventDefault();
+                        navigate("/profile");
+                    }} className='mt-2 text-sm text-red-900 hover:text-red-500'>Edit profile?</button>
+                </div>
+                
                 {/* <div className="p-1 capitalize text-red-900 text-xs">{props.touched.phoneNumber && props.errors.phoneNumber}</div> */}
             </div>
 
@@ -196,7 +198,7 @@ const Checkout = () => {
                 { !allVideos && 
                 <div>
                     <div className="font-bold mb-5">Select Delivery Location</div>
-                    <select className="w-full p-1 lg:p-3 bg-white mb-4 border-b-2" onChange={(e)=>{ setLocation(e.target.value); }}>
+                    <select className="w-full p-1 lg:p-2 bg-white mb-4 border-b-2" onChange={(e)=>{ setLocation(e.target.value); }}>
                             {
                                 townsLoading ?
                                 <option>Loading....</option>
@@ -254,7 +256,6 @@ const Checkout = () => {
 
             </div>
         </div>
-
 
         <button type="submit" className="visible lg:collapse fixed bottom-0 bg-purple-900 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif flex justify-center">
            { loading &&  <div><SyncLoader size={6} color={"#fff"}/></div> }
