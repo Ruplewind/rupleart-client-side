@@ -220,6 +220,7 @@ function MyAds() {
                 <th className='p-2'>Category</th>
                 <th className='p-2'>Size</th>
                 <th className='p-2'>Price</th>
+                <th className='p-2'>Approval Status</th>
                 <th className='p-2'>Edit</th>
                 <th className='p-2'>Delete</th>
             </tr>
@@ -237,6 +238,16 @@ function MyAds() {
                             <td className='text-center p-2'>{ad.type}</td>
                             <td className='text-center p-2'>{ad.size} cm</td>
                             <td className='text-center p-2'>{ad.price}</td>
+                            <td className='text-center p-2'>{
+                                ad.approvalStatus == 0 ? 
+                                    <div className='bg-gray-300 text-xs rounded-2xl p-1 w-full lg:w-3/4 mx-auto'>Pending approval</div>
+                                : ad.approvalStatus == 1 ? 
+                                    <div className='bg-green-500 text-xs rounded-2xl p-1 w-full lg:w-1/2 mx-auto text-white'>Approved</div>
+                                :
+                                <div>
+                                    <div className='bg-red-500 text-xs rounded-2xl p-1 w-full lg:w-1/2 mx-auto text-white'>Rejected</div>
+                                </div>
+                                }</td>
                             <td className='p-2'>
                                 <div className='flex justify-center'>
                                     <button onClick={(e)=>{
@@ -266,6 +277,7 @@ function MyAds() {
                         </tr>
                     ))
                 }
+                
 
         </table>
         </div>
