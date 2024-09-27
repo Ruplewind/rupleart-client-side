@@ -29,11 +29,11 @@ function Events() {
 
   return (
     <div className='mt-10 font-montserrat'>
-      <h2 className='w-full lg:w-3/4 mx-5 lg:mx-auto font-bold text-lg lg:text-2xl'>Upcoming Events</h2>
+      <h2 className='w-full lg:w-3/4 mx-5 lg:mx-auto font-bold text-lg lg:text-lg'>Upcoming Events</h2>
       {!loading && upcomingEvents.length > 0 ? (
         <ul>
           {upcomingEvents.map((event) => (
-            <div className='shadow-lg bg-white hover:bg-gray-200 border-4 border-l-green-500 hover:border-l-green-900 p-2 my-4 mx-5 lg:mx-auto lg:w-3/4' key={event._id}>
+            <div className='shadow-lg bg-white hover:bg-gray-200 border-4 border-l-green-500 hover:border-l-green-900 p-2 my-4 mx-5 lg:mx-auto lg:w-3/4 text-sm' key={event._id}>
                 <div className='block lg:flex gap-4'>
                     <img src={`${process.env.REACT_APP_API_URL}/uploads/${event.poster}`} className='w-28 h-28 object-cover' />
                     <div>
@@ -59,11 +59,11 @@ function Events() {
         loading && <div className='w-3/4 mx-auto text-sm mt-5 mb-10'>Loading ... </div>
     }
 
-    <h2 className='w-3/4 mx-5 lg:mx-auto font-bold text-lg lg:text-2xl mt-10'>Past Events</h2>
+    <h2 className='w-3/4 mx-5 lg:mx-auto font-bold text-lg lg:text-lg mt-10'>Past Events</h2>
       { !loading && pastEvents.length > 0 ? (
         <ul>
           {!loading && pastEvents.map((event) => (
-            <div className='shadow-lg bg-white hover:bg-gray-200 border-4 border-l-green-500 hover:border-l-green-900 p-2 my-4 mx-5 lg:mx-auto lg:w-3/4' key={event._id}>
+            <div className='shadow-lg bg-white hover:bg-gray-200 border-4 border-l-green-500 hover:border-l-green-900 p-2 my-4 mx-5 lg:mx-auto lg:w-3/4 text-sm' key={event._id}>
                 <div className='block lg:flex gap-4'>
                     <img src={`${process.env.REACT_APP_API_URL}/uploads/${event.poster}`} className='w-28 h-28 object-cover' />
                     <div>

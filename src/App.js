@@ -25,6 +25,8 @@ import ContactUs from "./components/ContactUs";
 import FAQ from "./components/FAQ";
 import TermsAndConditions from "./components/TermsAndConditions";
 import ReturnPolicy from "./components/ReturnPolicy";
+import HowItWorks from "./components/HowItWorks";
+import DmcaNotice from "./components/DCMANotice";
 
 function App() {
 
@@ -37,8 +39,7 @@ function App() {
       <Header />
       <div className="flex-grow bg-gray-100">
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/" element={<Shop />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
@@ -49,6 +50,8 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/return" element={<ReturnPolicy />} />
+          <Route path="/howitworks" element={<HowItWorks />} />
+          <Route path="/dcma" element={<DmcaNotice />} />
         </Routes>
         
         {

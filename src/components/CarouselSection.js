@@ -27,17 +27,14 @@ function CarouselSection() {
               color="white"
               className="mb-4 text-lg md:text-xl lg:text-2xl"
             >
-              The Beauty of Nature
+              RUPLEART
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80 text-md"
+              className="mb-9 opacity-80 text-sm"
             >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
+              Rupleart is an innovative online platform designed to bring artists and art enthusiasts together. As a marketplace for creativity, Rupleart allows artists to showcase their paintings, drawings, and other forms of visual art to a global audience. Our mission is to support artists by providing them with an accessible and dynamic space to sell their original artwork, while offering buyers a diverse collection of unique pieces to discover and purchase
             </Typography>
             <div className="flex justify-center gap-2">
               <Button size="sm" color="white">
@@ -63,17 +60,14 @@ function CarouselSection() {
               color="white"
               className="mb-4 text-lg md:text-xl lg:text-2xl"
             >
-              The Beauty of Nature
+              RUPLEART
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80 text-md"
+              className="mb-9 opacity-80 text-sm"
             >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
+              Whether you’re an artist looking to grow your audience and sell your work, or an art lover searching for the perfect piece to complete your space, Rupleart is the ultimate destination for connecting talent with appreciation. The platform ensures smooth transactions, secure payments, and a personalized experience for both buyers and sellers
             </Typography>
             <div className="flex justify-center gap-2">
               <Button size="sm" color="white">
@@ -99,17 +93,14 @@ function CarouselSection() {
               color="white"
               className="mb-4 text-lg md:text-xl lg:text-2xl"
             >
-              The Beauty of Nature
+              RUPLEART
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80 text-md"
+              className="mb-9 opacity-80 text-sm"
             >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
+              Rupleart makes art accessible to everyone, transforming every space into a work of art, one piece at a time.
             </Typography>
             <div className="flex justify-center gap-2">
               <Button size="sm" color="white">

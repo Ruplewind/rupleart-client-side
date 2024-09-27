@@ -37,8 +37,9 @@ function Header() {
                 <ul className='collapse lg:visible uppercase mr-1 lg:mr-5 tracking-wider text-sm'>
                     <div className='flex justify-end gap-2'>
                         <Link to={"/"} className='hover:underline hover:text-purple-900 decoration-purple-900 decoration-2 underline-offset-8 p-1 rounded-2xl'>Home</Link>
-                        <Link to={"/shop"} className='hover:underline hover:text-purple-900 decoration-purple-900 decoration-2 underline-offset-8 p-1 rounded-2xl'>Shop</Link>
                         <Link to={"/events"} className='hover:underline hover:text-purple-900 decoration-purple-900 decoration-2 underline-offset-8 p-1 rounded-2xl '>Events</Link>
+                        <Link to={"/about_us"} className='hover:underline hover:text-purple-900 decoration-purple-900 decoration-2 underline-offset-8 p-1 rounded-2xl '>About Us</Link>
+                        <Link to={"/contact_us"} className='hover:underline hover:text-purple-900 decoration-purple-900 decoration-2 underline-offset-8 p-1 rounded-2xl '>Contact Us</Link>
                         <Link to={'/cart'} className='flex items-center px-2 hover:text-purple-900'>
                             <ShoppingCartIcon fontSize={'small'}   />
                             <sup className="font-features sups bg"><div className='text-black bg-black'>{products.length}</div></sup>

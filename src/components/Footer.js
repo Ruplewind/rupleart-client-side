@@ -43,11 +43,11 @@ function Footer() {
                 </div>
                 <div className='flex items-center mt-2 gap-2'>
                     <CallIcon sx={{color: 'white', fontSize: 20}} />
-                    <button className='block text-gray-400 hover:text-gray-600 uppercase text-sm'>+254 7XX XXX XXX</button>
+                    <button className='block text-gray-400 hover:text-gray-600 uppercase text-sm'>+254 736 012 377</button>
                 </div>
                 <div className='flex items-center mt-2 gap-2'>
                     <MailIcon sx={{color: 'white', fontSize: 20}} />
-                <button className='block text-gray-400 hover:text-gray-600 uppercase text-sm'>info@rupleart.co.ke</button>
+                <button className='block text-gray-400 hover:text-gray-600 uppercase text-sm'>Rupleart@gmail.com</button>
                 </div>
 
             </div>
@@ -56,6 +56,8 @@ function Footer() {
                 <Link to={"/faq"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>FAQ</Link>
                 <Link to={"/contact_us"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Contact Us</Link>
                 <Link to={"/about_us"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>About Us</Link>
+                <Link to={"/howitworks"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>How it Works</Link>
+                <Link to={"/dcma"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>DCMA Notice</Link>
                 <Link to={"/terms"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Terms of Use</Link>
                 <Link to={"/return"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Return Policy</Link>
             </div>

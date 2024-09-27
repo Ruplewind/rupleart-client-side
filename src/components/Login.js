@@ -38,7 +38,7 @@ function Login() {
                         autoClose: 1000
                     });
                     setTimeout(()=>{
-                        navigate('/shop');
+                        navigate('/');
                     }, 500);
                 })                
             }else{
