@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CallIcon from '@mui/icons-material/Call';
 import MailIcon from '@mui/icons-material/Mail';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Link } from 'react-router-dom';
 
 function Footer() {
     const [year, setYear] = useState(null);
@@ -50,13 +51,13 @@ function Footer() {
                 </div>
 
             </div>
-            <div className='mb-4 h-0 collapse lg:visible'>
+            <div className='mb-4 mt-10 lg:mt-0'>
                 <div className='font-bold text-white'>OUR COMPANY</div>
-                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>FAQ</button>
-                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Contact Us</button>
-                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>About Us</button>
-                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Terms of Use</button>
-                <button className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Return Policy</button>
+                <Link to={"/faq"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>FAQ</Link>
+                <Link to={"/contact_us"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Contact Us</Link>
+                <Link to={"/about_us"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>About Us</Link>
+                <Link to={"/terms"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Terms of Use</Link>
+                <Link to={"/return"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-sm'>Return Policy</Link>
             </div>
 
             <div className='mb-4 h-0 collapse lg:visible'>

@@ -20,6 +20,11 @@ import Events from "./components/Events";
 import MyAds from "./components/MyAds";
 import { useContext } from "react";
 import { AuthContext } from "./utils/AuthContext";
+import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
+import FAQ from "./components/FAQ";
+import TermsAndConditions from "./components/TermsAndConditions";
+import ReturnPolicy from "./components/ReturnPolicy";
 
 function App() {
 
@@ -39,6 +44,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/about_us" element={<AboutUs />} />
+          <Route path="/contact_us" element={<ContactUs />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/return" element={<ReturnPolicy />} />
         </Routes>
         
         {

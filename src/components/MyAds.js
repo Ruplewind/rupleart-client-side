@@ -237,7 +237,7 @@ function MyAds() {
                             </td>
                             <td className='text-center p-2'>{ad.type}</td>
                             <td className='text-center p-2'>{ad.size} cm</td>
-                            <td className='text-center p-2'>{ad.price}</td>
+                            <td className='text-center p-2'>Ksh. {ad.price}</td>
                             <td className='text-center p-2'>{
                                 ad.approvalStatus == 0 ? 
                                     <div className='bg-gray-300 text-xs rounded-2xl p-1 w-full lg:w-3/4 mx-auto'>Pending approval</div>
