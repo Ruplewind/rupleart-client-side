@@ -87,7 +87,7 @@ function Header() {
                                 </div>
                             </div>
                         )}
-                        { token && <Link to={"/"} className='bg-purple-900 hover:bg-purple-800 text-white rounded-lg text-xs flex px-2 items-center'>Post Ad</Link> }
+                        { token && <Link to={"/myads"} className='bg-purple-900 hover:bg-purple-800 text-white rounded-lg text-xs flex px-2 items-center'>Post Ad</Link> }
 
                     </div>
                 </ul>

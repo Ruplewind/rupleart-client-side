@@ -17,8 +17,13 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import MyProfile from "./components/MyProfile";
 import Events from "./components/Events";
+import MyAds from "./components/MyAds";
+import { useContext } from "react";
+import { AuthContext } from "./utils/AuthContext";
 
 function App() {
+
+  const { token } = useContext(AuthContext);
   
   return (
     
@@ -31,12 +36,22 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<MyProfile />} />
           <Route path="/events" element={<Events />} />
         </Routes>
+        
+        {
+          token ?
+          <Routes> 
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/profile" element={<MyProfile />} />
+            <Route path="/myads" element={<MyAds />} />
+          </Routes>
+          :
+          null
+        }
+          
       </div>
       
 
