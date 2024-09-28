@@ -27,6 +27,8 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import ReturnPolicy from "./components/ReturnPolicy";
 import HowItWorks from "./components/HowItWorks";
 import DmcaNotice from "./components/DCMANotice";
+import SuccessTransaction from "./components/SuccessTransaction";
+import FailedTransaction from "./components/FailedTransaction";
 
 function App() {
 
@@ -52,6 +54,8 @@ function App() {
           <Route path="/return" element={<ReturnPolicy />} />
           <Route path="/howitworks" element={<HowItWorks />} />
           <Route path="/dcma" element={<DmcaNotice />} />
+          <Route path="/confirm" element={<ConfirmPayment />} />
+          <Route path="/cancel" element={<CancelTransaction />} />
         </Routes>
         
         {

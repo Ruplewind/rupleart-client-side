@@ -72,6 +72,8 @@ const Checkout = () => {
         minPrice: yup.number().min(deliveryCost + total, `Minimum price is ${deliveryCost + total}`)
     })
 
+    const { userId, token } = useContext(AuthContext);
+
     const handleSubmit = (data) =>{
         setLoading(true);
         let newData = {...data, products, location};
@@ -79,7 +81,8 @@ const Checkout = () => {
         fetch(`${process.env.REACT_APP_API_URL}/Checkout`,{
             method: 'POST',
             headers:{
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                'Authorization':`Bearer ${token}`
             },
             body: JSON.stringify(newData)
         })
@@ -110,8 +113,6 @@ const Checkout = () => {
     const [ secondName, setSecondName] = useState('');
     const [ email, setEmail] = useState('');
     const [ phoneNumber, setPhoneNumber] = useState('');
-
-    const { userId, token } = useContext(AuthContext);
     
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_API_URL}/profile`,{
