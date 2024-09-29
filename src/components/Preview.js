@@ -86,7 +86,7 @@ const Preview = () => {
 
                     {/* Desktop Add to Cart button */}
                     <button 
-                        className="hidden lg:block w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm"
+                        className="w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm"
                         onClick={() => handleAddToCart()}
                     >
                         ADD TO CART
@@ -113,14 +113,6 @@ const Preview = () => {
                 <div className="lg:w-2/6 border-l">
                     <NewArtWorks />
                 </div>
-
-                {/* Mobile Add to Cart button */}
-                <button 
-                    className="lg:hidden fixed bottom-0 bg-blue-950 text-white text-center w-full p-4 font-serif font-bold tracking-wider"
-                    onClick={() => handleAddToCart()}
-                >
-                    ADD TO CART
-                </button>
             </div>
 
             {/* Related Products section */}
