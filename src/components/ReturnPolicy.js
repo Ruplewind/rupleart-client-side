@@ -10,7 +10,7 @@ function ReturnPolicy() {
                 alt="Background"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-                <h1 className="text-white text-md lg:text-4xl font-bold">Return Policy</h1>
+                <h1 className="text-white text-md lg:text-2xl font-bold">Return Policy</h1>
             </div>
         </div>
     <div className="max-w-3xl mx-auto p-6 bg-gray-100 rounded-md shadow-lg mb-10 mt-5 text-sm">

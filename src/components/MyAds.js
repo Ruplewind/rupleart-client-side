@@ -213,7 +213,7 @@ function MyAds() {
         </div>
 
         <div className='overflow-x-auto'>
-        <table className='mt-5 w-full border bg-white min-w-full'>
+        <table className='mt-5 w-full border bg-white min-w-full text-sm uppercase'>
             <tr className='bg-gray-100 p-2'>
                 <th className='p-2'>Image</th>
                 <th className='p-2'>Title/Description</th>
@@ -261,7 +261,7 @@ function MyAds() {
                                         setImageUrl(`${process.env.REACT_APP_API_URL}/uploads/${ad.image}`);
                                         setImageSrc(ad.image);
                                         setEditShowPasswordModal(true);
-                                    }} className='bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-sm px-2'>Edit</button>
+                                    }} className='bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-xs px-2'>Edit</button>
                                 </div>
                             </td>
                             <td>
@@ -271,7 +271,7 @@ function MyAds() {
                                         e.preventDefault();
                                         handleDeleteItem(ad._id);
                                     }} 
-                                     className='bg-red-900 hover:bg-red-700 p-1 text-white rounded-lg text-sm px-2'>Delete</button>
+                                     className='bg-red-900 hover:bg-red-700 p-1 text-white rounded-lg text-xs px-2'>Delete</button>
                                 </div>
                             </td>
                         </tr>

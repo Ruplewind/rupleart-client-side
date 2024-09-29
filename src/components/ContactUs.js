@@ -56,7 +56,7 @@ function ContactUs() {
                 alt="Background"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-                <h1 className="text-white text-xl lg:text-4xl font-bold">Contact Us</h1>
+                <h1 className="text-white text-xl lg:text-2xl font-bold">Contact Us</h1>
             </div>
         </div>
 

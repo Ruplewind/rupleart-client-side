@@ -10,7 +10,7 @@ const DmcaNotice = () => {
                 alt="Background"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-                <h1 className="text-white text-md lg:text-4xl font-bold">DCMA Notice and Takedown Procedure</h1>
+                <h1 className="text-white text-md lg:text-2xl font-bold">DCMA Notice and Takedown Procedure</h1>
             </div>
         </div>
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg text-sm mb-10 mt-5">

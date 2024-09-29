@@ -1,10 +1,13 @@
 import { Carousel, Typography, Button } from '@material-tailwind/react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function CarouselSection() {
+  const navigate = useNavigate();
+
   return (
     <Carousel className="h-96" 
-    transition={{duration: 5}} 
+    transition={{duration: 1}} 
     autoplay={true}
     loop={true}
     prevArrow={({handlePrev})=>{
@@ -37,11 +40,15 @@ function CarouselSection() {
               Rupleart is an innovative online platform designed to bring artists and art enthusiasts together. As a marketplace for creativity, Rupleart allows artists to showcase their paintings, drawings, and other forms of visual art to a global audience. Our mission is to support artists by providing them with an accessible and dynamic space to sell their original artwork, while offering buyers a diverse collection of unique pieces to discover and purchase
             </Typography>
             <div className="flex justify-center gap-2">
-              <Button size="sm" color="white">
-                Explore
+              <Button size="sm" color="white" onClick={()=> {
+                navigate("/howitworks")
+              }}>
+                How It Works
               </Button>
-              <Button size="sm" color="white" variant="text">
-                Gallery
+              <Button size="sm" color="white" variant="text" onClick={()=> {
+                navigate("/about_us")
+              }}>
+                About Us
               </Button>
             </div>
           </div>
@@ -70,11 +77,15 @@ function CarouselSection() {
               Whether you’re an artist looking to grow your audience and sell your work, or an art lover searching for the perfect piece to complete your space, Rupleart is the ultimate destination for connecting talent with appreciation. The platform ensures smooth transactions, secure payments, and a personalized experience for both buyers and sellers
             </Typography>
             <div className="flex justify-center gap-2">
-              <Button size="sm" color="white">
-                Explore
+              <Button size="sm" color="white" onClick={()=> {
+                navigate("/howitworks")
+              }}>
+                How It Works
               </Button>
-              <Button size="sm" color="white" variant="text">
-                Gallery
+              <Button size="sm" color="white" variant="text" onClick={()=> {
+                navigate("/about_us")
+              }}>
+                About Us
               </Button>
             </div>
           </div>
@@ -103,11 +114,15 @@ function CarouselSection() {
               Rupleart makes art accessible to everyone, transforming every space into a work of art, one piece at a time.
             </Typography>
             <div className="flex justify-center gap-2">
-              <Button size="sm" color="white">
-                Explore
+              <Button size="sm" color="white" onClick={()=> {
+                navigate("/howitworks")
+              }}>
+                How It Works
               </Button>
-              <Button size="sm" color="white" variant="text">
-                Gallery
+              <Button size="sm" color="white" variant="text" onClick={()=> {
+                navigate("/about_us")
+              }}>
+                About Us
               </Button>
             </div>
           </div>

@@ -33,7 +33,7 @@ function Events() {
       {!loading && upcomingEvents.length > 0 ? (
         <ul>
           {upcomingEvents.map((event) => (
-            <div className='shadow-lg bg-white hover:bg-gray-200 border-4 border-l-green-500 hover:border-l-green-900 p-2 my-4 mx-5 lg:mx-auto lg:w-3/4 text-sm' key={event._id}>
+            <div className='shadow-lg bg-white hover:bg-gray-200 border-4 border-l-purple-500 hover:border-l-purple-900 p-2 my-4 mx-5 lg:mx-auto lg:w-3/4 text-sm' key={event._id}>
                 <div className='block lg:flex gap-4'>
                     <img src={`${process.env.REACT_APP_API_URL}/uploads/${event.poster}`} className='w-28 h-28 object-cover' />
                     <div>
@@ -63,7 +63,7 @@ function Events() {
       { !loading && pastEvents.length > 0 ? (
         <ul>
           {!loading && pastEvents.map((event) => (
-            <div className='shadow-lg bg-white hover:bg-gray-200 border-4 border-l-green-500 hover:border-l-green-900 p-2 my-4 mx-5 lg:mx-auto lg:w-3/4 text-sm' key={event._id}>
+            <div className='shadow-lg bg-white hover:bg-gray-200 border-4 border-l-purple-500 hover:border-l-purple-900 p-2 my-4 mx-5 lg:mx-auto lg:w-3/4 text-sm' key={event._id}>
                 <div className='block lg:flex gap-4'>
                     <img src={`${process.env.REACT_APP_API_URL}/uploads/${event.poster}`} className='w-28 h-28 object-cover' />
                     <div>
