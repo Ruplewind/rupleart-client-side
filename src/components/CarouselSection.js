@@ -35,7 +35,7 @@ function CarouselSection() {
             <Typography
               variant="lead"
               color="white"
-              className="mb-9 opacity-80 text-sm"
+              className="mb-9 opacity-80 text-xs lg:text-sm"
             >
               Rupleart is an innovative online platform designed to bring artists and art enthusiasts together. As a marketplace for creativity, Rupleart allows artists to showcase their paintings, drawings, and other forms of visual art to a global audience. Our mission is to support artists by providing them with an accessible and dynamic space to sell their original artwork, while offering buyers a diverse collection of unique pieces to discover and purchase
             </Typography>

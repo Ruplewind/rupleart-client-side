@@ -32,13 +32,13 @@ function RelatedProducts({category}) {
     })
   return (
     <div className='mb-10'>
-      <div className='font-bold border-b-2 border-purple-900 hover:border-purple-700 w-40 text-center uppercase text-sm'>Related Products</div>
+      <div className='font-bold border-b-2 border-purple-900 hover:border-purple-700 w-40 text-center uppercase text-sm mx-5 lg:mx-0'>Related Products</div>
 
-      <div className='flex gap-4 flex-wrap font-montserrat mt-5'>
+      <div className='flex gap-2 flex-wrap font-montserrat mt-5'>
             {!loading && filteredData.slice(0,6).map(item => (
                 <Link 
                 to={"/preview"} 
-                className='w-1/2 md:w-1/6 ' 
+                className='w-full lg:w-1/6 mx-5' 
                 key={item.productName} 
                 state={{ data: item }}
                 >
@@ -48,7 +48,7 @@ function RelatedProducts({category}) {
                     <img 
                         src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`} 
                         alt={item.productName} 
-                        className='transition-all duration-300 object-cover w-64 h-64 group-hover:w-60 group-hover:h-60' 
+                        className='transition-all duration-300 object-cover w-64 h-52 group-hover:w-60 group-hover:h-60' 
                     />
                     </div>
 

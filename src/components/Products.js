@@ -39,7 +39,7 @@ const Products = ({ category }) => {
     const handleAddToCart = (data) => {
         addToCart({ ...data, quantity: Number(quantity) });
     }
-    return ( <div className='mt-5 w-full mx-5'>
+    return ( <div className='mt-2 lg:mt-5 mx-2 lg:mx-5'>
         { loading && <div className="text-center text-slate-500 text-md mb-5">Loading...</div>}
         <div className="text-center font-bold text-slate-500 text-md mb-1 capitalize">{category == null ?  (<div>All Artworks</div>) : category}</div>
         <div className="text-center text-slate-500 text-md mb-5 text-sm">({!loading && filteredData.length} items)</div>
@@ -49,11 +49,11 @@ const Products = ({ category }) => {
             {!loading && filteredData.map(item => (
                 <Link 
                 to={"/preview"} 
-                className='w-1/2 md:w-1/4 ' 
+                className='w-full md:w-1/4 ' 
                 key={item.productName} 
                 state={{ data: item }}
                 >
-                <div className='group relative bg-white p-2 rounded-lg transform transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1'>
+                <div className='group relative bg-white p-2 rounded-lg lg:transform lg:transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1'>
                     {/* Image container with standard size and smooth resizing on hover */}
                     <div className='flex justify-center items-center'>
                     <img 
@@ -68,11 +68,11 @@ const Products = ({ category }) => {
                     <div className='text-center text-purple-900 font-montserrat'>Ksh {item.price}</div>
 
                     {/* Collapsible description */}
-                    <div className='text-center text-sm max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 text-gray-700'>
+                    <div className='text-center text-sm lg:max-h-0 lg:overflow-hidden group-hover:max-h-20 transition-all duration-300 text-gray-700'>
                         {item.description}
                     </div>
 
-                    <div className='flex justify-center max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300'>
+                    <div className='flex justify-center lg:max-h-0 lg:overflow-hidden group-hover:max-h-20 transition-all duration-300'>
                     <button 
                     onClick={()=>{
                         handleAddToCart(item)

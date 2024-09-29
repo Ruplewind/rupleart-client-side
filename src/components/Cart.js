@@ -29,7 +29,7 @@ const Cart = () => {
                     
                     <img src={`${process.env.REACT_APP_API_URL}/uploads/${ product.image }`} className="w-20 h-20 lg:w-28 lg:h-auto object-contain"/>
                     
-                    <div className="block lg:flex lg:gap-5  lg:justify-around text-sm lg:text-base items-center">
+                    <div className="block lg:flex gap-2 lg:gap-5  lg:justify-around text-sm lg:text-base items-center">
                         <div className="text-xs lg:text-base w-52 lg:w-64">
                             <div className="flex items-center  font-bold lg:font-normal">
                                 { product.productName }
@@ -66,29 +66,17 @@ const Cart = () => {
             </div>
             <div className="flex justify-center px-10 ml-5 lg:mb-8">
                 {
-                    token !== null ? <Link to={'/checkout'}><div className="collapse lg:visible w-48 flex justify-center p-2 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
+                    token !== null ? <Link to={'/checkout'}><div className="w-48 flex justify-center p-1 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
                         CHECKOUT
                 </div></Link>
                 :
-                <Link to={'/login'}><div className="collapse lg:visible w-48 flex justify-center p-2 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
+                <Link to={'/login'}><div className="w-48 flex justify-center p-1 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
                         CHECKOUT
                 </div></Link>
                 }
             </div>
             
             
-
-            { token !== null ?
-            
-            <Link to={'/checkout'}><div className="visible lg:collapse fixed bottom-0 bg-purple-900 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif" >
-                CHECKOUT
-            </div></Link>
-            :
-            <Link to={'/login'}><div className="visible lg:collapse fixed bottom-0 bg-purple-900 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif" >
-                CHECKOUT
-            </div></Link>
-
-            }
         </div> 
         
         : 

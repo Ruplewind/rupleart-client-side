@@ -249,7 +249,7 @@ const Checkout = () => {
                     {/* <div className="ml-12 lg:ml-0">KES. {total + deliveryCost}</div> */}
                 </div>
 
-                <button className="collapse lg:visible w-28 flex justify-center p-2 border-2 bg-purple-900 mt-10 hover:bg-purple-700 text-white rounded-lg" type="submit">
+                <button className="w-full lg:w-28 flex justify-center p-2 border-2 bg-purple-900 mt-5 lg:mt-10 hover:bg-purple-700 text-white rounded-lg" type="submit">
                     { loading &&  <div><SyncLoader size={6} color={"white"}/></div> }
                     {!loading && <div>PAY</div> }
                 </button>
@@ -257,11 +257,6 @@ const Checkout = () => {
 
             </div>
         </div>
-
-        <button type="submit" className="visible lg:collapse fixed bottom-0 bg-purple-900 text-white text-center w-full lg:w-0 p-4 text-bold tracking-wider font-serif flex justify-center">
-           { loading &&  <div><SyncLoader size={6} color={"#fff"}/></div> }
-           {!loading && <div>PAY</div> }
-        </button>
         </Form>
     )}
     </Formik>

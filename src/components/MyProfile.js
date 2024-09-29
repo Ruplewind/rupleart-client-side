@@ -120,7 +120,7 @@ function MyProfile() {
     }
 
     return (
-    <div className='mt-10'>
+    <div className='mt-10 mb-10'>
         <ToastContainer />
         <Formik
             initialValues={{firstname: firstName, secondname: secondName, email:email, phoneNumber:phoneNumber}}

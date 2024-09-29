@@ -196,7 +196,7 @@ function MyAds() {
     }
 
   return (
-    <div className='w-3/4 mx-auto font-montserrat mt-10'>
+    <div className='w-5/6 lg:w-3/4 mx-5 lg:mx-auto font-montserrat mt-10 mb-10'>
         <ToastContainer />
         <div className='text-xl font-bold uppercase'>My Ads</div>
 
@@ -213,7 +213,7 @@ function MyAds() {
         </div>
 
         <div className='overflow-x-auto'>
-        <table className='mt-5 w-full border bg-white min-w-full text-sm uppercase'>
+        <table className='mt-5 w-full border bg-white min-w-full text-xs lg:text-sm uppercase'>
             <tr className='bg-gray-100 p-2'>
                 <th className='p-2'>Image</th>
                 <th className='p-2'>Title/Description</th>

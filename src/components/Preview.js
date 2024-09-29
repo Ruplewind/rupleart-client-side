@@ -34,7 +34,7 @@ const Preview = () => {
 
             <div className="block lg:flex">
                 {/* Image section with zoom */}
-                <div className="lg:w-2/6 flex justify-center lg:justify-start lg:visible lg:relative">
+                <div className="lg:w-2/6 flex justify-center lg:justify-start collapse h-0 lg:visible lg:relative">
                     <ImageZoom imageUrl={`${process.env.REACT_APP_API_URL}/uploads/${data.image}`} />
                 </div>
 
@@ -49,10 +49,10 @@ const Preview = () => {
                 </div>
 
                 {/* Product details */}
-                <div className="p-10 lg:w-3/6 ml-5">
-                    <div className="font-semibold lg:text-3xl tracking-wide pb-1 lg:pb-3">{data.productName}</div> 
+                <div className="p-5 lg:p-10 w-full lg:w-3/6 ml-0 lg:ml-5">
+                    <div className="font-semibold lg:text-3xl tracking-wide pb-1 lg:pb-3 mx-10 lg:mx-0">{data.productName}</div> 
 
-                    <form>
+                    <form className="mx-10 lg:mx-0">
                         <div className="text-sm">
                             <div className="flex gap-2 items-center my-2">
                                 <div className="">Category:</div>
@@ -84,9 +84,8 @@ const Preview = () => {
                         </div>
                     </form>
 
-                    {/* Desktop Add to Cart button */}
                     <button 
-                        className="w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm"
+                        className="w-full lg:w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm mx-auto lg:mx-0"
                         onClick={() => handleAddToCart()}
                     >
                         ADD TO CART
@@ -110,7 +109,7 @@ const Preview = () => {
                     </div>
                 </div>
 
-                <div className="lg:w-2/6 border-l">
+                <div className="w-full lg:w-2/6 border-l">
                     <NewArtWorks />
                 </div>
             </div>
