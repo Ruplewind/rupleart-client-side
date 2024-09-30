@@ -49,6 +49,7 @@ function Header() {
                         <Link to={"/events"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl'>Events</Link>
                         <Link to={"/about_us"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl'>About Us</Link>
                         <Link to={"/contact_us"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl'>Contact Us</Link>
+                        { token && <Link to={"/orders"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl'>My Orders</Link> }
                         <Link to={'/cart'} className='flex items-center px-2 hover:text-purple-900'>
                             <ShoppingCartIcon fontSize={'small'} />
                             <sup className="text-black">{products.length}</sup>
@@ -61,7 +62,7 @@ function Header() {
                                 </div>
 
                                 {dropdownVisible && (
-                                    <div className='absolute right-0 mt-2 w-40 bg-gray-100 shadow-lg rounded-md py-2'>
+                                    <div className='fixed z-50 right-0 mt-2 w-40 bg-gray-100 shadow-lg rounded-md py-2'>
                                         <button 
                                             onClick={() => {
                                                 navigate('/profile');
@@ -113,6 +114,7 @@ function Header() {
                         <Link to={"/events"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>Events</Link>
                         <Link to={"/about_us"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>About Us</Link>
                         <Link to={"/contact_us"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>Contact Us</Link>
+                        { token && <Link to={"/orders"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>My Orders</Link> }
 
                         {token !== null ? (
                             <>

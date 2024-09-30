@@ -43,7 +43,6 @@ const Checkout = () => {
             let allItemsAreVideos = products.every(item => item.title);
             if(data.ok){
                 data.json().then((res)=>{
-                    console.log(res)
                     setTowns(res);
                     setLocation(res[0]._id);
                     if(allItemsAreVideos){

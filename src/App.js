@@ -29,6 +29,7 @@ import HowItWorks from "./components/HowItWorks";
 import DmcaNotice from "./components/DCMANotice";
 import SuccessTransaction from "./components/SuccessTransaction";
 import FailedTransaction from "./components/FailedTransaction";
+import MyOrders from "./components/MyOrders";
 
 function App() {
 
@@ -64,23 +65,13 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/profile" element={<MyProfile />} />
             <Route path="/myads" element={<MyAds />} />
+            <Route path="/orders" element={<MyOrders />} />
           </Routes>
           :
           null
         }
           
       </div>
-      
-
-      {/* <HeaderBar /> */}
-      {/* <Routes>
-        <Route path="/" element={<Navigation />} />
-        <Route path="/preview" element={<Preview />}/>
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/cancel" element={<CancelTransaction /> } />
-        <Route path="/confirm" element={ <ConfirmPayment /> } />
-      </Routes> */}
       <Footer />
       <WhatsAppButton />
     </CartProvider>

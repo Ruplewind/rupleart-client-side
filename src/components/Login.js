@@ -32,7 +32,6 @@ function Login() {
         .then((res)=>{
             if(res.ok){
                 res.json().then(data => {
-                    console.log(data)
                     login(data.token, data.userId, `${data.first_name} ${data.second_name}`);
                     toast.success("Welcome Onboard!",{
                         autoClose: 1000
