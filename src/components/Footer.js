@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CallIcon from '@mui/icons-material/Call';
 import MailIcon from '@mui/icons-material/Mail';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Footer() {
     const [year, setYear] = useState(null);
@@ -11,11 +11,17 @@ function Footer() {
         const date =  new Date();
 
         setYear(date.getFullYear());
-    },[])
+    },[]);
+
+    const navigate = useNavigate();
+
+    const [eventsLoading, setEventsLoading] = useState(true);
+    const [events, setEvents] = useState([]);
 
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [eventsError, setEventsError] = useState(false);
 
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_API_URL}/get_categories`)
@@ -29,6 +35,19 @@ function Footer() {
             setLoading(false);
         })
     },[])
+
+    useEffect(()=>{
+        fetch(`${process.env.REACT_APP_API_URL}/events`)
+        .then(res => res.json())
+        .then(data => {
+            setEvents(data);
+            setEventsLoading(false);
+        })
+        .catch(()=>{
+            setEventsError(true);
+            setEventsLoading(false);
+        })
+    },[])
   return (
     <div className='w-full font-montserrat bg-black/100 p-2'>
         <div className='block lg:flex gap-4 w-full justify-evenly mb-2 mt-4'>
@@ -39,7 +58,7 @@ function Footer() {
                 </div>
                 <div className='flex items-center mt-4 gap-2'>
                     <LocationOnIcon sx={{color: 'white', fontSize: 20}}/>
-                    <button className='block text-gray-400 hover:text-gray-600 uppercase text-xs'>Heritan Hse Argwings Kodhek Road</button>
+                    <button className='block text-gray-400 hover:text-gray-600 uppercase text-xs'>Urban View Building, Latema Rd, Nairobi CBD</button>
                 </div>
                 <div className='flex items-center mt-2 gap-2'>
                     <CallIcon sx={{color: 'white', fontSize: 20}} />
@@ -63,28 +82,33 @@ function Footer() {
                 <Link to={"/return"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Return Policy</Link>
             </div>
 
-            {/* <div className='mb-4 h-0 collapse lg:visible'>
-                <div className='h-0 collapse lg:visible font-bold text-white'>SHOP</div>
+            <div className='mb-0 lg:mb-4 h-0 lg:h-max collapse lg:visible'>
+                <div className='h-0 lg:h-max collapse lg:visible font-bold text-white mb-2 block'>SHOP</div>
                 {
-                    !loading && categories.length > 0 && categories.slice(1,6).map(category => 
-                        <div>
-                            <button className='h-0 collapse lg:visible text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>{category.category}</button>
+                    !loading && !error && categories.length > 0 && categories.slice(0,6).map(category => 
+                        <div onClick={() => {
+                            navigate("/shop")
+                        }} className='h-0 lg:h-max collapse lg:visible text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs cursor-pointer '>
+                            {category.category}
                         </div>
                     )
                 }
-            </div> */}
-
-            <div className='h-0 collapse lg:visible mb-0 m-0'>
-                <div className='h-0 collapse lg:visible font-bold text-white'>EVENTS</div>
-
-                <button className='h-0 collapse lg:visible block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>The Spectrum of Silence</button>
-                <button className='h-0 collapse lg:visible block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>EcoArt Futures Festival</button>
-                <button className='h-0 collapse lg:visible block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Chromatic Horizons</button>
-                <button className='h-0 collapse lg:visible block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Metaverse Art Summit</button>
-                <button className='h-0 collapse lg:visible block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Sculpting the Future</button>            
             </div>
 
-        </div>
+            <div className='mb-0 lg:mb-4 h-0 lg:h-max collapse lg:visible'>
+                <div className='h-0 lg:h-max collapse lg:visible font-bold text-white'>EVENTS</div>
+                {
+                    !eventsLoading && !error && events.length > 0 && events.slice(0,6).map(event => 
+                        <div onClick={() => {
+                            navigate("/events")
+                        }} 
+                        className='h-0 lg:h-max collapse lg:visible text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs cursor-pointer'>
+                            {event.title}
+                        </div>
+                    )
+                }
+                </div>
+            </div>
       <div className='text-center p-2 text-xs mt-3 font-bold text-white'>
         Ruple Art &copy; {year}
       </div>

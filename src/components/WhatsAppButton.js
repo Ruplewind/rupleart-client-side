@@ -2,7 +2,7 @@ import React from 'react';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 function WhatsAppButton() {
-  const phoneNumber = '+254707357072';
+  const phoneNumber = '+254736012377';
   const message = 'Hello! I would like to get more information on Ruple Art platform.';
 
   const handleClick = () => {
