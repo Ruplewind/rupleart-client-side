@@ -49,7 +49,7 @@ function Footer() {
         })
     },[])
   return (
-    <div className='w-full font-montserrat bg-purple-950 -950 p-2 z-50'>
+    <div className='w-full font-montserrat bg-black p-2 z-50'>
         <div className='block lg:flex gap-4 w-full justify-evenly mb-2 mt-4'>
             <div className='mb-4'>
                 <div className='flex gap-2 items-center'>
