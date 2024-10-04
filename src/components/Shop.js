@@ -30,7 +30,7 @@ const Shop = () => {
     <div>  
       <CarouselSection />
       <div className='block lg:flex mx-2 lg:mx-5 gap-4 mb-10 min-h-screen'>
-        <div className='collapse lg:visible h-0 w-0 lg:w-1/6'>
+        <div className='collapse lg:visible h-0 lg:h-full w-0 lg:w-1/6'>
             <div className='font-montserrat mt-10 ml-14'>
                 <div className='font-bold'>CATEGORIES</div>
                     { loading && <div className='text-gray-700'>Loading ...</div>}
