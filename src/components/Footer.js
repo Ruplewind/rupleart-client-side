@@ -62,7 +62,7 @@ function Footer() {
                 </div>
                 <div className='flex items-center mt-2 gap-2'>
                     <CallIcon sx={{color: 'white', fontSize: 20}} />
-                    <button className='block text-gray-400 hover:text-gray-600 uppercase text-xs'>+254 736 012 377</button>
+                    <button className='block text-gray-400 hover:text-gray-600 uppercase text-xs'>+254 759 324 250</button>
                 </div>
                 <div className='flex items-center mt-2 gap-2'>
                     <MailIcon sx={{color: 'white', fontSize: 20}} />
