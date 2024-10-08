@@ -5,6 +5,7 @@ import { Field, Form, Formik } from 'formik'
 import SyncLoader from "react-spinners/SyncLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 function MyAds() {
 
@@ -19,6 +20,7 @@ function MyAds() {
     const [description, setDescription] = useState(null);
     const [size, setSize] = useState(null);
     const [error, setError] = useState(false);
+    const [termsChecked, setTermsChecked] = useState(false);
 
     const [imageSrc, setImageSrc] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
@@ -95,6 +97,13 @@ function MyAds() {
 
         if(productName == null || price < 1 || imageSrc == null || type == null || size == null || description == null){
             toast('All fields must be filled',{
+                type:'error'
+            })
+            return
+        }
+
+        if(!termsChecked){
+            toast('Terms and conditions must be checked',{
                 type:'error'
             })
             return
@@ -392,6 +401,14 @@ function MyAds() {
                 <div className="mt-2">
                     <div className='font-bold'>Price</div>
                     <input className="mt-1 w-full p-2 border border-gray-400 rounded-lg" type="number" placeholder="0" onChange={e => setPrice(e.target.value)} required/>
+                </div>
+
+                <div className='mt-2 flex gap-2'>
+                    <input type="checkbox" onChange={e => setTermsChecked(e.target.value)} />
+                    <div>
+                        I have read the <b>Terms and conditions</b>. If not read <Link className='text-blue-600 hover:text-blue-400' to={"/terms"}>here</Link>
+                    </div>
+
                 </div>
                 
                 <div className='flex justify-center gap-5 mt-5'>

@@ -82,7 +82,7 @@ function MyOrders() {
                                 ad.delivery_status == "pending" ? 
                                     <div className='bg-gray-300 text-xs rounded-2xl p-1 w-full lg:w-3/4 mx-auto'>Pending</div>
                                 :
-                                    <div className='bg-green-500 text-xs rounded-2xl p-1 w-full lg:w-1/2 mx-auto text-white'>Delivered</div>
+                                    <div className='bg-green-500 text-xs rounded-2xl p-1 w-full lg:w-3/4 mx-auto text-white'>Delivered</div>
                                 }
                             </td>
                             <td className='text-center p-2'>{ad.delivery_date}</td>
