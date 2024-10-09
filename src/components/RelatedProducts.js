@@ -38,6 +38,12 @@ function RelatedProducts({category}) {
             {!loading && filteredData.slice(0,6).map(item => (
                 <Link 
                 to={"/preview"} 
+                onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
                 className='w-full lg:w-1/6 mx-5' 
                 key={item.productName} 
                 state={{ data: item }}

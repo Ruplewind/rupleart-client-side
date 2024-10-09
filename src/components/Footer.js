@@ -73,13 +73,65 @@ function Footer() {
 
             <div className='mb-0 lg:mb-4 mt-10 lg:mt-0'>
                 <div className='font-bold text-white'>OUR COMPANY</div>
-                <Link to={"/faq"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>FAQ</Link>
-                <Link to={"/contact_us"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Contact Us</Link>
-                <Link to={"/about_us"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>About Us</Link>
-                <Link to={"/howitworks"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>How it Works</Link>
-                <Link to={"/dcma"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>DCMA Notice</Link>
-                <Link to={"/terms"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Terms of Use</Link>
-                <Link to={"/return"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Return Policy</Link>
+                
+                <Link 
+                onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
+                to={"/faq"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>FAQ</Link>
+
+                <Link 
+                onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
+                to={"/contact_us"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Contact Us</Link>
+
+                <Link onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
+                to={"/about_us"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>About Us</Link>
+
+                <Link onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
+                to={"/howitworks"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>How it Works</Link>
+
+                <Link onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
+                to={"/dcma"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>DCMA Notice</Link>
+
+                <Link 
+                onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
+                to={"/terms"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Terms of Use</Link>
+
+                <Link onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
+                to={"/return"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Return Policy</Link>
             </div>
 
             <div className='mb-0 lg:mb-4 h-0 lg:h-max collapse lg:visible'>
