@@ -255,6 +255,10 @@ function MyAds() {
                                 :
                                 <div>
                                     <div className='bg-red-500 text-xs rounded-2xl p-1 w-full lg:w-1/2 mx-auto text-white'>Rejected</div>
+
+                                    { ad.disapproval_reason && <div className='mt-2 text-xs capitalize'>
+                                        <b>Reason:</b> {ad.disapproval_reason}
+                                    </div> }
                                 </div>
                                 }</td>
                             <td className='p-2'>
