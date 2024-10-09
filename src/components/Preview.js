@@ -116,7 +116,7 @@ const Preview = () => {
 
             {/* Related Products section */}
             <div className="mt-10">
-                <RelatedProducts category={null} />
+                <RelatedProducts category={data.type} />
             </div>
         </div> 
     );
