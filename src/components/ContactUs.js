@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function ContactUs() {
 
-    const location = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8091639245717!2d36.818232084812095!3d-1.288692995344679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11747e756f41%3A0x146973898c119b47!2sKenyatta%20International%20Convention%20Centre!5e0!3m2!1sen!2ske!4v1727439193227!5m2!1sen!2ske";
+    const location = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8188944289295!2d36.82347610306517!3d-1.2824647572041252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f112a74848b9b%3A0x34db30f217a96906!2sLatema%20Rd%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1728508285173!5m2!1sen!2ske";
 
     const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
