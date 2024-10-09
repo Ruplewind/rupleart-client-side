@@ -139,7 +139,7 @@ function Footer() {
                 {
                     !loading && !error && categories.length > 0 && categories.slice(0,6).map(category => 
                         <div onClick={() => {
-                            navigate("/shop")
+                            navigate("/")
                         }} className='h-0 lg:h-max collapse lg:visible text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs cursor-pointer '>
                             {category.category}
                         </div>
