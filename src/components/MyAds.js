@@ -132,13 +132,14 @@ function MyAds() {
                 window.location.reload();
             }else{
               response.json().then( err => {
-                console.log(err)
+                //console.log(err)
+                toast.error(err)
                 })
-                toast.error('Server Error')
+                
             }
         })
         .catch((err)=>{
-            toast('Server Error')
+            toast(err)
         })
     }
 
