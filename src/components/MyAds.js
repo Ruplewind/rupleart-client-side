@@ -139,7 +139,7 @@ function MyAds() {
             }
         })
         .catch((err)=>{
-            toast(err)
+            toast.error(err)
         })
     }
 
