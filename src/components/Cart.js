@@ -9,15 +9,11 @@ const Cart = () => {
 
     const { products, total, removeFromCart } = useCart();
     const { token } = useContext(AuthContext);
-
-    console.log(products)
-
     
     const handleRemoveFromCart = (product) =>{
         removeFromCart(product)
     }
-
-
+    
     return ( <div className="mb-10">
         { products.length > 0 ? 
         <div>

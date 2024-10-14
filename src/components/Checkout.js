@@ -112,6 +112,8 @@ const Checkout = () => {
     const [ secondName, setSecondName] = useState('');
     const [ email, setEmail] = useState('');
     const [ phoneNumber, setPhoneNumber] = useState('');
+
+    const navigate = useNavigate();
     
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_API_URL}/profile`,{
@@ -120,7 +122,14 @@ const Checkout = () => {
                 'Authorization':`Bearer ${token}`
             }
         })
-        .then( data => data.json())
+        .then( data => {
+            if(data.ok){
+                return data.json();
+
+            }else if(data.status === 401){
+                navigate("/login")
+            }
+        })
         .then( data => {
             setEmail(data.email);
             setFirstName(data.first_name);
@@ -131,8 +140,6 @@ const Checkout = () => {
             console.log(err);
         })
     },[]);
-
-    const navigate = useNavigate();
 
     return ( <div className="mt-3 lg:mt-10 mb-10 lg:mb-10 ">
         <ToastContainer />

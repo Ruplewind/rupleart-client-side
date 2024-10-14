@@ -57,19 +57,21 @@ function App() {
           <Route path="/dcma" element={<DmcaNotice />} />
           <Route path="/confirm" element={<ConfirmPayment />} />
           <Route path="/cancel" element={<CancelTransaction />} />
-        </Routes>
+        
         
         {
           token ?
-          <Routes> 
+          <> 
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/profile" element={<MyProfile />} />
             <Route path="/myads" element={<MyAds />} />
             <Route path="/orders" element={<MyOrders />} />
-          </Routes>
+          </>
           :
           null
         }
+
+        </Routes>
           
       </div>
       <Footer />

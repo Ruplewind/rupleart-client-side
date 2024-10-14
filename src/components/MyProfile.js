@@ -35,7 +35,14 @@ function MyProfile() {
                 'Authorization':`Bearer ${token}`
             }
         })
-        .then( data => data.json())
+        .then( data => {
+            if(data.ok){
+                return data.json();
+
+            }else if(data.status === 401){
+                navigate("/login")
+            }
+        })
         .then( data => {
             setEmail(data.email);
             setFirstName(data.first_name);

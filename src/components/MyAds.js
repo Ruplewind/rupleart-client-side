@@ -5,9 +5,11 @@ import { Field, Form, Formik } from 'formik'
 import SyncLoader from "react-spinners/SyncLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MyAds() {
+    const { token, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [myads, setMyads] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -53,15 +55,20 @@ function MyAds() {
 
       };
 
-    const { token } = useContext(AuthContext);
-
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_API_URL}/my_products`,{
           headers: {
             'Authorization':`Bearer ${token}`
           }
         })
-        .then( data => data.json())
+        .then( data => {
+            if(data.ok){
+                return data.json();
+
+            }else if(data.status === 401){
+                navigate("/login")
+            }
+        })
         .then( data => {
           setMyads(data)
           setLoading(false);
@@ -93,19 +100,25 @@ function MyAds() {
         confirmNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], 'Passwords must match').required('Confirm your new password')
     });
 
+    const [submitLoading, setSubmitLoading] = useState(false);
+
     const handleSubmit = () => {
 
+        setSubmitLoading(true);
+
         if(productName == null || price < 1 || imageSrc == null || type == null || size == null || description == null){
-            toast('All fields must be filled',{
+            toast.error('All fields must be filled',{
                 type:'error'
             })
+            setSubmitLoading(false);
             return
         }
 
         if(!termsChecked){
-            toast('Terms and conditions must be checked',{
+            toast.error('Terms and conditions must be checked',{
                 type:'error'
             })
+            setSubmitLoading(false);
             return
         }
 
@@ -128,24 +141,33 @@ function MyAds() {
         .then((response)=>{
             if(response.ok){
                 setShowPasswordModal(false);
+                setSubmitLoading(true);
                 toast.success('Success');
-                window.location.reload();
+                setSubmitLoading(false);
             }else{
-              response.json().then( err => {
-                //console.log(err)
-                toast.error(err)
-                })
+              response.json().then( err => {               
+                setSubmitLoading(false);
+                if(err.error == "Invalid Token"){
+                    toast.error("Login to Continue"); 
+                }
+                });
                 
             }
         })
-        .catch((err)=>{
-            toast.error(err)
+        .catch((err)=>{            
+            setSubmitLoading(false);
+            if(err.error == "Invalid Token"){
+                toast.error("Login to Continue"); 
+            }
         })
     }
 
     const handleEditSubmit = () =>{
+        setSubmitLoading(true);
+
         if(productName == null || price < 1 || imageSrc == null || type == null || description == null || size == null){
-            toast.error('All fields must be filled')
+            toast.error('All fields must be filled');
+            setSubmitLoading(false);
             return
         }
     
@@ -169,17 +191,29 @@ function MyAds() {
             if(response.ok){
                 setEditShowPasswordModal(false);
                 toast.success('Success');
-                window.location.reload();
+                setTimeout(()=>{
+                    setSubmitLoading(false);
+                    window.location.reload();
+                },500)
             }else{
                 response.json().then( err => {
+                    setSubmitLoading(false);
+                    if(err.error == "Invalid Token"){
+                        
+                        toast.error("Login to Continue");
+                    }
                 })
-                toast.error('Server Error');
+                
             }
         })
         .catch((err)=>{
-            toast('Server Error');
+            setSubmitLoading(false);
+            if(err.error == "Invalid Token"){
+                
+                toast.error("Login to Continue"); 
+            }
         })
-      }
+    }
 
     const fileInputRef = useRef(null);
 
@@ -425,11 +459,15 @@ function MyAds() {
                         resetState();
                     }}
                     >Cancel</button>
-                    <button onClick={e => {
+                    { !submitLoading && <button onClick={e => {
                         e.preventDefault();
                         handleSubmit();
                     }} 
-                    className='bg-purple-900 hover:bg-purple-700 p-2 text-white rounded-lg'>Submit</button>
+                    className='bg-purple-900 hover:bg-purple-700 p-2 text-white rounded-lg'>Submit</button> }
+                    { submitLoading && <button onClick={e => {
+                        e.preventDefault();
+                    }} 
+                    className='bg-gray-300 p-2 text-black rounded-lg'>Loading</button> }
                 </div>
 
                 </div>
@@ -557,11 +595,15 @@ function MyAds() {
                         resetState();
                     }}
                     >Cancel</button>
-                    <button onClick={e => {
+                    { !submitLoading && <button onClick={e => {
                         e.preventDefault();
                         handleEditSubmit();
                     }} 
-                    className='bg-purple-900 hover:bg-purple-700 p-2 text-white rounded-lg'>Submit</button>
+                    className='bg-purple-900 hover:bg-purple-700 p-2 text-white rounded-lg'>Submit</button> }
+                    { submitLoading && <button onClick={e => {
+                        e.preventDefault();
+                    }} 
+                    className='bg-gray-300 text-black rounded-lg'>Loading ....</button> }
                 </div>
 
                 </div>

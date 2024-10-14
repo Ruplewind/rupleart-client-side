@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../utils/AuthContext';
 import { DnsTwoTone } from '@mui/icons-material';
+import useAuthCheck from '../utils/useAuthCheck';
+import { useNavigate } from 'react-router-dom';
 
 function MyOrders() {
     const [order, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    const navigate = useNavigate();
+
     const { token } = useContext(AuthContext);
+
+    useAuthCheck();
 
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_API_URL}/GetMyOrders`,{
@@ -15,7 +21,14 @@ function MyOrders() {
                 'Authorization':`Bearer ${token}`
             }
         })
-        .then(data =>  data.json())
+        .then(data => {
+            if(data.ok){
+                return data.json();
+
+            }else if(data.status === 401){
+                navigate("/login")
+            }
+        })
         .then( result => {
             Promise.all(
                 result.map(order =>
