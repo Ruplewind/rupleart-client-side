@@ -102,12 +102,13 @@ function MyAds() {
 
     const [submitLoading, setSubmitLoading] = useState(false);
 
-    const handleSubmit = () => {
+    const [errorText, setErrorText] = useState('');
 
+    const handleSubmit = () => {
         setSubmitLoading(true);
 
-        if(productName == null || price < 1 || imageSrc == null || type == null || size == null || description == null){
-            toast.error('All fields must be filled',{
+        if(productName == null || productName.length < 1 || price < 1 || imageSrc == null || type == null || size == null || description == null){
+            toast('All fields must be filled',{
                 type:'error'
             })
             setSubmitLoading(false);
@@ -115,9 +116,9 @@ function MyAds() {
         }
 
         if(!termsChecked){
-            toast.error('Terms and conditions must be checked',{
+            toast('Terms and conditions must be checked',{
                 type:'error'
-            })
+            });
             setSubmitLoading(false);
             return
         }
@@ -142,22 +143,32 @@ function MyAds() {
             if(response.ok){
                 setShowPasswordModal(false);
                 setSubmitLoading(true);
-                toast.success('Success');
-                setSubmitLoading(false);
+                toast('Success',{
+                    type:"success"
+                });
+                setTimeout(()=>{
+                    setSubmitLoading(false);
+                    window.location.reload();
+                },500)
             }else{
-              response.json().then( err => {               
+              response.json().then( err => {      
                 setSubmitLoading(false);
                 if(err.error == "Invalid Token"){
-                    toast.error("Login to Continue"); 
+                    toast("Login to Continue",{
+                        type:"error"
+                    }); 
                 }
                 });
                 
             }
         })
-        .catch((err)=>{            
+        .catch((err)=>{   
+            setErrorText(err.error);
             setSubmitLoading(false);
             if(err.error == "Invalid Token"){
-                toast.error("Login to Continue"); 
+                toast("Login to Continue",{
+                    type:"error"
+                }); 
             }
         })
     }
@@ -449,6 +460,8 @@ function MyAds() {
                     </div>
 
                 </div>
+
+                <div className='mt-2 flex gap-2'>{errorText}</div>
                 
                 <div className='flex justify-center gap-5 mt-5'>
                     <button 
