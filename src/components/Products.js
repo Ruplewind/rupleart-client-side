@@ -22,7 +22,7 @@ const Products = ({ category }) => {
         })
     },[])
 
-    const filteredData = products.reverse().filter((item)=>{
+    const filteredData = products.filter((item)=>{
                     
         if(category === '' || category === null){
             return item;
@@ -50,7 +50,7 @@ const Products = ({ category }) => {
                 <Link 
                 to={"/preview"} 
                 className='w-full md:w-1/4 ' 
-                key={item.productName} 
+                key={item._id} 
                 state={{ data: item }}
                 >
                 <div className='group relative bg-white p-2 rounded-lg lg:transform lg:transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1'>
