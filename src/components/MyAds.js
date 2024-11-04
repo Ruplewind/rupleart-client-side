@@ -354,7 +354,7 @@ function MyAds() {
                         onClick={() => fileInputRef.current && fileInputRef.current.click()}
                         >
                         {imageSrc ? (
-                            <div className="h-40 w-full relative flex">
+                            <div className="h-20 w-full relative flex">
                             <button
                                 className="absolute top-2 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-2"
                                 onClick={handleDelete}
@@ -383,11 +383,11 @@ function MyAds() {
                         ) : (
                             <div
                             htmlFor="dropzone-file"
-                            className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 "
+                            className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 "
                             >
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                 <svg
-                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -401,7 +401,7 @@ function MyAds() {
                                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                                 />
                                 </svg>
-                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">
                                 <span className="font-semibold">Click to upload</span> or drag and
                                 drop
                                 </p>
@@ -463,7 +463,7 @@ function MyAds() {
 
                 <div className='mt-2 flex gap-2'>{errorText}</div>
                 
-                <div className='flex justify-center gap-5 mt-5'>
+                <div className='flex justify-center gap-5 mt-2'>
                     <button 
                     className='border border-gray-500 hover:bg-gray-500 hover:text-white p-2 rounded-lg'
                     onClick={(e)=>{
@@ -500,7 +500,7 @@ function MyAds() {
                         onClick={() => fileInputRef.current && fileInputRef.current.click()}
                         >
                         {imageSrc ? (
-                            <div className="h-40 w-full relative flex">
+                            <div className="h-20 w-full relative flex">
                             <button
                                 className="absolute top-2 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-2"
                                 onClick={handleDelete}
@@ -599,7 +599,7 @@ function MyAds() {
                     <input className="mt-1 w-full p-2 border border-gray-400 rounded-lg" type="number" value={price} placeholder="0" onChange={e => setPrice(e.target.value)} required/>
                 </div>
                 
-                <div className='flex justify-center gap-5 mt-5'>
+                <div className='flex justify-center gap-5 mt-2'>
                     <button 
                     className='border border-gray-500 hover:bg-gray-500 hover:text-white p-2 rounded-lg'
                     onClick={(e)=>{
