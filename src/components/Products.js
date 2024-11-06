@@ -46,7 +46,7 @@ const Products = ({ category }) => {
 
 
         <div className='flex gap-4 justify-evenly flex-wrap font-montserrat'>
-            {!loading && filteredData.map(item => (
+            {!loading && filteredData.reverse().map(item => (
                 <Link 
                 to={"/preview"} 
                 className='w-full md:w-1/4 ' 
