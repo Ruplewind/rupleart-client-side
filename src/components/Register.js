@@ -22,12 +22,12 @@ function Register() {
             return;
         }
 
-        if(!phoneNumberRegex.test(phoneNumber)){
-            toast.error("Invalid phone number.",{
-                autoClose: 1000
-            });
-            return;
-        }
+        // if(!phoneNumberRegex.test(phoneNumber)){
+        //     toast.error("Invalid phone number.",{
+        //         autoClose: 1000
+        //     });
+        //     return;
+        // }
 
         fetch(`${process.env.REACT_APP_API_URL}/register_user`,{
             method: 'POST',
