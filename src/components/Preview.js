@@ -43,7 +43,7 @@ const Preview = () => {
                     <img 
                         src={`${process.env.REACT_APP_API_URL}/uploads/${data.image}`} 
                         className="object-contain" 
-                        width="310px" 
+                        width="210px" 
                         alt={data.productName} 
                     />
                 </div>
@@ -115,7 +115,7 @@ const Preview = () => {
             </div>
 
             {/* Related Products section */}
-            <div className="mt-10">
+            <div className="mt-12">
                 <RelatedProducts category={data.type} />
             </div>
         </div> 
