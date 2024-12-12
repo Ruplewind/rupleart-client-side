@@ -66,7 +66,7 @@ const Preview = () => {
                                 <div className="">Size:</div>
                                 <div>{data.size}</div>            
                             </div>
-                            <div className="my-2 lg:my-2 text-purple-900 font-extrabold">Ksh {data.price}</div>
+                            <div className="my-2 lg:my-2 text-purple-900 font-extrabold">Ksh {data.price.toLocaleString()}</div>
                           
                             <div className="flex gap-2 items-center my-2 mt-4">
                                 <div className="">Quantity</div>

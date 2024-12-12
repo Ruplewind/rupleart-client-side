@@ -45,46 +45,57 @@ const Products = ({ category }) => {
         <div className="text-center text-slate-500 text-md mb-5 text-sm">({!loading && filteredData.length} items)</div>
 
 
-        <div className='flex gap-4 justify-evenly flex-wrap font-montserrat'>
-            {!loading && filteredData.reverse().map(item => (
-                <Link 
-                to={"/preview"} 
-                className='w-full md:w-1/4 ' 
-                key={item._id} 
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 font-montserrat">
+        {!loading &&
+            filteredData.reverse().map((item) => (
+            <Link
+                to="/preview"
+                className="bg-white p-1 lg:p-4 pb-2 lg:pb-4 rounded-lg shadow-lg group"
+                key={item._id}
                 state={{ data: item }}
-                >
-                <div className='group relative bg-white p-2 rounded-lg lg:transform lg:transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1'>
-                    {/* Image container with standard size and smooth resizing on hover */}
-                    <div className='flex justify-center items-center'>
-                    <img 
-                        src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`} 
-                        alt={item.productName} 
-                        className='transition-all duration-300 object-cover w-64 h-64 group-hover:w-60 group-hover:h-60' 
+            >
+                <div className="flex flex-col h-full">
+                {/* Image container */}
+                <div className="flex justify-center items-center h-44 lg:h-64">
+                    <img
+                    src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`}
+                    alt={item.productName}
+                    className="object-cover w-full h-full rounded-md"
                     />
-                    </div>
-
-                    <div className='text-center text-bold mt-3'>{item.productName}</div>                    
-
-                    <div className='text-center text-purple-900 font-montserrat'>Ksh {item.price}</div>
-
-                    {/* Collapsible description */}
-                    <div className='text-center text-sm lg:max-h-0 lg:overflow-hidden group-hover:max-h-20 transition-all duration-300 text-gray-700'>
-                        {item.description}
-                    </div>
-
-                    <div className='flex justify-center lg:max-h-0 lg:overflow-hidden group-hover:max-h-20 transition-all duration-300'>
-                    <button 
-                    onClick={()=>{
-                        handleAddToCart(item)
-                    }}
-                    className='bg-purple-900 hover:bg-purple-700 text-white p-2 text-sm uppercase rounded-lg mt-2'>
-                        add to cart
-                    </button>
-                    </div>
                 </div>
-                </Link>
-            ))}
+
+                {/* Product name */}
+                <div className="text-center font-bold text-lg mt-3 truncate">
+                    {item.productName}
+                </div>
+
+                {/* Price */}
+                <div className="text-center text-purple-900 mt-2">
+                    Ksh {item.price.toLocaleString()}
+                </div>
+
+                {/* Collapsible description */}
+                <div className="text-center text-sm text-gray-700 mt-2 lg:group-hover:max-h-20 lg:max-h-0 overflow-hidden transition-all duration-300">
+                    <p className="line-clamp-2">{item.description}</p>
+                </div>
+
+                {/* Add to cart button */}
+                <div className="flex justify-center mt-auto lg:max-h-0 lg:overflow-hidden group-hover:max-h-20 transition-all duration-300">
+                    <button
+                    onClick={() => {
+                        handleAddToCart(item);
+                    }}
+                    className="bg-purple-900 hover:bg-purple-700 text-white px-4 py-2 text-sm uppercase rounded-lg mt-3"
+                    >
+                    Add to cart
+                    </button>
+                </div>
+                </div>
+            </Link>
+            ))
+        }
         </div>
+
 
         
     </div> );
