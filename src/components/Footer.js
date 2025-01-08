@@ -132,6 +132,14 @@ function Footer() {
                     });
                 }}
                 to={"/return"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Return Policy</Link>
+
+                <Link onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
+                to={"/delete_account"} className='block text-red-400 hover:text-gray-600 uppercase text-xs mt-5 '>I want my account deleted?</Link>
             </div>
 
             <div className='mb-0 lg:mb-4 h-0 lg:h-max collapse lg:visible'>

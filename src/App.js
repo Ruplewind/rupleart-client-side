@@ -30,6 +30,7 @@ import DmcaNotice from "./components/DCMANotice";
 import SuccessTransaction from "./components/SuccessTransaction";
 import FailedTransaction from "./components/FailedTransaction";
 import MyOrders from "./components/MyOrders";
+import DeleteAccount from "./components/DeleteAccount";
 
 function App() {
 
@@ -57,6 +58,7 @@ function App() {
           <Route path="/dcma" element={<DmcaNotice />} />
           <Route path="/confirm" element={<ConfirmPayment />} />
           <Route path="/cancel" element={<CancelTransaction />} />
+          <Route path="/delete_account" element={<DeleteAccount />} />
         
         
         {
