@@ -139,6 +139,15 @@ function Footer() {
                         behavior: 'smooth',
                     });
                 }}
+                target='_blank'
+                to={"https://www.privacypolicies.com/live/84b45be8-cb8e-498c-9bd2-95ac38fc39e4"} className='block text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs'>Privacy Policy</Link>
+
+                <Link onClick={()=>{
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                    });
+                }}
                 to={"/delete_account"} className='block text-red-400 hover:text-gray-600 uppercase text-xs mt-5 '>I want my account deleted?</Link>
             </div>
 
