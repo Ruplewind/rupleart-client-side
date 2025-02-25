@@ -31,6 +31,7 @@ import SuccessTransaction from "./components/SuccessTransaction";
 import FailedTransaction from "./components/FailedTransaction";
 import MyOrders from "./components/MyOrders";
 import DeleteAccount from "./components/DeleteAccount";
+import DownloadApk from "./components/DownloadApk";
 
 function App() {
 
@@ -59,7 +60,7 @@ function App() {
           <Route path="/confirm" element={<ConfirmPayment />} />
           <Route path="/cancel" element={<CancelTransaction />} />
           <Route path="/delete_account" element={<DeleteAccount />} />
-        
+          <Route path="/download_app" element={<DownloadApk />} />
         
         {
           token ?

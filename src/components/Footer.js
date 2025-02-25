@@ -69,6 +69,17 @@ function Footer() {
                     <button className='block text-gray-400 hover:text-gray-600 uppercase text-xs'>Rupleart@gmail.com</button>
                 </div>
 
+                <div className='flex items-center mt-4 lg:mt-10 gap-2'>
+                    <Link 
+                    onClick={()=>{
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth',
+                        });
+                    }}
+                    to={"/download_app"} className=' bg-purple-900 p-2 text-white rounded-lg px-5'>Download Android App</Link>
+                </div>
+
             </div>
 
             <div className='mb-0 lg:mb-4 mt-10 lg:mt-0'>

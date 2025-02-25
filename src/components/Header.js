@@ -29,6 +29,8 @@ function Header() {
         setMenuOpen(!menuOpen);
     };
 
+    const apkUrl = "https://expo.dev/artifacts/eas/jPe1oar6TYWRpAYPdVwKe.apk";
+
     return (
         <div className='flex items-center justify-between shadow-md rounded-b-sm shadow-slate-400 w-full p-3 font-montserrat overflow-hidden'>
             <div className='flex items-center ml-1 lg:ml-5' onClick={()=>{
@@ -91,6 +93,35 @@ function Header() {
                         )}
 
                         {token && <Link to={"/myads"} className='bg-purple-900 hover:bg-purple-800 text-white rounded-lg text-xs flex px-2 items-center'>Post Ad</Link>}
+
+                        { token && <div className="flex justify-center">
+                            <Link
+                                onClick={()=>{
+                                    window.scrollTo({
+                                        top: 0,
+                                        behavior: 'smooth',
+                                    });
+                                }}
+                                to={"/download_app"}
+                                className="border border-purple-900 text-purple-900 hover:text-white px-4 py-1 rounded-lg shadow-md hover:bg-purple-900 transition-all uppercase text-sm"
+                            >
+                                Download  Android App
+                            </Link>
+                        </div> }
+                        {!token && <div className="flex justify-center">
+                            <Link
+                                onClick={()=>{
+                                    window.scrollTo({
+                                        top: 0,
+                                        behavior: 'smooth',
+                                    });
+                                }}
+                                to={"/download_app"}
+                                className="bg-purple-900 text-white px-4 py-1 rounded-lg text-sm shadow-md hover:bg-purple-700 transition-all"
+                            >
+                                Download App
+                            </Link>
+                        </div> }
                     </div>
                 </ul>
             </div>
@@ -112,7 +143,6 @@ function Header() {
                     <ul className='flex flex-col items-center gap-3'>
                         <Link to={"/"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>Home</Link>
                         <Link to={"/events"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>Events</Link>
-                        <Link to={"/about_us"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>About Us</Link>
                         <Link to={"/contact_us"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>Contact Us</Link>
                         { token && <Link to={"/orders"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>My Orders</Link> }
 
@@ -131,6 +161,36 @@ function Header() {
                         ) : (
                             <Link to={"/login"} className='hover:underline hover:text-purple-900 p-1 rounded-2xl' onClick={toggleMenu}>Login/Register</Link>
                         )}
+                        { token && <div className="flex justify-center">
+                            <Link
+                                onClick={()=>{
+                                    window.scrollTo({
+                                        top: 0,
+                                        behavior: 'smooth',
+                                    });
+                                    toggleMenu()
+                                }}
+                                to={"/download_app"}
+                                className="border border-purple-900 text-purple-900 hover:text-white px-4 py-1 rounded-lg shadow-md hover:bg-purple-900 transition-all uppercase text-sm"
+                            >
+                                Download  Android App
+                            </Link>
+                        </div> }
+                        {!token && <div className="flex justify-center">
+                            <Link
+                                onClick={()=>{
+                                    window.scrollTo({
+                                        top: 0,
+                                        behavior: 'smooth',
+                                    });
+                                    toggleMenu()
+                                }}
+                                to={"/download_app"}
+                                className="bg-purple-900 text-white px-4 py-1 rounded-lg text-sm shadow-md hover:bg-purple-700 transition-all"
+                            >
+                                Download App
+                            </Link>
+                        </div> }
                     </ul>
                 </div>
             )}
