@@ -211,7 +211,7 @@ const Checkout = () => {
                                 <option>Loading....</option>
                                 :
                                 towns.map( town => 
-                                    <option key={town._id} value={town._id}>{town.name} - Ksh.{town.price}</option>
+                                    <option key={town._id} value={town._id}>{town.town} - Ksh.{town.price}</option>
                                 )
                             }
                     </select>
