@@ -77,7 +77,7 @@ function Footer() {
                             behavior: 'smooth',
                         });
                     }}
-                    to={"/download_app"} className=' bg-purple-900 p-2 text-white rounded-lg px-5'>Download Android App</Link>
+                    to={"/download_app"} className=' bg-purple-900 p-2 text-white rounded-lg px-5'>Download Rupleart App</Link>
                 </div>
 
             </div>
