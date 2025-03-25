@@ -46,8 +46,8 @@ function App() {
       <div className="flex-grow bg-gray-100">
         <Routes>
           <Route path="/" element={<Shop />} />
-          <Route path="/preview" element={<Preview />} />
           <Route path="/preview/:id" element={<SharedPreview />} />
+          <Route path="/preview" element={<Preview />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
