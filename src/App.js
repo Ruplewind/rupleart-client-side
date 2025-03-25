@@ -6,6 +6,7 @@ import ConfirmPayment from "./components/ConfirmPayment";
 import HeaderBar from "./components/HeaderBar";
 import Navigation from "./components/Navigation";
 import Preview from "./components/Preview";
+import SharedPreview from "./components/SharedPreview";
 import { CartProvider } from "./utils/CartContext";
 import Header from "./components/Header";
 import CarouselSection from "./components/CarouselSection";
@@ -46,6 +47,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/preview" element={<Preview />} />
+          <Route path="/preview/:id" element={<SharedPreview />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
