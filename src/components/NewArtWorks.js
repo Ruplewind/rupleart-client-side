@@ -30,7 +30,7 @@ function NewArtWorks() {
                 (
                     <Link to={"/preview"} state={{ data: item }}className='mt-2 flex w-full gap-4 border-b border-b-gray-400 p-1 rounded-sm hover:shadow-lg hover:-translate-y-1'>
                         <img 
-                        src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`} 
+                        src={`${process.env.REACT_APP_API_URL}/uploads/${item.image[0]}`} 
                         alt={item.productName} 
                         className='transition-all duration-300 object-cover w-14 h-14 group-hover:w-60 group-hover:h-60 rounded-lg' 
                         />

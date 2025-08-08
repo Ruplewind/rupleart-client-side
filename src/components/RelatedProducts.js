@@ -53,7 +53,7 @@ function RelatedProducts({category}) {
                     {/* Image container with standard size and smooth resizing on hover */}
                     <div className="flex justify-center items-center h-52">
                         <img
-                        src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`}
+                        src={`${process.env.REACT_APP_API_URL}/uploads/${item.image[0]}`}
                         alt={item.productName}
                         className="transition-all duration-300 object-cover w-full h-full rounded-md group-hover:scale-105"
                         />

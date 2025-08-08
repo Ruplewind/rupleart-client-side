@@ -284,7 +284,7 @@ function MyAds() {
                     !loading && !error && myads.length > 0 && myads.map(ad => (
                         <tr className='mt-5 border-b border-gray-500 p-2'>
                             <td className='flex justify-center p-2'>
-                                <img src={`${process.env.REACT_APP_API_URL}/uploads/${ad.image}`} className='w-30 h-20 object-cover' />
+                                <img src={`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`} className='w-30 h-20 object-cover' />
                             </td>
                             <td className='p-2'>
                                 <div className='font-bold'>{ad.productName}</div>
@@ -317,8 +317,8 @@ function MyAds() {
                                         setPrice(ad.price);
                                         setDescription(ad.description);
                                         setSize(ad.size);
-                                        setImageUrl(`${process.env.REACT_APP_API_URL}/uploads/${ad.image}`);
-                                        setImageSrc(ad.image);
+                                        setImageUrl(`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`);
+                                        setImageSrc(ad.image[0]);
                                         setEditShowPasswordModal(true);
                                     }} className='bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-xs px-2'>Edit</button>
                                 </div>

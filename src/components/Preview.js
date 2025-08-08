@@ -35,13 +35,13 @@ const Preview = () => {
             <div className="block lg:flex">
                 {/* Image section with zoom */}
                 <div className="lg:w-2/6 flex justify-center lg:justify-start collapse h-0 lg:visible lg:relative">
-                    <ImageZoom imageUrl={`${process.env.REACT_APP_API_URL}/uploads/${data.image}`} />
+                    <ImageZoom imageUrl={`${process.env.REACT_APP_API_URL}/uploads/${data.image[0]}`} />
                 </div>
 
                 {/* Mobile view for image (non-zoomed) */}
                 <div className="lg:hidden flex justify-center">
                     <img 
-                        src={`${process.env.REACT_APP_API_URL}/uploads/${data.image}`} 
+                        src={`${process.env.REACT_APP_API_URL}/uploads/${data.image[0]}`} 
                         className="object-contain" 
                         width="210px" 
                         alt={data.productName} 

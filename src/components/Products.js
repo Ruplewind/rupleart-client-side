@@ -73,7 +73,7 @@ const Products = ({ category }) => {
                             <div className="flex flex-col h-full">
                                 <div className="flex justify-center items-center h-44 lg:h-64">
                                     <img
-                                        src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`}
+                                        src={`${process.env.REACT_APP_API_URL}/uploads/${item.image[0]}`}
                                         alt={item.productName}
                                         className="object-cover w-full h-full rounded-md"
                                     />
