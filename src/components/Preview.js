@@ -28,25 +28,79 @@ const Preview = () => {
         addToCart({ ...data, quantity: Number(quantity) });
     }
 
+    const [displayImageIndex, setDisplayImageIndex] = useState(0);
+
+    const handlePrevBtn = () => {
+        if (displayImageIndex > 0) {
+            setDisplayImageIndex(displayImageIndex - 1);
+        } else {
+            setDisplayImageIndex(data.image.length - 1); // Wrap around to the last image
+        }
+    }
+    
+    const handleNextBtn = () => {
+        if (displayImageIndex < data.image.length - 1) {
+            setDisplayImageIndex(displayImageIndex + 1);
+        } else {
+            setDisplayImageIndex(0); // Wrap around to the first image
+        }
+    }
+
     return (
         <div className="mt-10 lg:mx-28 font-montserrat">
             <ToastContainer />
 
             <div className="block lg:flex">
                 {/* Image section with zoom */}
-                <div className="lg:w-2/6 flex justify-center lg:justify-start collapse h-0 lg:visible lg:relative">
+                {/* <div className="lg:w-2/6 flex justify-center lg:justify-start collapse h-0 lg:visible lg:relative">
                     <ImageZoom imageUrl={`${process.env.REACT_APP_API_URL}/uploads/${data.image[0]}`} />
-                </div>
+                </div> */}
 
                 {/* Mobile view for image (non-zoomed) */}
-                <div className="lg:hidden flex justify-center">
+                {/* <div className="lg:hidden flex justify-center">
                     <img 
                         src={`${process.env.REACT_APP_API_URL}/uploads/${data.image[0]}`} 
                         className="object-contain" 
                         width="210px" 
                         alt={data.productName} 
                     />
-                </div>
+                </div> */}
+
+                <div className="w-3/6 hidden lg:block">
+            {/* Image section with zoom */}
+            <div className="flex items-center gap-5 justify-center">
+                <div onClick={handlePrevBtn} className="bg-black hover:bg-gray-500 text-white text-xl rounded-3xl px-2 cursor-pointer">{"<"}</div>
+                <ImageZoom imageUrl={`${process.env.REACT_APP_API_URL}/uploads/${data.image[displayImageIndex]}`} />
+                <div onClick={handleNextBtn} className="bg-black hover:bg-gray-500 text-white text-xl rounded-3xl px-2 cursor-pointer">{">"}</div>
+            </div>
+            <div className="flex justify-center gap-5 mt-5 w-3/4 mx-10">
+                {
+                    data.image.map((pic, index) => (
+                        <div className="h-20 w-20">
+                            <img 
+                                onClick={()=>{
+                                    setDisplayImageIndex(index);
+                                }}
+                                src={`${process.env.REACT_APP_API_URL}/uploads/${pic}`} 
+                                className="object-cover border bg-white p-2 h-full w-full hover:border-gray-500 cursor-pointer" 
+                                alt={data.productName} 
+                            />
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        {/* Mobile view for image (non-zoomed) */}
+        <div className="lg:hidden flex items-center gap-5 justify-center">
+            <div onClick={handlePrevBtn} className="bg-black hover:bg-gray-500 text-white text-xl rounded-3xl px-2 cursor-pointer">{"<"}</div>
+            <img 
+                src={`${process.env.REACT_APP_API_URL}/uploads/${data.image[displayImageIndex]}`} 
+                className="object-contain w-4/6" 
+                alt={data.productName} 
+            />
+            <div onClick={handleNextBtn} className="bg-black hover:bg-gray-500 text-white text-xl rounded-3xl px-2 cursor-pointer">{">"}</div>
+        </div>
 
                 {/* Product details */}
                 <div className="p-5 lg:p-10 w-full lg:w-3/6 ml-0 lg:ml-5">
