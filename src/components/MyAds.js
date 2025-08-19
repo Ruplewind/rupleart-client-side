@@ -24,8 +24,8 @@ function MyAds() {
     const [error, setError] = useState(false);
     const [termsChecked, setTermsChecked] = useState(false);
 
-    const [imageSrc, setImageSrc] = useState(null);
-    const [imageUrl, setImageUrl] = useState(null);
+    const [imageSrc, setImageSrc] = useState([]);
+    const [imageUrl, setImageUrl] = useState([]);
 
     const [editId, setEditId] = useState(null);
 
@@ -35,25 +35,33 @@ function MyAds() {
         setPrice(0);
         setDescription(null);
         setSize(null);
-        setImageSrc(null);
-        setImageUrl(null);
+        setImageSrc([]);
+        setImageUrl([]);
     }
 
-    const handleDrop = (e) => {
+      const handleDrop = (e) => {
         e.preventDefault();
-        const file = e.target.files[0];
-        setImageSrc(file);
-        setImageUrl(URL.createObjectURL(file));
-      };
-    
-      const handleDragOver = (e) => {
-        e.preventDefault();
-      };
-    
-      const handleDelete = () => {
-        setImageSrc(null);
+        const files = Array.from(e.dataTransfer.files);
+        if (files.length === 0) {
+            return;
+        }
+        setImageSrc((prevImages) => [...prevImages, ...files]);
+        const newImageUrls = files.map((file) => URL.createObjectURL(file));
+        setImageUrl((prevUrls) => [...prevUrls, ...newImageUrls]);
+    };
 
-      };
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDelete = (index) => {
+        const updatedImageSrc = [...imageSrc];
+        const updatedImageUrl = [...imageUrl];
+        updatedImageSrc.splice(index, 1);
+        updatedImageUrl.splice(index, 1);
+        setImageSrc(updatedImageSrc);
+        setImageUrl(updatedImageUrl);
+    };
 
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_API_URL}/my_products`,{
@@ -107,7 +115,7 @@ function MyAds() {
     const handleSubmit = () => {
         setSubmitLoading(true);
 
-        if(productName == null || productName.length < 1 || price < 1 || imageSrc == null || type == null || size == null || description == null){
+        if(productName == null || productName.length < 1 || price < 1 || imageSrc.length < 1 || type == null || size == null || description == null){
             toast('All fields must be filled',{
                 type:'error'
             })
@@ -128,7 +136,9 @@ function MyAds() {
         formData.append('productName', productName);
         formData.append('type', type);
         formData.append('price', price);
-        formData.append('image', imageSrc)
+        imageSrc.forEach((image, index) => {
+            formData.append(`image`, image);
+        });
         formData.append('description', description);
         formData.append('size', size);
 
@@ -176,7 +186,7 @@ function MyAds() {
     const handleEditSubmit = () =>{
         setSubmitLoading(true);
 
-        if(productName == null || price < 1 || imageSrc == null || type == null || description == null || size == null){
+        if(productName == null || price < 1 || imageSrc.length < 1 || type == null || description == null || size == null){
             toast.error('All fields must be filled');
             setSubmitLoading(false);
             return
@@ -187,7 +197,9 @@ function MyAds() {
         formData.append('productName', productName);
         formData.append('type', type);
         formData.append('price', price);
-        formData.append('image', imageSrc)
+        imageSrc.forEach((image, index) => {
+            formData.append(`image`, image);
+        });
         formData.append('description', description);
         formData.append('size', size);
     
@@ -317,8 +329,11 @@ function MyAds() {
                                         setPrice(ad.price);
                                         setDescription(ad.description);
                                         setSize(ad.size);
-                                        setImageUrl(`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`);
-                                        setImageSrc(ad.image[0]);
+                                        // setImageUrl(`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`);
+                                        // setImageSrc(ad.image[0]);
+                                        setImageSrc(ad.image);
+                                        const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
+                                        setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
                                         setEditShowPasswordModal(true);
                                     }} className='bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-xs px-2'>Edit</button>
                                 </div>
@@ -344,50 +359,52 @@ function MyAds() {
         {showPasswordModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={() => setShowPasswordModal(false)}>
             <div className="bg-white p-4 rounded-lg shadow-lg relative w-full mx-5 lg:w-1/3 text-xs" onClick={(e) => e.stopPropagation()}>
-                <div className="mt-1">
-                    <div className='font-bold'>Product Image</div>
-                    <br />
+                <div className="mt-2">
+                    <div className='font-bold'>Product Images</div>
                     <div
-                        className="flex items-center justify-center w-full mt-0"
+                        className="flex items-center justify-center w-full mt-1"
                         onDrop={handleDrop}
                         onDragOver={handleDragOver}
-                        onClick={() => fileInputRef.current && fileInputRef.current.click()}
                         >
-                        {imageSrc ? (
-                            <div className="h-20 w-full relative flex">
-                            <button
-                                className="absolute top-2 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-2"
-                                onClick={handleDelete}
-                            >
-                                <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-4 h-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
+                        {imageUrl.length > 0 ? (
+                        <div className="flex flex-wrap">
+                            {imageUrl.map((url, index) => (
+                            <div key={index} className="h-40 w-40 relative m-1">
+                                <button
+                                className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
+                                onClick={(e) =>{ e.preventDefault(); handleDelete(index); }}
                                 >
-                                <path
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
-                                    strokeWiadh="2"
+                                    strokeWidth="2"
                                     d="M6 18L18 6M6 6l12 12"
-                                />
+                                    />
                                 </svg>
-                            </button>
-                            <img
-                                src={imageUrl}
+                                </button>
+                                <img
+                                src={url}
                                 alt="Preview"
                                 className="w-full h-full object-contain rounded-lg"
-                            />
+                                />
                             </div>
+                            ))}
+                        </div>
                         ) : (
-                            <div
+                            <label
                             htmlFor="dropzone-file"
-                            className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 "
+                            className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 "
                             >
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                 <svg
-                                className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400"
+                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -397,11 +414,11 @@ function MyAds() {
                                     stroke="currentColor"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
-                                    strokeWiadh="2"
+                                    strokeWidth="2"
                                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                                 />
                                 </svg>
-                                <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">
+                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                 <span className="font-semibold">Click to upload</span> or drag and
                                 drop
                                 </p>
@@ -413,10 +430,16 @@ function MyAds() {
                                 id="dropzone-file"
                                 type="file"
                                 className="hidden"
-                                ref={fileInputRef}
-                                onChange={(e) =>{ setImageSrc(e.target.files[0]); setImageUrl(URL.createObjectURL(e.target.files[0]) )}}
+                                name="images"
+                                multiple
+                                onChange={(e) => {
+                                const files = Array.from(e.target.files);
+                                setImageSrc([...imageSrc, ...files]);
+                                const urls = files.map(file => URL.createObjectURL(file));
+                                setImageUrl([...imageUrl, ...urls]);
+                                }}
                             />
-                            </div>
+                            </label>
                         )}
                     </div>
                 </div>
@@ -440,7 +463,7 @@ function MyAds() {
                 
                 <div className="mt-2">
                     <div className='font-bold'>Description</div>
-                    <textarea className="mt-1 w-full p-2 border border-gray-400 rounded-lg" rows="3" placeholder="Enter some description" onChange={e => setDescription(e.target.value)} required />
+                    <textarea className="mt-1 w-full p-2 border border-gray-400 rounded-lg" rows="2" placeholder="Enter some description" onChange={e => setDescription(e.target.value)} required />
                 </div>
 
                 <div className="mt-2">
@@ -494,40 +517,43 @@ function MyAds() {
                     <div className='font-bold'>Product Image</div>
                     <br />
                     <div
-                        className="flex items-center justify-center w-full mt-0"
+                        className="flex items-center justify-center w-full mt-1"
                         onDrop={handleDrop}
                         onDragOver={handleDragOver}
-                        onClick={() => fileInputRef.current && fileInputRef.current.click()}
                         >
-                        {imageSrc ? (
-                            <div className="h-20 w-full relative flex">
-                            <button
-                                className="absolute top-2 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-2"
-                                onClick={handleDelete}
-                            >
-                                <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-4 h-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
+                        {imageUrl.length > 0 ? (
+                            <div className="flex flex-wrap">
+                            {imageUrl.map((url, index) => (
+                                <div key={index} className="h-40 w-40 relative m-1">
+                                <button
+                                    className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
+                                    onClick={(e) =>{ e.preventDefault(); handleDelete(index); } }
                                 >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWiadh="2"
-                                    d="M6 18L18 6M6 6l12 12"
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                    </svg>
+                                </button>
+                                <img
+                                    src={url}
+                                    alt="Preview"
+                                    className="w-full h-full object-contain rounded-lg"
                                 />
-                                </svg>
-                            </button>
-                            <img
-                                src={imageUrl}
-                                alt="Preview"
-                                className="w-full h-full object-contain rounded-lg"
-                            />
+                                </div>
+                            ))}
                             </div>
                         ) : (
-                            <div
+                            <label
                             htmlFor="dropzone-file"
                             className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 "
                             >
@@ -543,7 +569,7 @@ function MyAds() {
                                     stroke="currentColor"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
-                                    strokeWiadh="2"
+                                    strokeWidth="2"
                                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                                 />
                                 </svg>
@@ -559,10 +585,16 @@ function MyAds() {
                                 id="dropzone-file"
                                 type="file"
                                 className="hidden"
-                                ref={fileInputRef}
-                                onChange={(e) =>{ setImageSrc(e.target.files[0]); setImageUrl(URL.createObjectURL(e.target.files[0]) )}}
+                                name="images"
+                                multiple
+                                onChange={(e) => {
+                                    const files = Array.from(e.target.files);
+                                    setImageSrc([...imageSrc, ...files]);
+                                    const urls = files.map(file => URL.createObjectURL(file));
+                                    setImageUrl([...imageUrl, ...urls]);
+                                }}
                             />
-                            </div>
+                            </label>
                         )}
                     </div>
                 </div>
@@ -586,7 +618,7 @@ function MyAds() {
                 
                 <div className="mt-2">
                     <div className='font-bold'>Description</div>
-                    <textarea className="mt-1 w-full p-2 border border-gray-400 rounded-lg" rows="3" placeholder="Enter some description" value={description} onChange={e => setDescription(e.target.value)} required />
+                    <textarea className="mt-1 w-full p-2 border border-gray-400 rounded-lg" rows="2" placeholder="Enter some description" value={description} onChange={e => setDescription(e.target.value)} required />
                 </div>
 
                 <div className="mt-2">
