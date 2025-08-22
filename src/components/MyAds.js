@@ -279,33 +279,19 @@ function MyAds() {
             </button>
         </div>
 
-        <div className='overflow-x-auto'>
-        <table className='mt-5 w-full border bg-white min-w-full text-xs lg:text-sm uppercase'>
-            <tr className='bg-gray-100 p-2'>
-                <th className='p-2'>Image</th>
-                <th className='p-2'>Title/Description</th>
-                <th className='p-2'>Category</th>
-                <th className='p-2'>Size</th>
-                <th className='p-2'>Price</th>
-                <th className='p-2'>Approval Status</th>
-                <th className='p-2'>Edit</th>
-                <th className='p-2'>Delete</th>
-            </tr>
-
-                {
-                    !loading && !error && myads.length > 0 && myads.map(ad => (
-                        <tr className='mt-5 border-b border-gray-500 p-2'>
-                            <td className='flex justify-center p-2'>
-                                <img src={`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`} className='w-30 h-20 object-cover' />
-                            </td>
-                            <td className='p-2'>
-                                <div className='font-bold'>{ad.productName}</div>
-                                <div>{ad.description}</div>
-                            </td>
-                            <td className='text-center p-2'>{ad.type}</td>
-                            <td className='text-center p-2'>{ad.size} cm</td>
-                            <td className='text-center p-2'>Ksh. {ad.price}</td>
-                            <td className='text-center p-2'>{
+        {/* <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 font-montserrat">
+        {
+            !loading && !error && myads.length > 0 && myads.map(ad => (
+                <Link
+                    to="/preview"
+                    className="bg-white p-1 lg:p-4 pb-2 lg:pb-4 rounded-lg shadow-lg group"
+                    key={ad._id}
+                    state={{ data: ad }}
+                >
+                    <div className="flex flex-col h-full">
+                        <div className='justify-end'>
+                        <div className='text-center p-2'>
+                            {
                                 ad.approvalStatus == 0 ? 
                                     <div className='bg-gray-300 text-xs rounded-2xl p-1 w-full lg:w-3/4 mx-auto'>Pending approval</div>
                                 : ad.approvalStatus == 1 ? 
@@ -318,42 +304,168 @@ function MyAds() {
                                         <b>Reason:</b> {ad.disapproval_reason}
                                     </div> }
                                 </div>
-                                }</td>
-                            <td className='p-2'>
-                                <div className='flex justify-center'>
-                                    <button onClick={(e)=>{
-                                        e.preventDefault();
-                                        setEditId(ad._id);
-                                        setProductName(ad.productName);
-                                        setType(ad.type);
-                                        setPrice(ad.price);
-                                        setDescription(ad.description);
-                                        setSize(ad.size);
-                                        // setImageUrl(`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`);
-                                        // setImageSrc(ad.image[0]);
-                                        setImageSrc(ad.image);
-                                        const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
-                                        setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
-                                        setEditShowPasswordModal(true);
-                                    }} className='bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-xs px-2'>Edit</button>
+                            }
+                        </div>
+                        </div>
+                        <div className="flex justify-center items-center h-44 lg:h-64">
+                            <img
+                                src={`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`}
+                                alt={ad.productName}
+                                className="object-cover w-full h-full rounded-md"
+                            />
+                        </div>
+                        <div className='flex mt-2'>
+                            <div className='w-5/6'>
+                                <div className="font-bold text-lg mt-3 truncate">{ad.productName}</div>
+                            </div>
+                            <div className='1/6 flex justify-end'>
+                                <div className="text-purple-900 mt-2">Ksh {ad.price.toLocaleString()}</div>
+                            </div>
+                        </div>
+                        <div className="text-sm text-gray-700 mt-2 lg:group-hover:max-h-20 lg:max-h-0 overflow-hidden transition-all duration-300">
+                            <p className="line-clamp-2">{ad.description}</p>
+                        </div>
+
+                        <div className="flex gap-2 justify-end mt-auto lg:max-h-0 lg:overflow-hidden group-hover:max-h-20 transition-all duration-300">
+                            <button onClick={(e)=>{
+                                e.preventDefault();
+                                setEditId(ad._id);
+                                setProductName(ad.productName);
+                                setType(ad.type);
+                                setPrice(ad.price);
+                                setDescription(ad.description);
+                                setSize(ad.size);
+                                // setImageUrl(`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`);
+                                // setImageSrc(ad.image[0]);
+                                setImageSrc(ad.image);
+                                const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
+                                setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
+                                setEditShowPasswordModal(true);
+                            }} className='bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-xs px-2'>
+                                Edit
+                            </button>
+                            <button
+                                onClick={(e)=>{
+                                    e.preventDefault();
+                                    handleDeleteItem(ad._id);
+                                }}
+                                className='bg-red-900 hover:bg-red-700 p-1 text-white rounded-lg text-xs px-2'>
+                                    Delete
+                            </button>
+                        </div>
+                    </div>
+                </Link>
+            ))
+        }
+
+        </div> */}
+
+        <div className="overflow-x-auto">
+            <table className="mt-5 w-full border bg-white min-w-full text-xs lg:text-sm uppercase">
+                <thead>
+                <tr className="bg-gray-200 p-2">
+                    <th className="p-2">Image</th>
+                    <th className="p-2">Title/Description</th>
+                    <th className="p-2">Category</th>
+                    <th className="p-2">Size</th>
+                    <th className="p-2">Price</th>
+                    <th className="p-2">Approval Status</th>
+                    <th className="p-2">Edit</th>
+                    <th className="p-2">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    !loading && !error && myads.length > 0 && myads.map((ad, index) => (
+                    <tr
+                        key={ad._id}
+                        className="cursor-pointer odd:bg-gray-50 even:bg-white hover:bg-gray-100 border-b border-gray-300 transition-colors"
+                        onClick={(e) => {
+                                e.stopPropagation(); // prevent row click
+                                setEditId(ad._id);
+                                setProductName(ad.productName);
+                                setType(ad.type);
+                                setPrice(ad.price);
+                                setDescription(ad.description);
+                                setSize(ad.size);
+                                setImageSrc(ad.image);
+                                const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
+                                setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
+                                setEditShowPasswordModal(true);
+                            }}
+                    >
+                        <td className="flex justify-center p-2">
+                        <img
+                            src={`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`}
+                            alt={ad.productName}
+                            className="w-30 h-20 object-cover"
+                        />
+                        </td>
+                        <td className="p-2">
+                        <div className="font-bold">{ad.productName}</div>
+                        <div>{ad.description}</div>
+                        </td>
+                        <td className="text-center p-2">{ad.type}</td>
+                        <td className="text-center p-2">{ad.size} cm</td>
+                        <td className="text-center p-2">Ksh. {ad.price}</td>
+                        <td className="text-center p-2">
+                        {
+                            ad.approvalStatus === 0 ? (
+                            <div className="bg-gray-300 text-xs rounded-2xl p-1 w-full lg:w-3/4 mx-auto">Pending approval</div>
+                            ) : ad.approvalStatus === 1 ? (
+                            <div className="bg-green-500 text-xs rounded-2xl p-1 w-full lg:w-1/2 mx-auto text-white">Approved</div>
+                            ) : (
+                            <div>
+                                <div className="bg-red-500 text-xs rounded-2xl p-1 w-full lg:w-1/2 mx-auto text-white">Rejected</div>
+                                {ad.disapproval_reason && (
+                                <div className="mt-2 text-xs capitalize">
+                                    <b>Reason:</b> {ad.disapproval_reason}
                                 </div>
-                            </td>
-                            <td>
-                                <div className='flex justify-center'>
-                                    <button
-                                    onClick={(e)=>{
-                                        e.preventDefault();
-                                        handleDeleteItem(ad._id);
-                                    }} 
-                                     className='bg-red-900 hover:bg-red-700 p-1 text-white rounded-lg text-xs px-2'>Delete</button>
-                                </div>
-                            </td>
-                        </tr>
+                                )}
+                            </div>
+                            )
+                        }
+                        </td>
+                        <td className="p-2">
+                        <div className="flex justify-center">
+                            <button
+                            onClick={(e) => {
+                                e.stopPropagation(); // prevent row click
+                                setEditId(ad._id);
+                                setProductName(ad.productName);
+                                setType(ad.type);
+                                setPrice(ad.price);
+                                setDescription(ad.description);
+                                setSize(ad.size);
+                                setImageSrc(ad.image);
+                                const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
+                                setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
+                                setEditShowPasswordModal(true);
+                            }}
+                            className="bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-xs px-2"
+                            >
+                            Edit
+                            </button>
+                        </div>
+                        </td>
+                        <td>
+                        <div className="flex justify-center">
+                            <button
+                            onClick={(e) => {
+                                e.stopPropagation(); // prevent row click
+                                handleDeleteItem(ad._id);
+                            }}
+                            className="bg-red-900 hover:bg-red-700 p-1 text-white rounded-lg text-xs px-2"
+                            >
+                            Delete
+                            </button>
+                        </div>
+                        </td>
+                    </tr>
                     ))
                 }
-                
-
-        </table>
+                </tbody>
+            </table>
         </div>
 
         {showPasswordModal && (
@@ -367,9 +479,9 @@ function MyAds() {
                         onDragOver={handleDragOver}
                         >
                         {imageUrl.length > 0 ? (
-                        <div className="flex flex-wrap">
+                        <div className="flex flex-nowrap overflow-x-auto gap-2 p-1">
                             {imageUrl.map((url, index) => (
-                            <div key={index} className="h-40 w-40 relative m-1">
+                            <div key={index} className="h-40 w-40 relative flex-shrink-0">
                                 <button
                                 className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
                                 onClick={(e) =>{ e.preventDefault(); handleDelete(index); }}
@@ -516,7 +628,7 @@ function MyAds() {
                 <div className="mt-1">
                     <div className='font-bold'>Product Image</div>
                     <br />
-                    <div
+                    {/* <div
                         className="flex items-center justify-center w-full mt-1"
                         onDrop={handleDrop}
                         onDragOver={handleDragOver}
@@ -592,6 +704,90 @@ function MyAds() {
                                     setImageSrc([...imageSrc, ...files]);
                                     const urls = files.map(file => URL.createObjectURL(file));
                                     setImageUrl([...imageUrl, ...urls]);
+                                }}
+                            />
+                            </label>
+                        )}
+                    </div> */}
+
+                    <div
+                        className="flex items-center justify-center w-full mt-1"
+                        onDrop={handleDrop}
+                        onDragOver={handleDragOver}
+                        >
+                        {imageUrl.length > 0 ? (
+                            <div className="flex flex-nowrap overflow-x-auto gap-2 p-1">
+                            {imageUrl.map((url, index) => (
+                                <div key={index} className="h-40 w-40 relative flex-shrink-0">
+                                <button
+                                    className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
+                                    onClick={(e) => {
+                                    e.preventDefault();
+                                    handleDelete(index);
+                                    }}
+                                >
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                    </svg>
+                                </button>
+                                <img
+                                    src={url}
+                                    alt="Preview"
+                                    className="w-full h-full object-contain rounded-lg"
+                                />
+                                </div>
+                            ))}
+                            </div>
+                        ) : (
+                            <label
+                            htmlFor="dropzone-file"
+                            className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500"
+                            >
+                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg
+                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 20 16"
+                                >
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                />
+                                </svg>
+                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                <span className="font-semibold">Click to upload</span> or drag and drop
+                                </p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                SVG, PNG, JPG or GIF (MAX. 800x400px)
+                                </p>
+                            </div>
+                            <input
+                                id="dropzone-file"
+                                type="file"
+                                className="hidden"
+                                name="images"
+                                multiple
+                                onChange={(e) => {
+                                const files = Array.from(e.target.files);
+                                setImageSrc([...imageSrc, ...files]);
+                                const urls = files.map((file) => URL.createObjectURL(file));
+                                setImageUrl([...imageUrl, ...urls]);
                                 }}
                             />
                             </label>
