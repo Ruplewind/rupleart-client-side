@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import CancelTransaction from "./components/CancelTransaction";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
@@ -44,7 +44,7 @@ function App() {
     <CartProvider>
       <Header />
       <div className="flex-grow bg-gray-100">
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/preview/:id" element={<SharedPreview />} />
           <Route path="/preview" element={<Preview />} />
@@ -76,8 +76,45 @@ function App() {
           null
         }
 
-        </Routes>
-          
+        </Routes> */}
+          <Routes>
+  <Route path="/" element={<Shop />} />
+  <Route path="/preview/:id" element={<SharedPreview />} />
+  <Route path="/preview" element={<Preview />} />
+  <Route path="/cart" element={<Cart />} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
+  <Route path="/events" element={<Events />} />
+  <Route path="/about_us" element={<AboutUs />} />
+  <Route path="/contact_us" element={<ContactUs />} />
+  <Route path="/faq" element={<FAQ />} />
+  <Route path="/terms" element={<TermsAndConditions />} />
+  <Route path="/return" element={<ReturnPolicy />} />
+  <Route path="/howitworks" element={<HowItWorks />} />
+  <Route path="/dcma" element={<DmcaNotice />} />
+  <Route path="/confirm" element={<ConfirmPayment />} />
+  <Route path="/cancel" element={<CancelTransaction />} />
+  <Route path="/delete_account" element={<DeleteAccount />} />
+  <Route path="/download_app" element={<DownloadApk />} />
+
+  {/* Protected Routes */}
+  <Route
+    path="/checkout"
+    element={token ? <Checkout /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/profile"
+    element={token ? <MyProfile /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/myads"
+    element={token ? <MyAds /> : <Navigate to="/login" />}
+  />
+  <Route
+    path="/orders"
+    element={token ? <MyOrders /> : <Navigate to="/login" />}
+  />
+</Routes>
       </div>
       <Footer />
       <WhatsAppButton />

@@ -37,7 +37,7 @@ function DeleteAccount() {
                         });
                         setTimeout(() => {
                             window.location.reload()
-                        }, 1000);
+                        }, 1500);
                     });
                 } else {
                     toast.error("Failed to place account deletion request. Please check your credentials.", {
