@@ -60,7 +60,7 @@ function Login() {
             <form className='text-sm'>
                     <div className='mt-5'>
                         <div className='text-md'>Email</div>
-                        <input type="email" onChange={e=>setEmail(e.target.value)} className="mt-1 border-b border-gray-400 rounded-xs p-2 w-full" placeholder='john.doe@gmail.com' />
+                        <input type="email" onChange={e=>setEmail(e.target.value)} className="mt-1 border-b border-gray-400 rounded-xs p-2 w-full" placeholder='rupleart@gmail.com' />
                     </div>
                     <div className='mt-5'>
                         <div className='text-md'>Password</div>

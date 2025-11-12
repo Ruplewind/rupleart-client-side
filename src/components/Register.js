@@ -82,11 +82,11 @@ function Register() {
                     </div>
                     <div className='mt-3'>
                         <div className='text-md'>Email</div>
-                        <input type="email" onChange={e => setEmail(e.target.value)} className="mt-2 border-b border-gray-400 rounded-xs p-2 w-full" placeholder='john.doe@gmail.com' />
+                        <input type="email" onChange={e => setEmail(e.target.value)} className="mt-2 border-b border-gray-400 rounded-xs p-2 w-full" placeholder='rupleart@gmail.com' />
                     </div>
                     <div className='mt-3'>
                         <div className='text-md'>Phone number</div>
-                        <input type="text" onChange={e => setPhoneNumber(e.target.value)} className="mt-2 border-b border-gray-400 rounded-xs p-2 w-full" placeholder='0707357072' />
+                        <input type="text" onChange={e => setPhoneNumber(e.target.value)} className="mt-2 border-b border-gray-400 rounded-xs p-2 w-full" placeholder='0759324250' />
                     </div>
                     <div className='mt-3'>
                         <div className='text-md'>Password</div>
