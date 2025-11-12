@@ -104,6 +104,7 @@ const Preview = () => {
 
                 {/* Product details */}
                 <div className="p-5 lg:p-10 w-full lg:w-3/6 ml-0 lg:ml-5">
+                    <div className="text-blue-900">#{data.productId}</div>
                     <div className="font-semibold lg:text-3xl tracking-wide pb-1 lg:pb-3 mx-10 lg:mx-0">{data.productName}</div> 
 
                     <form className="mx-10 lg:mx-0">

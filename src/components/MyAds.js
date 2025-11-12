@@ -364,6 +364,7 @@ function MyAds() {
             <table className="mt-5 w-full border bg-white min-w-full text-xs lg:text-sm uppercase">
                 <thead>
                 <tr className="bg-gray-200 p-2">
+                    <th className="p-2">Product ID</th>
                     <th className="p-2">Image</th>
                     <th className="p-2">Title/Description</th>
                     <th className="p-2">Category</th>
@@ -394,6 +395,7 @@ function MyAds() {
                                 setEditShowPasswordModal(true);
                             }}
                     >
+                        <td className='text-center p-2'>#{ad.productId}</td>
                         <td className="flex justify-center p-2">
                         <img
                             src={`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`}

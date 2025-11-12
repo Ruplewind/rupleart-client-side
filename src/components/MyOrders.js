@@ -75,7 +75,11 @@ function MyOrders() {
                             <td className='p-2'>
                                 {
                                     ad.items.map( item => 
-                                        <div className='font-bold'>{item.productName} X {item.quantity}</div>
+                                        <div className='font-bold'>
+                                            <div className='text-blue-500'>#{item.productId}</div>
+                                            <div>{item.productName} X {item.quantity}</div>
+                                            ----------
+                                        </div>
                                     )
                                 }
                             </td>

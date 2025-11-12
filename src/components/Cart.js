@@ -27,6 +27,7 @@ const Cart = () => {
                     
                     <div className="block lg:flex gap-2 lg:gap-5  lg:justify-around text-sm lg:text-base items-center">
                         <div className="text-xs lg:text-base w-52 lg:w-64">
+                            <div className="text-blue-900">#{product.productId}</div>
                             <div className="flex items-center  font-bold lg:font-normal">
                                 { product.productName }
                             </div>
