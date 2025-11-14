@@ -15,20 +15,21 @@ const ConfirmPayment = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
-        fetch(`${process.env.REACT_APP_API_URL}/ConfirmPayment/${id}`)
-        .then(res => {
-            if(res.ok){
-                setSuccess(true);
+        setTimeout(()=>{
+            fetch(`${process.env.REACT_APP_API_URL}/ConfirmPayment/${id}`)
+            .then(res => {
+                if(res.ok){
+                    setSuccess(true);
+                    setLoading(false);
+                }else{
+                    setSuccess(false);
+                    setLoading(false);
+                }
+            })
+            .catch(err =>{
                 setLoading(false);
-            }else{
-                setSuccess(false);
-                setLoading(false);
-            }
-        })
-        .catch(err =>{
-            setLoading(false);
-        })
-
+            })
+        },[6000])
     },[])
     return ( <div>
         {
