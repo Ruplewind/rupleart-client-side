@@ -29,7 +29,7 @@ const ConfirmPayment = () => {
             .catch(err =>{
                 setLoading(false);
             })
-        },[6000])
+        },4000)
     },[])
     return ( <div>
         {
