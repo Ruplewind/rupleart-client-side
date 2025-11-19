@@ -48,7 +48,7 @@ const Shop = () => {
                     {
                         !loading && !error && categories.map(category => 
                             (
-                                <div className='mt-2'>
+                                <div key={category._id} className='mt-2'>
                                     <button 
                                         onClick={() => {
                                             setSelectedCategory(category.category);
@@ -82,7 +82,7 @@ const Shop = () => {
                     {
                         !loading && !error && categories.map(category => 
                         ( 
-                            <option value={category.category}>{category.category}</option> 
+                            <option key={category._id} value={category.category}>{category.category}</option> 
                         )
                     )}
                 </select>

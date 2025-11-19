@@ -21,7 +21,7 @@ const Cart = () => {
             <div className="text-center mt-1 text-gray-500 lg:ml-8 mb-10">{products.length} item(s)</div>
 
             { products.map(product =>(
-                <div className="flex justify-center lg:justify-around mx-5 lg:mx-80 mb-5 lg:mb-3 gap-1">
+                <div key={product._id} className="flex justify-center lg:justify-around mx-5 lg:mx-80 mb-5 lg:mb-3 gap-1">
                     
                     <img src={`${process.env.REACT_APP_API_URL}/uploads/${ product.image[0] }`} className="w-20 h-20 lg:w-28 lg:h-auto object-contain"/>
                     

@@ -166,7 +166,7 @@ function Footer() {
                 <div className='h-0 lg:h-max collapse lg:visible font-bold text-white mb-2 block'>SHOP</div>
                 {
                     !loading && !error && categories.length > 0 && categories.slice(0,6).map(category => 
-                        <div onClick={() => {
+                        <div key={category._id} onClick={() => {
                             navigate("/")
                         }} className='h-0 lg:h-max collapse lg:visible text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs cursor-pointer '>
                             {category.category}
@@ -179,7 +179,7 @@ function Footer() {
                 <div className='h-0 lg:h-max collapse lg:visible font-bold text-white'>EVENTS</div>
                 {
                     !eventsLoading && !error && events.length > 0 && events.slice(0,6).map(event => 
-                        <div onClick={() => {
+                        <div key={event._id} onClick={() => {
                             navigate("/events")
                         }} 
                         className='h-0 lg:h-max collapse lg:visible text-gray-400 hover:text-gray-600 mt-2 uppercase text-xs cursor-pointer'>
