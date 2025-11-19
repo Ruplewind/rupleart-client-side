@@ -6,6 +6,7 @@ export function AuthProvider({ children }){
     const [token, setToken] = useState(null);
     const [fullName, setFullName] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [loading, setLoading] = useState(true);
 
 
     const login = (token, user_id, fullname) =>{
@@ -40,7 +41,8 @@ export function AuthProvider({ children }){
 
     useEffect(()=>{
         isLoggedIn();
+        setLoading(false);
     },[])
 
-    return (<AuthContext.Provider  value={{login, logout, fullName, userId, token}}>{children}</AuthContext.Provider>)
+    return (<AuthContext.Provider  value={{login, logout, fullName, userId, token, loading}}>{children}</AuthContext.Provider>)
 }

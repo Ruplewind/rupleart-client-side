@@ -36,8 +36,12 @@ import DownloadApk from "./components/DownloadApk";
 
 function App() {
 
-  const { token } = useContext(AuthContext);
+  const { token, loading } = useContext(AuthContext);
   
+  if (loading) {
+    return <div className="text-center mt-5">Loading ...</div>;
+  }
+
   return (
     
     <div className="App flex flex-col min-h-screen">

@@ -262,6 +262,39 @@ function MyAds() {
         })
     }
 
+    const [change, setChange] = useState(false);
+
+    const handleAvailabilityToggle = (id, value) => {
+        fetch(`${process.env.REACT_APP_API_URL}/change_availability/${id}`,{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':`Bearer ${token}`
+            },
+            body: JSON.stringify({
+                value: value
+            })
+        })
+        .then((response)=>{
+            if(response.ok){
+                toast('Status Updated',{
+                    type:'success'
+                })
+                setChange(!change);
+                window.location.reload();
+            }else{
+                toast('Server Error',{
+                    type:'error'
+                })
+            }
+        })
+        .catch((err)=>{
+            toast('Server Error',{
+                type:'error'
+            })
+        })
+    }
+
   return (
     <div className='w-5/6 lg:w-3/4 mx-5 lg:mx-auto font-montserrat mt-10 mb-10'>
         <ToastContainer />
@@ -279,87 +312,6 @@ function MyAds() {
             </button>
         </div>
 
-        {/* <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 font-montserrat">
-        {
-            !loading && !error && myads.length > 0 && myads.map(ad => (
-                <Link
-                    to="/preview"
-                    className="bg-white p-1 lg:p-4 pb-2 lg:pb-4 rounded-lg shadow-lg group"
-                    key={ad._id}
-                    state={{ data: ad }}
-                >
-                    <div className="flex flex-col h-full">
-                        <div className='justify-end'>
-                        <div className='text-center p-2'>
-                            {
-                                ad.approvalStatus == 0 ? 
-                                    <div className='bg-gray-300 text-xs rounded-2xl p-1 w-full lg:w-3/4 mx-auto'>Pending approval</div>
-                                : ad.approvalStatus == 1 ? 
-                                    <div className='bg-green-500 text-xs rounded-2xl p-1 w-full lg:w-1/2 mx-auto text-white'>Approved</div>
-                                :
-                                <div>
-                                    <div className='bg-red-500 text-xs rounded-2xl p-1 w-full lg:w-1/2 mx-auto text-white'>Rejected</div>
-
-                                    { ad.disapproval_reason && <div className='mt-2 text-xs capitalize'>
-                                        <b>Reason:</b> {ad.disapproval_reason}
-                                    </div> }
-                                </div>
-                            }
-                        </div>
-                        </div>
-                        <div className="flex justify-center items-center h-44 lg:h-64">
-                            <img
-                                src={`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`}
-                                alt={ad.productName}
-                                className="object-cover w-full h-full rounded-md"
-                            />
-                        </div>
-                        <div className='flex mt-2'>
-                            <div className='w-5/6'>
-                                <div className="font-bold text-lg mt-3 truncate">{ad.productName}</div>
-                            </div>
-                            <div className='1/6 flex justify-end'>
-                                <div className="text-purple-900 mt-2">Ksh {ad.price.toLocaleString()}</div>
-                            </div>
-                        </div>
-                        <div className="text-sm text-gray-700 mt-2 lg:group-hover:max-h-20 lg:max-h-0 overflow-hidden transition-all duration-300">
-                            <p className="line-clamp-2">{ad.description}</p>
-                        </div>
-
-                        <div className="flex gap-2 justify-end mt-auto lg:max-h-0 lg:overflow-hidden group-hover:max-h-20 transition-all duration-300">
-                            <button onClick={(e)=>{
-                                e.preventDefault();
-                                setEditId(ad._id);
-                                setProductName(ad.productName);
-                                setType(ad.type);
-                                setPrice(ad.price);
-                                setDescription(ad.description);
-                                setSize(ad.size);
-                                // setImageUrl(`${process.env.REACT_APP_API_URL}/uploads/${ad.image[0]}`);
-                                // setImageSrc(ad.image[0]);
-                                setImageSrc(ad.image);
-                                const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
-                                setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
-                                setEditShowPasswordModal(true);
-                            }} className='bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-xs px-2'>
-                                Edit
-                            </button>
-                            <button
-                                onClick={(e)=>{
-                                    e.preventDefault();
-                                    handleDeleteItem(ad._id);
-                                }}
-                                className='bg-red-900 hover:bg-red-700 p-1 text-white rounded-lg text-xs px-2'>
-                                    Delete
-                            </button>
-                        </div>
-                    </div>
-                </Link>
-            ))
-        }
-
-        </div> */}
-
         <div className="overflow-x-auto">
             <table className="mt-5 w-full border bg-white min-w-full text-xs lg:text-sm uppercase">
                 <thead>
@@ -370,6 +322,7 @@ function MyAds() {
                     <th className="p-2">Category</th>
                     <th className="p-2">Size</th>
                     <th className="p-2">Price</th>
+                    <th className='p-2'>In Stock?</th>
                     <th className="p-2">Approval Status</th>
                     <th className="p-2">Edit</th>
                     <th className="p-2">Delete</th>
@@ -382,7 +335,7 @@ function MyAds() {
                         key={ad._id}
                         className="cursor-pointer odd:bg-gray-50 even:bg-white hover:bg-gray-100 border-b border-gray-300 transition-colors"
                         onClick={(e) => {
-                                e.stopPropagation(); // prevent row click
+                                e.stopPropagation();
                                 setEditId(ad._id);
                                 setProductName(ad.productName);
                                 setType(ad.type);
@@ -411,6 +364,20 @@ function MyAds() {
                         <td className="text-center p-2">{ad.size} cm</td>
                         <td className="text-center p-2">Ksh. {ad.price}</td>
                         <td className="text-center p-2">
+                            <div className='flex justify-center'>
+                                <input type="checkbox" 
+                                className="border border-black"
+                                checked={ad.availability}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                }}
+                                onChange={(e)=> {
+                                    handleAvailabilityToggle( ad._id , e.target.checked)
+                                }}
+                                />
+                            </div>
+                        </td>
+                        <td className="text-center p-2">
                         {
                             ad.approvalStatus === 0 ? (
                             <div className="bg-gray-300 text-xs rounded-2xl p-1 w-full lg:w-3/4 mx-auto">Pending approval</div>
@@ -432,7 +399,7 @@ function MyAds() {
                         <div className="flex justify-center">
                             <button
                             onClick={(e) => {
-                                e.stopPropagation(); // prevent row click
+                                e.stopPropagation();
                                 setEditId(ad._id);
                                 setProductName(ad.productName);
                                 setType(ad.type);
@@ -454,7 +421,7 @@ function MyAds() {
                         <div className="flex justify-center">
                             <button
                             onClick={(e) => {
-                                e.stopPropagation(); // prevent row click
+                                e.stopPropagation();
                                 handleDeleteItem(ad._id);
                             }}
                             className="bg-red-900 hover:bg-red-700 p-1 text-white rounded-lg text-xs px-2"
