@@ -20,7 +20,7 @@ function NewArtWorks() {
         })
     },[])
   return (
-    <div className='font-montserrat mt-5 lg:mt-10 mx-5 lg:ml-14 mb-10'>
+    <div className='font-montserrat mt-5 lg:mt-10 mx-5 lg:ml-8 mb-10'>
         <div className='font-bold uppercase'>New ArtWorks</div>
 
         { loading && <div className='text-gray-700'>Loading ...</div>}
