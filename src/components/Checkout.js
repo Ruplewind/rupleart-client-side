@@ -9,6 +9,7 @@ import { AuthContext } from "../utils/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const myRegex = /^07\d{8}$/;
+const TAX_RATE = 0.015; // 1.5%
 
 const Checkout = () => {
 
@@ -36,6 +37,10 @@ const Checkout = () => {
             
         }
     }, [location])
+
+    // Tax is 1.5% of (items total + delivery cost)
+    const tax = (total + deliveryCost) * TAX_RATE;
+    const grandTotal = total + deliveryCost + tax;
 
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_API_URL}/get_locations`)
@@ -68,14 +73,14 @@ const Checkout = () => {
         secondname: yup.string().required().min(3),
         email: yup.string().email('Invalid Email').required().min(3),
         phoneNumber: yup.string().nullable().matches(myRegex, {message:"Phone number is not valid", excludeEmptyString: true}),
-        minPrice: yup.number().min(deliveryCost + total, `Minimum price is ${deliveryCost + total}`)
+        minPrice: yup.number().min(deliveryCost + total + tax, `Minimum price is ${(deliveryCost + total + tax).toFixed(2)}`)
     })
 
     const { userId, token } = useContext(AuthContext);
 
     const handleSubmit = (data) =>{
         setLoading(true);
-        let newData = {...data, products, location};
+        let newData = {...data, products, location, tax, grandTotal};
 
         fetch(`${process.env.REACT_APP_API_URL}/Checkout`,{
             method: 'POST',
@@ -160,7 +165,7 @@ const Checkout = () => {
     :
     
     <Formik
-            initialValues={{firstname: firstName, secondname: secondName, email:email, phoneNumber:phoneNumber, minPrice: deliveryCost + total}}
+            initialValues={{firstname: firstName, secondname: secondName, email:email, phoneNumber:phoneNumber, minPrice: deliveryCost + total + tax}}
             enableReinitialize={true}
             validationSchema={checkoutSchema}
             onSubmit={(values)=>{
@@ -241,6 +246,16 @@ const Checkout = () => {
                 <div className="flex mt-5 text-xs lg:text-base">
                     <div className="w-48 lg:w-80 lg:mr-6 font-bold">Delivery Cost:</div>
                     <div className="ml-12 lg:ml-0">KES. {deliveryCost}</div>
+                </div>
+
+                <div className="flex mt-2 text-xs lg:text-base">
+                    <div className="w-48 lg:w-80 lg:mr-6 font-bold">Tax (1.5%):</div>
+                    <div className="ml-12 lg:ml-0">KES. {tax.toFixed(2)}</div>
+                </div>
+
+                <div className="flex mt-2 text-xs lg:text-base">
+                    <div className="w-48 lg:w-80 lg:mr-6 font-bold">Order Total:</div>
+                    <div className="ml-12 lg:ml-0 font-bold text-purple-900">KES. {grandTotal.toFixed(2)}</div>
                 </div>
 
                 <div className="flex mt-5 text-xs lg:text-base">
