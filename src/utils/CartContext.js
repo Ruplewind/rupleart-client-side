@@ -5,6 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const CartContext = createContext(initialState);
 
+const buildCartItemId = (product) =>
+    product.color ? `${product._id}-${product.color}` : `${product._id}`;
+
 export const CartProvider = ({ children }) => {
     const [state , dispatch] = useReducer(reducer, initialState);
 
@@ -17,26 +20,33 @@ export const CartProvider = ({ children }) => {
     },[])
 
     const addToCart = (product) => {
-        
-        const itemIndex = state.products.findIndex(item => item._id === product._id);
-        
+
+        const cartItemId = buildCartItemId(product);
+        const itemIndex = state.products.findIndex(item => item.cartItemId === cartItemId);
 
         if(itemIndex >= 0){ //If it exists in state
-                
+
             state.products[itemIndex].quantity += Number(product.quantity);
 
             state.products[itemIndex].size = product.size;
 
             updatedPrice(state.products);
-            
+
+            dispatch({
+                type: "ADD_TO_CART",
+                payload: {
+                    products: state.products
+                }
+            })
+
             toast("Product Has Been Added To Cart",{
                 autoClose: 500
             })
-            
-        }else{
-            //let newProduct = {...product, quantity: product.quantity}
 
-            const updatedCart = state.products.concat(product);
+        }else{
+            const newProduct = { ...product, cartItemId };
+
+            const updatedCart = state.products.concat(newProduct);
 
             updatedPrice(updatedCart)
 
@@ -53,7 +63,7 @@ export const CartProvider = ({ children }) => {
 
     const removeFromCart = (product) =>{
         const updatedCart = state.products.filter(currentProduct => 
-            currentProduct._id !== product._id
+            currentProduct.cartItemId !== product.cartItemId
         )
 
         updatedPrice(updatedCart);

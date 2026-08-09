@@ -7,6 +7,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 
+const AVAILABLE_COLORS = [
+  'Black', 'White', 'Grey', 'Red', 'Orange', 'Yellow',
+  'Green', 'Blue', 'Navy', 'Purple', 'Pink', 'Brown', 'Beige', 'Gold', 'Silver'
+];
+
+const COLOR_SWATCHES = {
+  Black: '#000000', White: '#FFFFFF', Grey: '#808080', Red: '#DC2626',
+  Orange: '#EA580C', Yellow: '#EAB308', Green: '#16A34A', Blue: '#2563EB',
+  Navy: '#1E3A8A', Purple: '#9333EA', Pink: '#EC4899', Brown: '#78350F',
+  Beige: '#D8C3A5', Gold: '#D4AF37', Silver: '#C0C0C0'
+};
+
 function MyAds() {
     const { token, logout } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -23,11 +35,19 @@ function MyAds() {
     const [size, setSize] = useState(null);
     const [error, setError] = useState(false);
     const [termsChecked, setTermsChecked] = useState(false);
+    const [colors, setColors] = useState([]);
+    const [colorDropdownOpen, setColorDropdownOpen] = useState(false);
 
     const [imageSrc, setImageSrc] = useState([]);
     const [imageUrl, setImageUrl] = useState([]);
 
     const [editId, setEditId] = useState(null);
+
+    const toggleColor = (color) => {
+        setColors(prev =>
+            prev.includes(color) ? prev.filter(c => c !== color) : [...prev, color]
+        );
+    }
 
     const resetState =  () => {
         setProductName(null);
@@ -37,6 +57,8 @@ function MyAds() {
         setSize(null);
         setImageSrc([]);
         setImageUrl([]);
+        setColors([]);
+        setColorDropdownOpen(false);
     }
 
       const handleDrop = (e) => {
@@ -123,6 +145,14 @@ function MyAds() {
             return
         }
 
+        if(colors.length === 0){
+            toast('Please select at least one color',{
+                type:'error'
+            })
+            setSubmitLoading(false);
+            return
+        }
+
         if(!termsChecked){
             toast('Terms and conditions must be checked',{
                 type:'error'
@@ -141,6 +171,9 @@ function MyAds() {
         });
         formData.append('description', description);
         formData.append('size', size);
+        colors.forEach((color) => {
+            formData.append('colors', color);
+        });
 
         fetch(`${process.env.REACT_APP_API_URL}/add_product`,{
             method: 'POST',
@@ -191,6 +224,12 @@ function MyAds() {
             setSubmitLoading(false);
             return
         }
+
+        if(colors.length === 0){
+            toast.error('Please select at least one color');
+            setSubmitLoading(false);
+            return
+        }
     
         const formData = new FormData();
     
@@ -202,6 +241,9 @@ function MyAds() {
         });
         formData.append('description', description);
         formData.append('size', size);
+        colors.forEach((color) => {
+            formData.append('colors', color);
+        });
     
         fetch(`${process.env.REACT_APP_API_URL}/edit_product/${editId}`,{
             method: 'PUT',
@@ -295,6 +337,20 @@ function MyAds() {
         })
     }
 
+    const openEditFor = (ad) => {
+        setEditId(ad._id);
+        setProductName(ad.productName);
+        setType(ad.type);
+        setPrice(ad.price);
+        setDescription(ad.description);
+        setSize(ad.size);
+        setColors(ad.colors || []);
+        setImageSrc(ad.image);
+        const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
+        setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
+        setEditShowPasswordModal(true);
+    }
+
   return (
     <div className='w-5/6 lg:w-3/4 mx-5 lg:mx-auto font-montserrat mt-10 mb-10'>
         <ToastContainer />
@@ -321,6 +377,7 @@ function MyAds() {
                     <th className="p-2">Title/Description</th>
                     <th className="p-2">Category</th>
                     <th className="p-2">Size</th>
+                    <th className="p-2">Colors</th>
                     <th className="p-2">Price</th>
                     <th className='p-2'>In Stock?</th>
                     <th className="p-2">Approval Status</th>
@@ -336,16 +393,7 @@ function MyAds() {
                         className="cursor-pointer odd:bg-gray-50 even:bg-white hover:bg-gray-100 border-b border-gray-300 transition-colors"
                         onClick={(e) => {
                                 e.stopPropagation();
-                                setEditId(ad._id);
-                                setProductName(ad.productName);
-                                setType(ad.type);
-                                setPrice(ad.price);
-                                setDescription(ad.description);
-                                setSize(ad.size);
-                                setImageSrc(ad.image);
-                                const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
-                                setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
-                                setEditShowPasswordModal(true);
+                                openEditFor(ad);
                             }}
                     >
                         <td className='text-center p-2'>#{ad.productId}</td>
@@ -362,6 +410,22 @@ function MyAds() {
                         </td>
                         <td className="text-center p-2">{ad.type}</td>
                         <td className="text-center p-2">{ad.size} cm</td>
+                        <td className="text-center p-2">
+                            {ad.colors && ad.colors.length > 0 ? (
+                                <div className="flex flex-wrap justify-center gap-1 max-w-[110px] mx-auto">
+                                    {ad.colors.map((color, idx) => (
+                                        <span
+                                            key={idx}
+                                            title={color}
+                                            className="w-4 h-4 rounded-full border border-gray-300 inline-block cursor-default"
+                                            style={{ backgroundColor: COLOR_SWATCHES[color] || '#ccc' }}
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <span className="text-gray-400 normal-case">—</span>
+                            )}
+                        </td>
                         <td className="text-center p-2">Ksh. {ad.price}</td>
                         <td className="text-center p-2">
                             <div className='flex justify-center'>
@@ -400,16 +464,7 @@ function MyAds() {
                             <button
                             onClick={(e) => {
                                 e.stopPropagation();
-                                setEditId(ad._id);
-                                setProductName(ad.productName);
-                                setType(ad.type);
-                                setPrice(ad.price);
-                                setDescription(ad.description);
-                                setSize(ad.size);
-                                setImageSrc(ad.image);
-                                const imageUrls = ad.image.map(image => `${process.env.REACT_APP_API_URL}/uploads/${image}`);
-                                setImageUrl(prevImageUrls => [...prevImageUrls, ...imageUrls]);
-                                setEditShowPasswordModal(true);
+                                openEditFor(ad);
                             }}
                             className="bg-blue-900 hover:bg-blue-700 p-1 text-white rounded-lg text-xs px-2"
                             >
@@ -553,6 +608,63 @@ function MyAds() {
                 </div>
 
                 <div className="mt-2">
+                    <div className='font-bold'>Colors</div>
+                    <div className="relative mt-1">
+                        <div
+                            className="flex items-center justify-between w-full border border-gray-400 rounded-lg px-3 py-2 cursor-pointer bg-white"
+                            onClick={() => setColorDropdownOpen(!colorDropdownOpen)}
+                        >
+                            <span className="normal-case text-gray-600">
+                                {colors.length > 0 ? `${colors.length} selected` : 'Select colors'}
+                            </span>
+                            <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+
+                        {colorDropdownOpen && (
+                            <div className="absolute z-10 mt-1 w-full max-h-48 overflow-y-auto border rounded-lg bg-white shadow-lg">
+                                {AVAILABLE_COLORS.map((color) => (
+                                    <label
+                                        key={color}
+                                        className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer normal-case"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked={colors.includes(color)}
+                                            onChange={() => toggleColor(color)}
+                                        />
+                                        <span
+                                            className="w-3 h-3 rounded-full border"
+                                            style={{ backgroundColor: COLOR_SWATCHES[color] }}
+                                        />
+                                        <span>{color}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {colors.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {colors.map((color) => (
+                                <div key={color} className="flex items-center gap-1 pl-2 pr-1 py-1 rounded-full border normal-case">
+                                    <span className="w-3 h-3 rounded-full border" style={{ backgroundColor: COLOR_SWATCHES[color] }} />
+                                    <span>{color}</span>
+                                    <button
+                                        type="button"
+                                        className="text-gray-400 hover:text-red-500 ml-1"
+                                        onClick={() => toggleColor(color)}
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <div className="mt-2">
                     <div className='font-bold'>Price</div>
                     <input className="mt-1 w-full p-2 border border-gray-400 rounded-lg" type="number" placeholder="0" onChange={e => setPrice(e.target.value)} required/>
                 </div>
@@ -597,87 +709,6 @@ function MyAds() {
                 <div className="mt-1">
                     <div className='font-bold'>Product Image</div>
                     <br />
-                    {/* <div
-                        className="flex items-center justify-center w-full mt-1"
-                        onDrop={handleDrop}
-                        onDragOver={handleDragOver}
-                        >
-                        {imageUrl.length > 0 ? (
-                            <div className="flex flex-wrap">
-                            {imageUrl.map((url, index) => (
-                                <div key={index} className="h-40 w-40 relative m-1">
-                                <button
-                                    className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
-                                    onClick={(e) =>{ e.preventDefault(); handleDelete(index); } }
-                                >
-                                    <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                    </svg>
-                                </button>
-                                <img
-                                    src={url}
-                                    alt="Preview"
-                                    className="w-full h-full object-contain rounded-lg"
-                                />
-                                </div>
-                            ))}
-                            </div>
-                        ) : (
-                            <label
-                            htmlFor="dropzone-file"
-                            className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 "
-                            >
-                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg
-                                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 20 16"
-                                >
-                                <path
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                />
-                                </svg>
-                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                <span className="font-semibold">Click to upload</span> or drag and
-                                drop
-                                </p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">
-                                SVG, PNG, JPG or GIF (MAX. 800x400px)
-                                </p>
-                            </div>
-                            <input
-                                id="dropzone-file"
-                                type="file"
-                                className="hidden"
-                                name="images"
-                                multiple
-                                onChange={(e) => {
-                                    const files = Array.from(e.target.files);
-                                    setImageSrc([...imageSrc, ...files]);
-                                    const urls = files.map(file => URL.createObjectURL(file));
-                                    setImageUrl([...imageUrl, ...urls]);
-                                }}
-                            />
-                            </label>
-                        )}
-                    </div> */}
 
                     <div
                         className="flex items-center justify-center w-full mt-1"
@@ -789,6 +820,63 @@ function MyAds() {
                 <div className="mt-2">
                     <div className='font-bold'>Size (in cm)</div>
                     <input className="mt-1 w-full p-2 border border-gray-400 rounded-lg" value={size} type="text" placeholder="50 X 40" onChange={e => setSize(e.target.value)} required/>
+                </div>
+
+                <div className="mt-2">
+                    <div className='font-bold'>Colors</div>
+                    <div className="relative mt-1">
+                        <div
+                            className="flex items-center justify-between w-full border border-gray-400 rounded-lg px-3 py-2 cursor-pointer bg-white"
+                            onClick={() => setColorDropdownOpen(!colorDropdownOpen)}
+                        >
+                            <span className="normal-case text-gray-600">
+                                {colors.length > 0 ? `${colors.length} selected` : 'Select colors'}
+                            </span>
+                            <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+
+                        {colorDropdownOpen && (
+                            <div className="absolute z-10 mt-1 w-full max-h-48 overflow-y-auto border rounded-lg bg-white shadow-lg">
+                                {AVAILABLE_COLORS.map((color) => (
+                                    <label
+                                        key={color}
+                                        className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer normal-case"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked={colors.includes(color)}
+                                            onChange={() => toggleColor(color)}
+                                        />
+                                        <span
+                                            className="w-3 h-3 rounded-full border"
+                                            style={{ backgroundColor: COLOR_SWATCHES[color] }}
+                                        />
+                                        <span>{color}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {colors.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {colors.map((color) => (
+                                <div key={color} className="flex items-center gap-1 pl-2 pr-1 py-1 rounded-full border normal-case">
+                                    <span className="w-3 h-3 rounded-full border" style={{ backgroundColor: COLOR_SWATCHES[color] }} />
+                                    <span>{color}</span>
+                                    <button
+                                        type="button"
+                                        className="text-gray-400 hover:text-red-500 ml-1"
+                                        onClick={() => toggleColor(color)}
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 <div className="mt-2">

@@ -6,6 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const COLOR_SWATCHES = {
+  Black: '#000000', White: '#FFFFFF', Grey: '#808080', Red: '#DC2626',
+  Orange: '#EA580C', Yellow: '#EAB308', Green: '#16A34A', Blue: '#2563EB',
+  Navy: '#1E3A8A', Purple: '#9333EA', Pink: '#EC4899', Brown: '#78350F',
+  Beige: '#D8C3A5', Gold: '#D4AF37', Silver: '#C0C0C0'
+};
+
 function MyOrders() {
     const [order, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -120,6 +127,16 @@ function MyOrders() {
                                         <div key={item._id} className='font-bold'>
                                             <div className='text-blue-500'>#{item.productId}</div>
                                             <div>{item.productName} X {item.quantity}</div>
+                                            {item.color &&
+                                                <div className='flex items-center gap-1 normal-case font-normal text-gray-600'>
+                                                    <span
+                                                        title={item.color}
+                                                        className="w-2.5 h-2.5 rounded-full border border-gray-300 inline-block cursor-default"
+                                                        style={{ backgroundColor: COLOR_SWATCHES[item.color] || '#ccc' }}
+                                                    />
+                                                    <span>{item.color}</span>
+                                                </div>
+                                            }
                                             ----------
                                         </div>
                                     )

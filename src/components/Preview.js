@@ -11,6 +11,15 @@ import { Twitter } from "@mui/icons-material";
 import RelatedProducts from "./RelatedProducts";
 import NewArtWorks from "./NewArtWorks";
 
+const COLOR_SWATCHES = {
+  Black: '#000000', White: '#FFFFFF', Grey: '#808080', Red: '#DC2626',
+  Orange: '#EA580C', Yellow: '#EAB308', Green: '#16A34A', Blue: '#2563EB',
+  Navy: '#1E3A8A', Purple: '#9333EA', Pink: '#EC4899', Brown: '#78350F',
+  Beige: '#D8C3A5', Gold: '#D4AF37', Silver: '#C0C0C0'
+};
+
+const LIGHT_COLORS = ['White', 'Beige', 'Silver', 'Yellow'];
+
 const Preview = () => {
 
     const location = useLocation();
@@ -23,9 +32,12 @@ const Preview = () => {
 
     const { addToCart } = useCart();
     const [quantity, setQuantity] = useState(1);
+    const [selectedColor, setSelectedColor] = useState(
+        data.colors && data.colors.length > 0 ? data.colors[0] : null
+    );
 
     const handleAddToCart = () => {
-        addToCart({ ...data, quantity: Number(quantity) });
+        addToCart({ ...data, quantity: Number(quantity), color: selectedColor });
     }
 
     const [displayImageIndex, setDisplayImageIndex] = useState(0);
@@ -121,6 +133,44 @@ const Preview = () => {
                                 <div className="">Size:</div>
                                 <div>{data.size}</div>            
                             </div>
+
+                            {data.colors && data.colors.length > 0 && (
+                                <div className="flex gap-2 items-start my-2">
+                                    <div className="mt-1">Color:</div>
+                                    <div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {data.colors.map(color => {
+                                                const isActive = color === selectedColor;
+                                                const isLight = LIGHT_COLORS.includes(color);
+                                                return (
+                                                    <button
+                                                        type="button"
+                                                        key={color}
+                                                        title={color}
+                                                        onClick={() => setSelectedColor(color)}
+                                                        className="w-7 h-7 rounded-full flex items-center justify-center"
+                                                        style={{
+                                                            backgroundColor: COLOR_SWATCHES[color] || '#ccc',
+                                                            border: isActive ? '2px solid #581C87' : isLight ? '1px solid #D1D5DB' : '2px solid transparent',
+                                                        }}
+                                                    >
+                                                        {isActive && (
+                                                            <span
+                                                                className="text-xs"
+                                                                style={{ color: isLight ? '#111827' : '#FFFFFF' }}
+                                                            >
+                                                                ✓
+                                                            </span>
+                                                        )}
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                        <div className="text-xs text-gray-500 mt-1">{selectedColor}</div>
+                                    </div>
+                                </div>
+                            )}
+
                             <div className="my-2 lg:my-2 text-purple-900 font-extrabold">Ksh {data.price.toLocaleString()}</div>
                           
                             <div className="flex gap-2 items-center my-2 mt-4">

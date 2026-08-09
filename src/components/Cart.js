@@ -5,6 +5,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../utils/AuthContext";
 
+const COLOR_SWATCHES = {
+  Black: '#000000', White: '#FFFFFF', Grey: '#808080', Red: '#DC2626',
+  Orange: '#EA580C', Yellow: '#EAB308', Green: '#16A34A', Blue: '#2563EB',
+  Navy: '#1E3A8A', Purple: '#9333EA', Pink: '#EC4899', Brown: '#78350F',
+  Beige: '#D8C3A5', Gold: '#D4AF37', Silver: '#C0C0C0'
+};
+
 const Cart = () => {
 
     const { products, total, removeFromCart } = useCart();
@@ -21,7 +28,7 @@ const Cart = () => {
             <div className="text-center mt-1 text-gray-500 lg:ml-8 mb-10">{products.length} item(s)</div>
 
             { products.map(product =>(
-                <div key={product._id} className="flex justify-center lg:justify-around mx-5 lg:mx-80 mb-5 lg:mb-3 gap-1">
+                <div key={product.cartItemId ?? product._id} className="flex justify-center lg:justify-around mx-5 lg:mx-80 mb-5 lg:mb-3 gap-1">
                     
                     <img src={`${process.env.REACT_APP_API_URL}/uploads/${ product.image[0] }`} className="w-20 h-20 lg:w-28 lg:h-auto object-contain"/>
                     
@@ -32,6 +39,17 @@ const Cart = () => {
                                 { product.productName }
                             </div>
                             <div className="flex items-center text-gray-500">Size: {product.size}</div>
+                            { product.color &&
+                                <div className="flex items-center gap-1 text-gray-500">
+                                    <span>Color:</span>
+                                    <span
+                                        title={product.color}
+                                        className="w-3 h-3 rounded-full border border-gray-300 inline-block cursor-default"
+                                        style={{ backgroundColor: COLOR_SWATCHES[product.color] || '#ccc' }}
+                                    />
+                                    <span>{product.color}</span>
+                                </div>
+                            }
                         </div>
                           
                         <div className="flex py-0 w-10 lg:w-28">

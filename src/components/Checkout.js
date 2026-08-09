@@ -11,6 +11,13 @@ import { useNavigate } from "react-router-dom";
 const myRegex = /^07\d{8}$/;
 const TAX_RATE = 0.015; // 1.5%
 
+const COLOR_SWATCHES = {
+  Black: '#000000', White: '#FFFFFF', Grey: '#808080', Red: '#DC2626',
+  Orange: '#EA580C', Yellow: '#EAB308', Green: '#16A34A', Blue: '#2563EB',
+  Navy: '#1E3A8A', Purple: '#9333EA', Pink: '#EC4899', Brown: '#78350F',
+  Beige: '#D8C3A5', Gold: '#D4AF37', Silver: '#C0C0C0'
+};
+
 const Checkout = () => {
 
     const { products, total } = useCart();
@@ -228,9 +235,19 @@ const Checkout = () => {
                 <div className="font-bold mb-5">Order Summary</div>
                 {
                     products.map( product =>(
-                        <div className="flex mb-1 text-xs lg:text-base">
+                        <div key={product.cartItemId ?? product._id} className="flex mb-1 text-xs lg:text-base items-center">
                             <div className="w-48 lg:w-64">
-                                { product.productName } #{product.productId}
+                                <div>{ product.productName } #{product.productId}</div>
+                                { product.color &&
+                                    <div className="flex items-center gap-1 text-gray-500 text-xs mt-0.5">
+                                        <span
+                                            title={product.color}
+                                            className="w-2.5 h-2.5 rounded-full border border-gray-300 inline-block cursor-default"
+                                            style={{ backgroundColor: COLOR_SWATCHES[product.color] || '#ccc' }}
+                                        />
+                                        <span>{product.color}</span>
+                                    </div>
+                                }
                             </div>
                             <div className="ml-5 lg:ml-0 w-5 lg:w-20">
                                X { product.quantity }
