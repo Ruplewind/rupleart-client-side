@@ -3,63 +3,154 @@ import React, { useState } from 'react';
 const faqs = [
   {
     question: "What is Rupleart?",
-    answer: "Rupleart is an online platform that connects artists with buyers. Artists can showcase and sell their artwork, including paintings, drawings, and other visual creations, while art lovers can browse and purchase original pieces from emerging and established artists."
+    answer: (
+      <>
+        <p>
+          Rupleart is a <i>creative, design and lifestyle shopping platform</i> where customers can discover and purchase unique products across selected categories including{' '}
+          <i>art, home décor, fashion &amp; design, creative pieces and lifestyle products</i>.
+        </p>
+        <p className="mt-2">
+          Rupleart also features events, promotions and experiences that our community can discover through the platform.
+        </p>
+      </>
+    )
   },
   {
-    question: "How do I create an account on Rupleart?",
-    answer: "Creating an account is simple! Click on the 'Sign Up' button at the top of the homepage. You can sign up as an artist to sell your work or as a buyer to purchase artwork. Fill in the required information, and you're ready to start exploring or listing artwork."
+    question: "What can I find on Rupleart?",
+    answer: (
+      <>
+        <p>
+          Rupleart features a growing collection across <i>art, décor, fashion, design, creative and selected lifestyle categories</i>.
+        </p>
+        <p className="mt-2">
+          Our collection continues to evolve as we introduce products and experiences that fit the Rupleart identity.
+        </p>
+      </>
+    )
   },
   {
-    question: "Who can sell artwork on Rupleart?",
-    answer: "Any artist, whether professional or amateur, can sell their original artwork on Rupleart. You must be at least 18 years old or have reached the legal age in your country. Once you create a seller account, you can list your artwork for sale."
+    question: "Are the products on Rupleart only artworks?",
+    answer: (
+      <>
+        <p>
+          No. While art remains an important part of our identity, <i>Rupleart has evolved beyond the canvas</i>.
+        </p>
+        <p className="mt-2">
+          Today, you can discover art alongside <i>home décor, fashion &amp; design, creative pieces and selected lifestyle products</i>.
+        </p>
+      </>
+    )
   },
   {
-    question: "How do I list my artwork for sale?",
-    answer: "To list artwork:\n1. Create an artist account.\n2. Click 'Upload Artwork' from your dashboard.\n3. Add high-quality images, a detailed description and price (in Kenyan Shillings).\n4. Publish your listing and wait for art lovers to discover your work!"
+    question: "How do I create an account?",
+    answer: (
+      <>
+        <p>
+          Creating an account is simple. Click the <i>"Sign Up"</i> button and provide the required information to create your Rupleart account.
+        </p>
+        <p className="mt-2">
+          Your account makes it easier to shop, manage your orders and enjoy a more personalized Rupleart experience.
+        </p>
+      </>
+    )
   },
   {
-    question: "How do payments work on Rupleart?",
-    answer: "All payments on Rupleart are processed in Kenyan Shillings (KES). Buyers can pay securely using debit/credit cards, mobile money platforms like M-Pesa, or other supported payment methods. Once the artwork is purchased, the artist will receive payment after the buyer confirms receipt of the item."
+    question: "How do I place an order?",
+    answer: (
+      <>
+        <p>
+          Browse Rupleart, select the product you want, add it to your cart and proceed to checkout.
+        </p>
+        <p className="mt-2">
+          Provide the required information and complete your payment using one of the available payment methods.
+        </p>
+      </>
+    )
   },
   {
-    question: "Can I buy artwork if I'm outside Kenya?",
-    answer: "Yes! Rupleart serves customers globally. While all prices are listed in Kenyan Shillings, buyers from outside Kenya can purchase artwork and will see the final conversion to their local currency at checkout. International buyers are responsible for any customs duties or taxes applied by their country."
+    question: "What currency does Rupleart use?",
+    answer: (
+      <p>
+        Prices on Rupleart are primarily displayed in <i>Kenyan Shillings (KES)</i> unless otherwise indicated.
+      </p>
+    )
   },
   {
-    question: "How is artwork shipped?",
-    answer: "Artists are responsible for shipping their artwork to buyers. When purchasing an artwork, shipping fees are added at checkout. Artists will provide tracking information to the website administrator once the artwork has been shipped and hence the buyer will receive the same information. Delivery times may vary depending on the artist’s location and the buyer’s address."
+    question: "What payment methods does Rupleart accept?",
+    answer: (
+      <p>
+        Rupleart supports selected secure payment methods available during checkout, including applicable mobile money and other approved payment options.
+      </p>
+    )
   },
   {
-    question: "What is Rupleart's return policy?",
-    answer: "Since the artwork on Rupleart is often unique and custom, all sales are generally considered final. However, if the artwork arrives damaged or is significantly different from its description, buyers can report the issue within 7 days of receipt. Please refer to our Return Policy for more details."
+    question: "How do I receive my order?",
+    answer: (
+      <p>
+        Available delivery or collection options will be communicated during the ordering process or after your order has been confirmed.
+      </p>
+    )
   },
   {
-    question: "How do I contact the artist?",
-    answer: "Buyers can contact artists through the Rupleart administrators. To reach an artist:\n1. Submit your inquiry by contacting Rupleart’s support team via WhatsApp or email.\n2. The Rupleart administrators will forward your message to the artist on your behalf.\n3. You will receive a response from the artist, relayed through the Rupleart administrators. This process ensures all communication is managed securely through Rupleart, making it easy to inquire about artwork, custom orders, or commissions."
+    question: "Can I return a product?",
+    answer: (
+      <>
+        <p>
+          Returns, exchanges and refunds are handled according to <i>Rupleart's Return and Refund Policy</i>.
+        </p>
+        <p className="mt-2">
+          If you experience an issue with your order, contact Rupleart directly through our official customer support channels.
+        </p>
+      </>
+    )
   },
   {
-    question: "Does Rupleart take a commission on sales?",
-    answer: "Yes, Rupleart takes a small commission on each sale to support the platform and its services. The commission is automatically deducted from the final sale price before the payment is transferred to the artist."
+    question: "Does Rupleart advertise events?",
+    answer: (
+      <>
+        <p>Yes.</p>
+        <p className="mt-2">
+          Rupleart has an <i>Events &amp; Promotions section</i> where approved events, promotions, exhibitions and experiences can be featured.
+        </p>
+      </>
+    )
   },
   {
-    question: "Can I commission an artist for custom work?",
-    answer: "Absolutely! You can commission a custom piece through Rupleart by contacting our administrators. Simply let us know your specific requirements, and we will connect you with an artist who can create a work tailored to your needs. Our team will handle the communication and ensure that the process runs smoothly. Please note that all commissioned artwork is non-refundable."
+    question: "Can I advertise my event or promotion on Rupleart?",
+    answer: (
+      <>
+        <p>
+          Yes. <i>Individuals, businesses, brands, organizations and event organizers can request to advertise events or promotions on Rupleart</i>.
+        </p>
+        <p className="mt-2">
+          Contact the <i>Rupleart Administration through the official administration email</i> and provide details of what you would like advertised.
+        </p>
+        <p className="mt-2">
+          All advertising requests are reviewed and approved by Rupleart before publication.
+        </p>
+      </>
+    )
   },
   {
-    question: "How do I report copyright infringement?",
-    answer: "If you believe your work has been used on Rupleart without your permission, you can file a DMCA Notice through our DMCA Takedown Procedure. We take copyright infringement seriously and will take prompt action to remove infringing content once verified."
+    question: "What can I advertise?",
+    answer: (
+      <>
+        <p>
+          Subject to Rupleart's approval, advertising may include <i>events, exhibitions, festivals, shows, launches, promotions, special offers and other appropriate promotional content</i>.
+        </p>
+        <p className="mt-2">
+          Rupleart reserves the right to approve, reject or remove advertising that does not meet our platform standards.
+        </p>
+      </>
+    )
   },
   {
-    question: "What happens if I forget my password?",
-    answer: "If you've forgotten your password, click on the 'Forgot Password?' link on the login page. You’ll receive an email with instructions to reset your password."
-  },
-  {
-    question: "Can I cancel an order?",
-    answer: "If you need to cancel an order, please contact the Rupleart administrators immediately. Once the artwork has been shipped, cancellation may no longer be possible, and you may need to follow the return process outlined in our Return Policy."
-  },
-  {
-    question: "How do I get in touch with Rupleart support?",
-    answer: "For any questions, issues, or support requests, you can reach out to the Rupleart team at:\nEmail: Rupleart@gmail.com\nPhone: 0759324250"
+    question: "How can I contact Rupleart?",
+    answer: (
+      <p>
+        For questions regarding products, orders, payments, deliveries, accounts, events or advertising, contact the Rupleart team through the official contact details provided on the platform.
+      </p>
+    )
   },
 ];
 
@@ -79,7 +170,7 @@ const FAQ = () => {
                 alt="Background"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-                <h1 className="text-white text-xl lg:text-2xl font-bold">About Us</h1>
+                <h1 className="text-white text-xl lg:text-2xl font-bold">Frequently Asked Questions</h1>
             </div>
         </div>
 
@@ -97,9 +188,7 @@ const FAQ = () => {
           </div>
           {openIndex === index && (
             <div className="pl-4 pb-4 text-gray-600">
-              {faq.answer.split('\n').map((line, i) => (
-                <p key={i}>{line}</p>
-              ))}
+              {faq.answer}
             </div>
           )}
         </div>

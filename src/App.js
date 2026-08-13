@@ -33,6 +33,9 @@ import FailedTransaction from "./components/FailedTransaction";
 import MyOrders from "./components/MyOrders";
 import DeleteAccount from "./components/DeleteAccount";
 import DownloadApk from "./components/DownloadApk";
+import WhatWeDo from "./components/WhatWeDo";
+import EventsPromotions from "./components/EventsPromotion";
+import SingleEvent from "./components/SingleEvent";
 
 function App() {
 
@@ -89,6 +92,7 @@ function App() {
   <Route path="/login" element={<Login />} />
   <Route path="/register" element={<Register />} />
   <Route path="/events" element={<Events />} />
+  <Route path="/events/:id" element={<SingleEvent />} />
   <Route path="/about_us" element={<AboutUs />} />
   <Route path="/contact_us" element={<ContactUs />} />
   <Route path="/faq" element={<FAQ />} />
@@ -100,6 +104,8 @@ function App() {
   <Route path="/cancel" element={<CancelTransaction />} />
   <Route path="/delete_account" element={<DeleteAccount />} />
   <Route path="/download_app" element={<DownloadApk />} />
+  <Route path="/whatwedo" element={<WhatWeDo />} />
+  <Route path="/eventspromotion" element={<EventsPromotions />} />
 
   {/* Protected Routes */}
   <Route

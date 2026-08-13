@@ -1,65 +1,87 @@
 import React from 'react';
 
+const steps = [
+  {
+    title: 'Discover',
+    body: (
+      <>
+        Explore Rupleart's collection across <i className="text-purple-800">art, décor, fashion, design and selected lifestyle categories</i>.
+      </>
+    )
+  },
+  {
+    title: 'Find What You Love',
+    body: 'Browse products, view images and descriptions, compare your options and find something that matches your style, space, personality or occasion.'
+  },
+  {
+    title: 'Add to Cart',
+    body: 'Choose the products you want and add them to your shopping cart.'
+  },
+  {
+    title: 'Checkout Securely',
+    body: 'Provide the required order information and complete your purchase using the payment methods available on Rupleart.'
+  },
+  {
+    title: 'Order Confirmation',
+    body: 'Once your order has been successfully placed, you will receive confirmation and Rupleart will begin processing your purchase.'
+  },
+  {
+    title: 'Receive Your Order',
+    body: 'Your order will be prepared and delivered or made available for collection according to the available fulfilment options.'
+  },
+  {
+    title: 'Enjoy Your Find',
+    body: 'Unbox, experience and enjoy something uniquely Rupleart.'
+  },
+];
+
 const HowItWorks = () => {
   return (
     <div>
+        {/* Hero */}
         <div className="relative w-full h-56 lg:h-60 bg-black opacity-80">
             <img
                 src={require('../images/carousel/purple.jpg')}
                 className="absolute top-0 left-0 w-full h-full object-cover"
                 alt="Background"
             />
-            <div className="absolute inset-0 flex items-center justify-center">
-                <h1 className="text-white text-md lg:text-2xl font-bold">How It Works</h1>
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                <span className="text-[#d4b078] text-[11px] tracking-[0.35em] uppercase font-montserrat font-semibold">
+                    Shopping Made Simple
+                </span>
+                <h1 className="text-white font-serif italic text-2xl lg:text-3xl">How Rupleart Works</h1>
             </div>
         </div>
-    <div className="max-w-3xl mx-auto p-6 bg-gray-100 rounded-md shadow-lg mt-5 mb-10 text-sm">
 
-      <div className="mb-8">
-        <h2 className="text-md font-semibold mb-4">For Artists:</h2>
-        <ol className="list-decimal pl-6 space-y-2">
-          <li>
-            <strong>Create an Account:</strong> Sign up for free and create your artist profile. Personalize your 
-            profile with a bio and pictures to share your artistic journey.
-          </li>
-          <li>
-            <strong>Upload Your Artwork:</strong> List your original artwork by uploading high-quality images, 
-            adding descriptions, and setting prices in Kenyan Shillings (KES).
-          </li>
-          <li>
-            <strong>Sell and Ship:</strong> Once a buyer purchases your work, you’ll receive an order notification. 
-            Package the artwork securely and ship it to the buyer. After the buyer confirms receipt, 
-            you'll receive your payment.
-          </li>
-          <li>
-            <strong>Get Paid:</strong> Payments are securely processed and transferred to your account via mobile 
-            money (e.g., M-Pesa), PayPal or bank transfer.
-          </li>
-        </ol>
-      </div>
+        {/* Intro */}
+        <div className="text-center mt-10 mb-4 px-4">
+            <p className="font-serif italic text-purple-950 text-lg lg:text-xl">
+                Shopping on Rupleart is simple.
+            </p>
+        </div>
 
-      <div>
-        <h2 className="text-md font-semibold mb-4">For Buyers:</h2>
-        <ol className="list-decimal pl-6 space-y-2">
-          <li>
-            <strong>Browse and Discover:</strong> Explore a wide range of original artworks by talented artists from 
-            around the world. Use filters to find pieces that match your style.
-          </li>
-          <li>
-            <strong>Purchase with Confidence:</strong> Select the artwork you love, and complete the payment 
-            using our secure system. All payments are processed in Kenyan Shillings.
-          </li>
-          <li>
-            <strong>Receive Your Artwork:</strong> Once your order is processed, the artist will ship the artwork to 
-            you. You’ll receive tracking information to keep an eye on delivery.
-          </li>
-          <li>
-            <strong>Enjoy Your Piece:</strong> Once your artwork arrives, it’s yours to enjoy! Every piece comes 
-            directly from the artist, ensuring authenticity and originality.
-          </li>
-        </ol>
-      </div>
-    </div>
+        {/* Timeline */}
+        <div className="max-w-2xl mx-auto px-6 py-10 text-sm font-montserrat">
+            <div className="relative">
+                <div className="absolute left-5 top-2 bottom-2 w-px bg-gray-200"></div>
+
+                {steps.map((step, index) => (
+                    <div key={step.title} className="relative flex gap-5 pb-10 last:pb-0">
+                        <div className="relative z-10 shrink-0 w-10 h-10 rounded-full bg-purple-900 text-white flex items-center justify-center font-serif italic text-base">
+                            {index + 1}
+                        </div>
+                        <div className="pt-1.5">
+                            <h2 className="font-serif italic text-purple-950 text-base lg:text-lg mb-1.5">
+                                {step.title}
+                            </h2>
+                            <p className="text-gray-600 leading-relaxed">
+                                {step.body}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     </div>
   );
 };

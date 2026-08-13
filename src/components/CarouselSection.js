@@ -37,7 +37,11 @@ function CarouselSection() {
               color="white"
               className="mb-9 opacity-80 text-xs lg:text-sm"
             >
-              Rupleart is an innovative online platform designed to bring artists and art enthusiasts together. As a marketplace for creativity, Rupleart allows artists to showcase their paintings, drawings, and other forms of visual art to a global audience. Our mission is to support artists by providing them with an accessible and dynamic space to sell their original artwork, while offering buyers a diverse collection of unique pieces to discover and purchase
+              Rupleart is a dynamic online marketplace where creativity, design and lifestyle come together. Evolving beyond traditional art, Rupleart connects customers with artists, designers, creators and businesses offering unique products across art, home décor, fashion & design, souvenirs, creative pieces and selected lifestyle categories.
+
+              Our mission is to provide a modern platform where creators and businesses can showcase and sell distinctive products while giving customers an exciting place to discover, shop and experience creativity in its many forms.
+
+              Rupleart — Creativity Beyond the Canvas.
             </Typography>
             <div className="flex justify-center gap-2">
               <Button size="sm" color="white" onClick={()=> {
@@ -74,7 +78,9 @@ function CarouselSection() {
               color="white"
               className="mb-9 opacity-80 text-sm"
             >
-              Whether you’re an artist looking to grow your audience and sell your work, or an art lover searching for the perfect piece to complete your space, Rupleart is the ultimate destination for connecting talent with appreciation. The platform ensures smooth transactions, secure payments, and a personalized experience for both buyers and sellers
+              Whether you’re an artist, designer, creator or business looking to grow your audience and showcase your products, or a customer searching for something unique, Rupleart brings creativity, design and lifestyle together in one dynamic marketplace.
+
+              From art and home décor to fashion, souvenirs, creative pieces and selected lifestyle products, Rupleart makes it easier to discover, connect and shop. The platform provides a seamless experience with secure payments, convenient transactions and a user-friendly marketplace* for both buyers and sellers.
             </Typography>
             <div className="flex justify-center gap-2">
               <Button size="sm" color="white" onClick={()=> {
@@ -111,7 +117,7 @@ function CarouselSection() {
               color="white"
               className="mb-9 opacity-80 text-sm"
             >
-              Rupleart makes art accessible to everyone, transforming every space into a work of art, one piece at a time.
+              Rupleart makes creativity and unique products accessible to everyone, connecting people with art, décor, lifestyle pieces and more—all in one marketplace.
             </Typography>
             <div className="flex justify-center gap-2">
               <Button size="sm" color="white" onClick={()=> {
