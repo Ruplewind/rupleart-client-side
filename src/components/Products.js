@@ -103,7 +103,7 @@ const Products = ({ category }) => {
             <div className="text-center font-bold text-slate-500 text-md mb-1 capitalize">
                 {searchQuery
                     ? `Results for "${searchQuery}"`
-                    : (category == null ? <div>All Artworks</div> : category)
+                    : (category == null ? <div>All Items</div> : category)
                 }
             </div>
             <div className="text-center text-slate-500 text-md mb-5 text-sm">

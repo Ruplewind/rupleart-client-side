@@ -23,7 +23,7 @@ function ReturnPolicy() {
 
       <h2 className="text-md font-semibold mt-6 mb-2">1. General Return Policy</h2>
       <p className="mb-2 text-sm">
-        <strong>1.1 Final Sale:</strong> All artwork purchases are generally considered final sale unless otherwise specified by 
+        <strong>1.1 Final Sale:</strong> All item purchases are generally considered final sale unless otherwise specified by 
         the artist. We encourage buyers to read the artist’s return policy on each artwork listing before 
         completing a purchase.
       </p>
