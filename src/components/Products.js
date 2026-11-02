@@ -106,9 +106,9 @@ const Products = ({ category }) => {
                     : (category == null ? <div>All Items</div> : category)
                 }
             </div>
-            <div className="text-center text-slate-500 text-md mb-5 text-sm">
+            {/* <div className="text-center text-slate-500 text-md mb-5 text-sm">
                 ({!loading && filteredData.length} items)
-            </div>
+            </div> */}
 
             {!loading && filteredData.length === 0 && (
                 <div className="text-center text-slate-400 text-sm mb-10">
