@@ -28,14 +28,27 @@ function Events() {
       .catch((error) => console.error('Error fetching events:', error));
   }, []);
 
+  // const filterEvents = (events) => {
+  //   const today = new Date().toISOString().split('T')[0];
+  //   const upcoming = events.filter(event => event.date >= today);
+  //   const past = events.filter(event => event.date < today);
+  //   setUpcomingEvents(upcoming);
+  //   setPastEvents(past);
+  //   setLoading(false);
+  // };
+
   const filterEvents = (events) => {
-    const today = new Date().toISOString().split('T')[0];
-    const upcoming = events.filter(event => event.date >= today);
-    const past = events.filter(event => event.date < today);
-    setUpcomingEvents(upcoming);
-    setPastEvents(past);
-    setLoading(false);
-  };
+  const today = new Date().toISOString().split('T')[0];
+
+  const byDateDesc = (a, b) => new Date(a.date) - new Date(b.date);
+
+  const upcoming = events.filter(event => event.date >= today).sort(byDateDesc);
+  const past = events.filter(event => event.date < today).sort(byDateDesc);
+
+  setUpcomingEvents(upcoming);
+  setPastEvents(past);
+  setLoading(false);
+};
 
   const SkeletonGrid = () => (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full lg:w-3/4 mx-5 lg:mx-auto mt-5 mb-10'>
