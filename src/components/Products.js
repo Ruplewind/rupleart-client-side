@@ -10,11 +10,20 @@ const Products = ({ category }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const itemsPerPage = 21;
 
+    const shuffle = (array) => {
+    const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    };
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/get_approved_products`)
             .then((res) => res.json())
             .then((res) => {
-                setProducts(res.reverse());
+                setProducts(shuffle(res));//setProducts(res.reverse());
                 setLoading(false);
             })
             .catch(err => {
