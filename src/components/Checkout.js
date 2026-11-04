@@ -6,7 +6,9 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from "../utils/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useFlowerCategories from "../utils/useFlowerCategories";
+import FlowerDeliveryForm, { emptyFlowerDetails, validateFlowerDetails } from "./FlowerDeliveryForm";
 
 const myRegex = /^07\d{8}$/;
 const TAX_RATE = 0.015; // 1.5%
@@ -29,6 +31,17 @@ const Checkout = () => {
     const [towns, setTowns] = useState([]);
     const [townsLoading, setTownsLoading] = useState(true);
     const [allVideos, SetAllVideos] = useState(false);
+
+    const { flowerTypes, ready } = useFlowerCategories();
+    const hasFlowers = products.some((p) => flowerTypes.has(p.type));
+    const mixedCart = hasFlowers && !products.every((p) => flowerTypes.has(p.type));
+
+    const [flower, setFlower] = useState(emptyFlowerDetails);
+    const [flowerErrors, setFlowerErrors] = useState({});
+    const patchFlower = (patch) => {
+        setFlower((f) => ({ ...f, ...patch }));
+        setFlowerErrors({}); // clear stale errors once the user edits
+    };
 
     useEffect(()=>{
         let allItemsAreVideos = products.every(item => item.title);
@@ -85,39 +98,50 @@ const Checkout = () => {
 
     const { userId, token } = useContext(AuthContext);
 
-    const handleSubmit = (data) =>{
-        setLoading(true);
-        let newData = {...data, products, location, tax, grandTotal};
+    const handleSubmit = (data) => {
+        if (hasFlowers) {
+            const errs = validateFlowerDetails(flower);
+            setFlowerErrors(errs);
+            if (Object.keys(errs).length > 0) {
+                toast.error("Please complete the flower delivery details");
+                return;
+            }
+        }
 
-        fetch(`${process.env.REACT_APP_API_URL}/Checkout`,{
+        setLoading(true);
+        const newData = {
+            ...data, products, location, tax, grandTotal,
+            ...(hasFlowers && { flowerDetails: flower }),
+        };
+
+        fetch(`${process.env.REACT_APP_API_URL}/Checkout`, {
             method: 'POST',
-            headers:{
-                "Content-Type":"application/json",
-                'Authorization':`Bearer ${token}`
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(newData)
         })
-        .then((res)=>{
-            if(res.ok){
+        .then((res) => {
+            if (res.ok) {
                 res.json().then(response => {
                     setLink(response.redirect_url);
                     setLoading(false);
                     setShowIframe(true);
-                })
-            }else{ 
-                if(res.status == 400){
-                    toast.error("Min price is invalid");
-                }else{
-                    res.json().then(response => {
-                        toast.error(response)
-                    })
-                }
+                });
+            } else {
+                // Show the server's own message (flower validation, min price, etc.)
+                res.json()
+                    .then(msg => toast.error(typeof msg === 'string' ? msg : "Something went wrong. Try again"))
+                    .catch(() => toast.error("Something went wrong. Try again"))
+                    .finally(() => setLoading(false));
             }
-            
         })
-        .catch( err=>{
+        .catch(err => {
             console.log(err);
-        })
+            setLoading(false);
+            toast.error("Network error. Try again");
+        });
     }
 
     const [ firstName, setFirstName] = useState('');
@@ -152,6 +176,25 @@ const Checkout = () => {
             console.log(err);
         })
     },[]);
+
+    if (!ready) {
+        return <div className="text-center mt-20 text-gray-500">Loading...</div>;
+    }
+
+    if (mixedCart) {
+        return (
+            <div className="mt-20 mx-5 text-center">
+                <div className="font-bold mb-2">Flowers must be ordered separately</div>
+                <p className="text-sm text-gray-600 mb-5">
+                    Flowers are delivered to a recipient, while other items go to your own delivery
+                    location. Please remove one kind from your cart and check out separately.
+                </p>
+                <Link to="/cart" className="px-4 py-2 bg-purple-900 hover:bg-purple-700 text-white rounded-lg">
+                    Back to cart
+                </Link>
+            </div>
+        );
+    }
 
     return ( <div className="mt-3 lg:mt-10 mb-10 lg:mb-10 ">
         <ToastContainer />
@@ -216,7 +259,9 @@ const Checkout = () => {
             <div className="block w-full lg:w-1/2">
                 { !allVideos && 
                 <div>
-                    <div className="font-bold mb-5">Select Delivery Location</div>
+                    <div className="font-bold mb-5">
+                        {hasFlowers ? "Select Delivery Area" : "Select Delivery Location"}
+                    </div>
                     <select className="w-full p-1 lg:p-2 bg-white mb-4 border-b-2" onChange={(e)=>{ setLocation(e.target.value); }}>
                             {
                                 townsLoading ?
@@ -229,9 +274,9 @@ const Checkout = () => {
                     </select>
                 </div>
                 }
-                {
-                    allVideos && <div className="mb-8 text-md text-zinc-700 italic">* Links to our watch streams will be emailed to you via the email you have provided on <b>Account Information</b></div>
-                }
+                {hasFlowers && (
+                    <FlowerDeliveryForm value={flower} onChange={patchFlower} errors={flowerErrors} />
+                )}
                 <div className="font-bold mb-5">Order Summary</div>
                 {
                     products.map( product =>(

@@ -10,8 +10,11 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Twitter } from "@mui/icons-material";
 import RelatedProducts from "./RelatedProducts";
 import NewArtWorks from "./NewArtWorks";
+import useFlowerCategories from "../utils/useFlowerCategories";
+import { FlowerNotice } from "./FlowerDeliveryForm";
 
 const SharedPreview = () => {
+    const { flowerTypes } = useFlowerCategories();
     const { id } = useParams();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -80,10 +83,13 @@ const SharedPreview = () => {
                                 <div className="">Description:</div>
                                 <div className="text-gray-800">{data.description}</div>            
                             </div>
-                            <div className="flex gap-2 items-center my-2">
-                                <div className="">Size:</div>
-                                <div>{data.size}</div>            
-                            </div>
+                            {/* only show Size when the product has one (flowers usually don't) */}
+                            {data.size && (
+                                <div className="flex gap-2 items-center my-2">
+                                    <div>Size:</div>
+                                    <div>{data.size}</div>
+                                </div>
+                            )}
                             <div className="my-2 lg:my-2 text-purple-900 font-extrabold">Ksh {data.price.toLocaleString()}</div>
                           
                             <div className="flex gap-2 items-center my-2 mt-4">
@@ -101,6 +107,8 @@ const SharedPreview = () => {
                             </div>
                         </div>
                     </form>
+
+                    {flowerTypes.has(data.type) && <FlowerNotice className="mt-6 lg:w-80" />}
 
                     <button 
                         className="w-full lg:w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm mx-auto lg:mx-0"
@@ -134,7 +142,7 @@ const SharedPreview = () => {
 
             {/* Related Products section */}
             <div className="mt-12">
-                <RelatedProducts category={data.type} />
+                <RelatedProducts category={data.type} currentItemId={data._id} />
             </div>
         </div> 
     );

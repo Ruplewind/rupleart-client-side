@@ -4,6 +4,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../utils/AuthContext";
+import useFlowerCategories from "../utils/useFlowerCategories";
+import { FlowerNotice } from "./FlowerDeliveryForm"
 
 const COLOR_SWATCHES = {
   Black: '#000000', White: '#FFFFFF', Grey: '#808080', Red: '#DC2626',
@@ -20,6 +22,10 @@ const Cart = () => {
     const handleRemoveFromCart = (product) =>{
         removeFromCart(product)
     }
+
+    const { flowerTypes } = useFlowerCategories();
+    const hasFlowers = products.some((p) => flowerTypes.has(p.type));
+    const mixedCart = hasFlowers && !products.every((p) => flowerTypes.has(p.type));
     
     return ( <div className="mb-10">
         { products.length > 0 ? 
@@ -38,7 +44,7 @@ const Cart = () => {
                             <div className="flex items-center  font-bold lg:font-normal">
                                 { product.productName }
                             </div>
-                            <div className="flex items-center text-gray-500">Size: {product.size}</div>
+                            {   product.size && <div className="flex items-center text-gray-500">Size: {product.size}</div> }                            
                             { product.color &&
                                 <div className="flex items-center gap-1 text-gray-500">
                                     <span>Color:</span>
@@ -79,16 +85,28 @@ const Cart = () => {
                 <div className="text-bold">Ksh.{total}</div>
                     
             </div>
+            {hasFlowers && !mixedCart && (
+                <div className="mx-5 lg:mx-80 mb-5"><FlowerNotice /></div>
+            )}
+
+            {mixedCart && (
+                <div className="mx-5 lg:mx-80 mb-5 border border-red-300 bg-red-50 text-red-900 rounded-lg p-3 text-xs text-center">
+                    Flowers must be ordered separately from other items. Please remove one kind to continue.
+                </div>
+            )}
+
             <div className="flex justify-center px-10 ml-5 lg:mb-8">
-                {
-                    token !== null ? <Link to={'/checkout'}><div className="w-48 flex justify-center p-1 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
+                {mixedCart ? (
+                    <div className="w-48 flex justify-center p-1 border-2 bg-gray-300 rounded-lg text-white cursor-not-allowed">
                         CHECKOUT
-                </div></Link>
-                :
-                <Link to={'/login'}><div className="w-48 flex justify-center p-1 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white" >
-                        CHECKOUT
-                </div></Link>
-                }
+                    </div>
+                ) : (
+                    <Link to={token !== null ? '/checkout' : '/login'}>
+                        <div className="w-48 flex justify-center p-1 border-2 bg-purple-900 hover:bg-purple-700 rounded-lg text-white">
+                            CHECKOUT
+                        </div>
+                    </Link>
+                )}
             </div>
             
             

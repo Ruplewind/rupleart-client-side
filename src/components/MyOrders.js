@@ -145,6 +145,18 @@ function MyOrders() {
                             <td className='text-gray-700 p-2'>
                                 <div className='font-bold text-black'>{ad.deliveryLocation}</div>
                                 <div className='text-xs'>Ksh. {ad.delivery_cost}</div>
+                                {ad.hasFlowers && ad.flowerDelivery && (
+                                    <div className='mt-2 p-2 border border-pink-300 rounded-lg normal-case font-normal'>
+                                        <div className='font-bold text-pink-800'>
+                                            {ad.flowerDelivery.sameDay
+                                                ? 'Same-day delivery'
+                                                : `Deliver on ${ad.flowerDelivery.preferredDate}`}
+                                        </div>
+                                        <div>To: {ad.flowerDelivery.recipientName}, {ad.flowerDelivery.recipientPhone}</div>
+                                        <div>{ad.flowerDelivery.recipientAddress}</div>
+                                        {ad.flowerDelivery.note && <div className='italic'>"{ad.flowerDelivery.note}"</div>}
+                                    </div>
+                                )}
                             </td>
                             <td className='text-center p-2'>Ksh. {ad.total_price + ad.delivery_cost}</td>
                             <td className='text-center p-2'>{

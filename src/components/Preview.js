@@ -10,6 +10,10 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { Twitter } from "@mui/icons-material";
 import RelatedProducts from "./RelatedProducts";
 import NewArtWorks from "./NewArtWorks";
+import useFlowerCategories from "../utils/useFlowerCategories";
+import { FlowerNotice } from "./FlowerDeliveryForm";
+
+
 
 const COLOR_SWATCHES = {
   Black: '#000000', White: '#FFFFFF', Grey: '#808080', Red: '#DC2626',
@@ -23,6 +27,7 @@ const LIGHT_COLORS = ['White', 'Beige', 'Silver', 'Yellow'];
 const Preview = () => {
 
     const location = useLocation();
+    const { flowerTypes } = useFlowerCategories();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -129,10 +134,13 @@ const Preview = () => {
                                 <div className="">Description:</div>
                                 <div className="text-gray-800">{data.description}</div>            
                             </div>
-                            <div className="flex gap-2 items-center my-2">
-                                <div className="">Size:</div>
-                                <div>{data.size}</div>            
-                            </div>
+                            {/* only show Size when the product has one (flowers usually don't) */}
+                            {data.size && (
+                                <div className="flex gap-2 items-center my-2">
+                                    <div>Size:</div>
+                                    <div>{data.size}</div>
+                                </div>
+                            )}
 
                             {data.colors && data.colors.length > 0 && (
                                 <div className="flex gap-2 items-start my-2">
@@ -189,6 +197,8 @@ const Preview = () => {
                         </div>
                     </form>
 
+                    {flowerTypes.has(data.type) && <FlowerNotice className="mt-6 lg:w-80" />}
+
                     <button 
                         className="w-full lg:w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm mx-auto lg:mx-0"
                         onClick={() => handleAddToCart()}
@@ -221,7 +231,7 @@ const Preview = () => {
 
             {/* Related Products section */}
             <div className="mt-12">
-                <RelatedProducts category={data.type} />
+                <RelatedProducts category={data.type} currentItemId={data._id} />
             </div>
         </div> 
     );
