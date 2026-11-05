@@ -113,9 +113,14 @@ export default function FlowerDeliveryForm({ value, onChange, errors }) {
                 <Err msg={errors.recipientPhone} />
             </div>
             <div className="mb-3">
+                <label htmlFor="flower-address" className="block text-xs font-semibold text-gray-700 mb-1">
+                    Delivery address
+                    <span className="font-normal text-gray-500"> (building, street, landmark)</span>
+                </label>
                 <textarea
+                    id="flower-address"
                     rows={2}
-                    placeholder="Delivery address (building, street, landmark)"
+                    placeholder="e.g. Apt 4B, Riverside Drive, near Java House"
                     value={value.recipientAddress}
                     onChange={(e) => onChange({ recipientAddress: e.target.value })}
                     className={`${inputCls} border-2 rounded-md`}
