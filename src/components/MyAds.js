@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../utils/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import ProductFormModal from '../components/ProductFormModal';
 import { COLOR_SWATCHES } from '../components/ColorPicker';
 
 function MyAds() {
-  const { token } = useContext(AuthContext);
+  const { token, canPostAds, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [myads, setMyads] = useState([]);
@@ -30,6 +30,8 @@ function MyAds() {
       .then((res) => {
         if (res.ok) return res.json();
         if (res.status === 401) navigate('/login');
+        if (res.status === 403) setError(true);
+        return [];
       })
       .then((data) => {
         setMyads(data || []);
@@ -38,6 +40,7 @@ function MyAds() {
       .catch((err) => {
         console.log(err);
         setError(true);
+        setLoading(false);
       });
   }, []);
 
@@ -169,6 +172,29 @@ function MyAds() {
     });
     setIsEditOpen(true);
   };
+
+  if (authLoading) return null;
+
+  if (!token) {
+    return (
+      <div className="mt-20 text-center font-montserrat">
+        <div className="mb-4">Please log in to continue.</div>
+        <Link to="/login" className="bg-purple-900 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm">Login</Link>
+      </div>
+    );
+  }
+
+  if (!canPostAds) {
+    return (
+      <div className="mt-20 mx-5 text-center font-montserrat">
+        <div className="font-bold mb-2">Posting ads isn't enabled for your account</div>
+        <p className="text-sm text-gray-600 mb-5">
+          Only approved sellers can post ads. Please contact us if you'd like to become one.
+        </p>
+        <Link to="/contact_us" className="bg-purple-900 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm">Contact us</Link>
+      </div>
+    );
+  }
 
   return (
     <div className="w-5/6 lg:w-3/4 mx-5 lg:mx-auto font-montserrat mt-10 mb-10">

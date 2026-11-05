@@ -32,7 +32,7 @@ function Login() {
         .then((res)=>{
             if(res.ok){
                 res.json().then(data => {
-                    login(data.token, data.userId, `${data.first_name} ${data.second_name}`);
+                    login(data.token, data.userId, `${data.first_name} ${data.second_name}`, data.canPostAds);
                     toast.success("Welcome Onboard!",{
                         autoClose: 1000
                     });

@@ -10,7 +10,7 @@ import { AuthContext } from '../utils/AuthContext';
 
 function Header() {
     const { products } = useCart();
-    const { token, logout } = useContext(AuthContext);
+    const { token, logout, canPostAds } = useContext(AuthContext);
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false); // state to toggle mobile menu
     const navigate = useNavigate();
@@ -108,7 +108,7 @@ function Header() {
                         <Link to={"/login"} className={navLinkClass}>Login/Register</Link>
                     )}
 
-                    {token && (
+                    {token && canPostAds && (
                         <Link to={"/myads"} className='bg-purple-900 hover:bg-purple-800 transition-colors text-white rounded-lg text-xs px-3 py-1.5 normal-case tracking-normal'>
                             Post Ad
                         </Link>
@@ -186,9 +186,11 @@ function Header() {
                                     <LogoutIcon sx={{fontSize: 16}} />
                                     <span>Logout</span>
                                 </button>
-                                <Link to={"/myads"} className='hover:bg-white flex items-center justify-center py-3' onClick={toggleMenu}>
-                                    <span className='bg-purple-900 hover:bg-purple-800 text-white rounded-lg text-xs px-4 py-1.5'>Post Ad</span>
-                                </Link>
+                                {canPostAds && (
+                                    <Link to={"/myads"} className='hover:bg-white flex items-center justify-center py-3' onClick={toggleMenu}>
+                                        <span className='bg-purple-900 hover:bg-purple-800 text-white rounded-lg text-xs px-4 py-1.5'>Post Ad</span>
+                                    </Link>
+                                )}
                             </>
                         ) : (
                             <Link to={"/login"} className='hover:bg-white hover:text-purple-900 py-3 transition-colors' onClick={toggleMenu}>Login/Register</Link>
