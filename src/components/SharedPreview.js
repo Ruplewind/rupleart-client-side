@@ -14,7 +14,7 @@ import useFlowerCategories from "../utils/useFlowerCategories";
 import { FlowerNotice } from "./FlowerDeliveryForm";
 
 const SharedPreview = () => {
-    const { flowerTypes } = useFlowerCategories();
+    const { isFlower } = useFlowerCategories();
     const { id } = useParams();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -108,7 +108,7 @@ const SharedPreview = () => {
                         </div>
                     </form>
 
-                    {flowerTypes.has(data.type) && <FlowerNotice className="mt-6 lg:w-80" />}
+                   {isFlower(data.type) && <FlowerNotice className="mt-6 lg:w-80" />}
 
                     <button 
                         className="w-full lg:w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm mx-auto lg:mx-0"
