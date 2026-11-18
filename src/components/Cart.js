@@ -23,9 +23,9 @@ const Cart = () => {
         removeFromCart(product)
     }
 
-    const { flowerTypes } = useFlowerCategories();
-    const hasFlowers = products.some((p) => flowerTypes.has(p.type));
-    const mixedCart = hasFlowers && !products.every((p) => flowerTypes.has(p.type));
+    const { isFlower } = useFlowerCategories();
+    const hasFlowers = products.some((p) => isFlower(p.type));
+    const mixedCart = hasFlowers && !products.every((p) => isFlower(p.type));
     
     return ( <div className="mb-10">
         { products.length > 0 ? 

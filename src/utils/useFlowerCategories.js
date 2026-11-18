@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-let cache = null;     // Set of category names that need recipient details
+const norm = (s) => String(s || '').trim().toLowerCase();
+
+let cache = null;     // Set of normalized category names that need recipient details
 let inflight = null;
 
 function load() {
@@ -10,12 +12,12 @@ function load() {
             .then((res) => (res.ok ? res.json() : []))
             .then((cats) => {
                 cache = new Set(
-                    cats.filter((c) => c.requiresRecipientDetails).map((c) => c.category)
+                    cats.filter((c) => c.requiresRecipientDetails).map((c) => norm(c.category))
                 );
                 return cache;
             })
             .catch(() => {
-                inflight = null; // allow a retry on the next mount
+                inflight = null;
                 return new Set();
             });
     }
@@ -36,5 +38,8 @@ export default function useFlowerCategories() {
         return () => { alive = false; };
     }, []);
 
-    return { flowerTypes, ready };
+    // Case- and whitespace-insensitive
+    const isFlower = useCallback((type) => flowerTypes.has(norm(type)), [flowerTypes]);
+
+    return { flowerTypes, isFlower, ready };
 }

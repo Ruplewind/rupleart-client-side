@@ -27,7 +27,7 @@ const LIGHT_COLORS = ['White', 'Beige', 'Silver', 'Yellow'];
 const Preview = () => {
 
     const location = useLocation();
-    const { flowerTypes } = useFlowerCategories();
+    const { isFlower } = useFlowerCategories();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -197,7 +197,7 @@ const Preview = () => {
                         </div>
                     </form>
 
-                    {flowerTypes.has(data.type) && <FlowerNotice className="mt-6 lg:w-80" />}
+                    {isFlower(data.type) && <FlowerNotice className="mt-6 lg:w-80" />}
 
                     <button 
                         className="w-full lg:w-52 mt-10 p-2 bg-purple-900 hover:bg-purple-800 text-white rounded-md text-sm mx-auto lg:mx-0"

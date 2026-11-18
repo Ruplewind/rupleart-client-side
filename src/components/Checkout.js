@@ -31,10 +31,10 @@ const Checkout = () => {
     const [towns, setTowns] = useState([]);
     const [townsLoading, setTownsLoading] = useState(true);
     const [allVideos, SetAllVideos] = useState(false);
-
-    const { flowerTypes, ready } = useFlowerCategories();
-    const hasFlowers = products.some((p) => flowerTypes.has(p.type));
-    const mixedCart = hasFlowers && !products.every((p) => flowerTypes.has(p.type));
+  
+    const { isFlower, ready } = useFlowerCategories();
+    const hasFlowers = products.some((p) => isFlower(p.type));
+    const mixedCart = hasFlowers && !products.every((p) => isFlower(p.type));
 
     const [flower, setFlower] = useState(emptyFlowerDetails);
     const [flowerErrors, setFlowerErrors] = useState({});
